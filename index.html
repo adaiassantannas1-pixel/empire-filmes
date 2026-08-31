@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="Empire Filmes - Filmes, séries e episódios">
+<title>Empire Filmes</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#050505;
+    --card:#151515;
+    --text:#ffffff;
+    --muted:#a7a7a7;
+    --accent:#e50914;
+    --border:#252525;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.app{
+    max-width:600px;
+    margin:auto;
+    min-height:100vh;
+    padding-bottom:75px;
+}
+
+/* TOPO */
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    height:62px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 16px;
+    background:rgba(5,5,5,.95);
+    backdrop-filter:blur(12px);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    color:var(--accent);
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:50%;
+    background:#1d1d1d;
+    color:#fff;
+    font-size:20px;
+}
+
+/* TELAS */
+
+.screen{
+    display:none;
+    padding:0 14px;
+}
+
+.screen.active{
+    display:block;
+}
+
+/* HERO */
+
+.hero{
+    position:relative;
+    min-height:390px;
+    border-radius:18px;
+    overflow:hidden;
+    margin-bottom:22px;
+    background:
+        linear-gradient(to top,#050505 5%,transparent 65%),
+        linear-gradient(135deg,#343434,#111);
+}
+
+.hero-content{
+    position:absolute;
+    bottom:20px;
+    left:18px;
+    right:18px;
+}
+
+.hero-tag{
+    display:inline-block;
+    background:var(--accent);
+    padding:5px 9px;
+    border-radius:5px;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.hero h1{
+    font-size:30px;
+    margin-bottom:7px;
+}
+
+.hero p{
+    color:#ddd;
+    font-size:13px;
+    line-height:1.4;
+    max-width:450px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:9px;
+    margin-top:14px;
+}
+
+.primary-btn,
+.secondary-btn{
+    border:0;
+    border-radius:8px;
+    padding:12px 17px;
+    font-weight:bold;
+}
+
+.primary-btn{
+    background:#fff;
+    color:#000;
+}
+
+.secondary-btn{
+    background:#333;
+    color:#fff;
+}
+
+/* SEÇÕES */
+
+.section{
+    margin-bottom:27px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.section-title h2{
+    font-size:19px;
+}
+
+.section-title small{
+    color:var(--muted);
+}
+
+/* CATEGORIAS */
+
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:5px;
+    scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.category{
+    flex:0 0 auto;
+    background:#1b1b1b;
+    border:1px solid #292929;
+    color:#fff;
+    border-radius:20px;
+    padding:9px 14px;
+}
+
+/* CARDS */
+
+.row{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    padding-bottom:5px;
+}
+
+.row::-webkit-scrollbar{
+    display:none;
+}
+
+.movie-card{
+    flex:0 0 125px;
+    cursor:pointer;
+}
+
+.poster{
+    height:180px;
+    border-radius:10px;
+    overflow:hidden;
+    background:#222;
+    position:relative;
+}
+
+.poster img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.movie-card h3{
+    font-size:13px;
+    margin-top:8px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.movie-card p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:3px;
+}
+
+/* PROGRESSO */
+
+.progress{
+    height:4px;
+    background:#333;
+    margin-top:7px;
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    background:var(--accent);
+}
+
+/* EXPLORAR */
+
+.search-box{
+    display:flex;
+    gap:8px;
+    margin:10px 0 20px;
+}
+
+.search-box input{
+    flex:1;
+    background:#171717;
+    border:1px solid #292929;
+    color:white;
+    border-radius:10px;
+    padding:13px;
+    outline:none;
+}
+
+.search-box button{
+    border:0;
+    border-radius:10px;
+    background:var(--accent);
+    color:#fff;
+    width:50px;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+}
+
+.grid .movie-card{
+    min-width:0;
+    width:100%;
+}
+
+.grid .poster{
+    height:200px;
+}
+
+/* FAVORITOS */
+
+.empty{
+    text-align:center;
+    padding:70px 20px;
+    color:var(--muted);
+}
+
+.empty-icon{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+/* PERFIL */
+
+.profile{
+    text-align:center;
+    padding:30px 10px;
+}
+
+.avatar{
+    width:90px;
+    height:90px;
+    margin:auto;
+    border-radius:50%;
+    background:#222;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+}
+
+.profile h2{
+    margin-top:15px;
+}
+
+.profile p{
+    color:var(--muted);
+    margin-top:6px;
+}
+
+.profile-menu{
+    margin-top:25px;
+}
+
+.profile-item{
+    width:100%;
+    padding:16px;
+    margin-bottom:8px;
+    background:#171717;
+    border:1px solid #242424;
+    border-radius:10px;
+    color:#fff;
+    text-align:left;
+}
+
+/* DETALHES */
+
+.back{
+    margin:12px 0;
+    border:0;
+    background:none;
+    color:white;
+    font-size:15px;
+}
+
+.detail-cover{
+    height:300px;
+    border-radius:15px;
+    overflow:hidden;
+    background:#222;
+}
+
+.detail-cover img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.detail-info{
+    padding:18px 3px;
+}
+
+.detail-info h1{
+    font-size:27px;
+}
+
+.meta{
+    color:var(--muted);
+    margin:8px 0 15px;
+    font-size:13px;
+}
+
+.description{
+    color:#ddd;
+    line-height:1.5;
+    font-size:14px;
+}
+
+.favorite-btn{
+    margin-top:12px;
+    width:100%;
+    background:#252525;
+    color:white;
+    border:0;
+    padding:13px;
+    border-radius:8px;
+}
+
+/* PLAYER */
+
+.player{
+    position:relative;
+    background:#000;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.player video{
+    width:100%;
+    display:block;
+    background:#000;
+    max-height:70vh;
+}
+
+.player-title{
+    padding:14px 2px;
+}
+
+.player-title h2{
+    font-size:19px;
+}
+
+.player-title p{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+/* EPISÓDIOS */
+
+.episode{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    background:#151515;
+    border:1px solid #222;
+    border-radius:10px;
+    padding:10px;
+    margin-bottom:9px;
+}
+
+.episode-number{
+    width:42px;
+    height:42px;
+    border-radius:8px;
+    background:#252525;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.episode-info{
+    flex:1;
+}
+
+.episode-info h3{
+    font-size:14px;
+}
+
+.episode-info p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
+}
+
+.episode button{
+    border:0;
+    background:var(--accent);
+    color:#fff;
+    border-radius:50%;
+    width:38px;
+    height:38px;
+}
+
+/* MENU INFERIOR */
+
+.bottom-nav{
+    position:fixed;
+    z-index:100;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    height:68px;
+    background:rgba(12,12,12,.97);
+    border-top:1px solid #222;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.nav-btn{
+    background:none;
+    border:0;
+    color:#777;
+    font-size:11px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+}
+
+.nav-btn span{
+    font-size:21px;
+}
+
+.nav-btn.active{
+    color:#fff;
+}
+
+@media(max-width:380px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid .poster{
+        height:230px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- TOPO -->
+<header class="topbar">
+    <div class="logo">EMPIRE <span>FILMES</span></div>
+    <button class="icon-btn" onclick="openSearch()">🔍</button>
+</header>
+
+
+<!-- HOME -->
+<section id="home" class="screen active">
+
+    <div class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">DESTAQUE</span>
+            <h1>Projeto Eclipse</h1>
+            <p>
+                Um grupo de exploradores recebe uma missão que pode mudar
+                o destino da humanidade.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="primary-btn" onclick="openMovie('Projeto Eclipse')">
+                    ▶ Assistir
+                </button>
+
+                <button class="secondary-btn" onclick="addFavorite('Projeto Eclipse')">
+                    + Minha lista
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="section">
+        <div class="section-title">
+            <h2>🔥 Lançamentos</h2>
+        </div>
+
+        <div class="row" id="homeMovies"></div>
+    </div>
+
+
+    <div class="section">
+        <div class="section-title">
+            <h2>📂 Categorias</h2>
+        </div>
+
+        <div class="categories">
+            <button class="category" onclick="filterCategory('Ação')">Ação</button>
+            <button class="category" onclick="filterCategory('Terror')">Terror</button>
+            <button class="category" onclick="filterCategory('Romance')">Romance</button>
+            <button class="category" onclick="filterCategory('Comédia')">Comédia</button>
+            <button class="category" onclick="filterCategory('Nacional')">Nacional</button>
+            <button class="category" onclick="filterCategory('Documentário')">Documentário</button>
+            <button class="category" onclick="filterCategory('Canais')">Canais</button>
+        </div>
+    </div>
+
+
+    <div class="section">
+        <div class="section-title">
+            <h2>▶ Continue assistindo</h2>
+        </div>
+
+        <div class="row">
+
+            <div class="movie-card" onclick="openMovie('Projeto Eclipse')">
+                <div class="poster">
+                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=500&q=80">
+                </div>
+
+                <h3>Projeto Eclipse</h3>
+                <p>32 min restantes</p>
+
+                <div class="progress">
+                    <span style="width:65%"></span>
+                </div>
+            </div>
+
+            <div class="movie-card" onclick="openMovie('Horizonte')">
+                <div class="poster">
+                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=500&q=80">
+                </div>
+
+                <h3>Horizonte</h3>
+                <p>18 min restantes</p>
+
+                <div class="progress">
+                    <span style="width:35%"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+<!-- EXPLORAR -->
+<section id="explorar" class="screen">
+
+    <div class="section-title">
+        <h2>Explorar</h2>
+    </div>
+
+    <div class="search-box">
+        <input id="searchInput" placeholder="Buscar filmes..." oninput="searchMovies()">
+        <button onclick="searchMovies()">🔍</button>
+    </div>
+
+    <div id="exploreGrid" class="grid"></div>
+
+</section>
+
+
+<!-- FAVORITOS -->
+<section id="favoritos" class="screen">
+
+    <div class="section-title">
+        <h2>❤️ Favoritos</h2>
+    </div>
+
+    <div id="favoriteGrid" class="grid"></div>
+
+</section>
+
+
+<!-- PERFIL -->
+<section id="perfil" class="screen">
+
+    <div class="profile">
+
+        <div class="avatar">👤</div>
+
+        <h2>Meu Perfil</h2>
+        <p>Bem-vindo ao Empire Filmes</p>
+
+        <div class="profile-menu">
+
+            <button class="profile-item">
+                👤 Minha conta
+            </button>
+
+            <button class="profile-item">
+                ⚙️ Configurações
+            </button>
+
+            <button class="profile-item">
+                🔔 Notificações
+            </button>
+
+            <button class="profile-item">
+                ℹ️ Sobre o Empire Filmes
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DETALHES -->
+<section id="detalhes" class="screen">
+
+    <button class="back" onclick="showScreen('home')">
+        ← Voltar
+    </button>
+
+    <div class="detail-cover">
+        <img id="detailImage" src="">
+    </div>
+
+    <div class="detail-info">
+
+        <h1 id="detailTitle"></h1>
+
+        <div class="meta" id="detailMeta"></div>
+
+        <p class="description" id="detailDescription"></p>
+
+        <button class="primary-btn"
+                style="width:100%;margin-top:16px"
+                onclick="playCurrentMovie()">
+            ▶ ASSISTIR
+        </button>
+
+        <button class="favorite-btn"
+                onclick="favoriteCurrentMovie()">
+            ❤️ Adicionar aos favoritos
+        </button>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-title">
+            <h2>📺 Episódios</h2>
+        </div>
+
+        <div id="episodes"></div>
+
+    </div>
+
+</section>
+
+
+<!-- PLAYER -->
+<section id="player" class="screen">
+
+    <button class="back" onclick="showScreen('detalhes')">
+        ← Voltar
+    </button>
+
+    <div class="player">
+
+        <video id="videoPlayer"
+               controls
+               playsinline
+               preload="metadata">
+        </video>
+
+    </div>
+
+    <div class="player-title">
+        <h2 id="playerTitle">Vídeo</h2>
+        <p>Reprodução de demonstração</p>
+    </div>
+
+</section>
+
+
+<!-- MENU -->
+<nav class="bottom-nav">
+
+    <button class="nav-btn active" onclick="showScreen('home',this)">
+        <span>🏠</span>
+        Início
+    </button>
+
+    <button class="nav-btn" onclick="showScreen('explorar',this)">
+        <span>🔎</span>
+        Explorar
+    </button>
+
+    <button class="nav-btn" onclick="showScreen('favoritos',this)">
+        <span>❤️</span>
+        Favoritos
+    </button>
+
+    <button class="nav-btn" onclick="showScreen('perfil',this)">
+        <span>👤</span>
+        Perfil
+    </button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+/* =========================
+   BANCO DE FILMES DE TESTE
+========================= */
+
+const movies = [
+
+    {
+        title:"Projeto Eclipse",
+        category:"Ação",
+        year:"2026",
+        duration:"1h 48min",
+        description:"Um grupo de exploradores recebe uma missão que pode mudar o destino da humanidade.",
+        image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
+        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
+    },
+
+    {
+        title:"Horizonte",
+        category:"Drama",
+        year:"2026",
+        duration:"1h 42min",
+        description:"Uma viagem inesperada coloca antigas escolhas diante de uma nova oportunidade.",
+        image:"https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=700&q=80",
+        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
+    },
+
+    {
+        title:"Noite Sombria",
+        category:"Terror",
+        year:"2025",
+        duration:"1h 35min",
+        description:"Uma casa abandonada guarda um segredo que ninguém deveria descobrir.",
+        image:"https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=700&q=80",
+        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
+    },
+
+    {
+        title:"Último Verão",
+        category:"Romance",
+        year:"2025",
+        duration:"1h 38min",
+        description:"Duas pessoas se encontram no momento mais inesperado de suas vidas.",
+        image:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80",
+        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
+    },
+
+    {
+        title:"Cidade em Chamas",
+        category:"Ação",
+        year:"2026",
+        duration:"2h 01min",
+        description:"Uma cidade entra em colapso e um pequeno grupo tenta encontrar uma saída.",
+        image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80",
+        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
+    },
+
+    {
+        title:"Riso Garantido",
+        category:"Comédia",
+        year:"2025",
+        duration:"1h 30min",
+        description:"Uma sequência de acontecimentos transforma um dia comum em uma grande confusão.",
+        image:"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80",
+        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
+    }
+
+];
+
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+let currentMovie = null;
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    renderHome();
+    renderExplore();
+    renderFavorites();
+
+});
+
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+
+function showScreen(id,button){
+
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
+    });
+
+    const screen=document.getElementById(id);
+
+    if(screen){
+        screen.classList.add("active");
+    }
+
+    document.querySelectorAll(".nav-btn").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function renderHome(){
+
+    const container=document.getElementById("homeMovies");
+
+    container.innerHTML="";
+
+    movies.forEach(movie=>{
+
+        container.innerHTML+=createCard(movie);
+
+    });
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+function createCard(movie){
+
+    return `
+
+        <div class="movie-card"
+             onclick="openMovie('${escapeQuotes(movie.title)}')">
+
+            <div class="poster">
+
+                <img src="${movie.image}"
+                     alt="${movie.title}"
+                     loading="lazy">
+
+            </div>
+
+            <h3>${movie.title}</h3>
+
+            <p>${movie.category} • ${movie.year}</p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   EXPLORAR
+========================= */
+
+function renderExplore(list=movies){
+
+    const grid=document.getElementById("exploreGrid");
+
+    grid.innerHTML="";
+
+    if(list.length===0){
+
+        grid.innerHTML=`
+
+            <div class="empty" style="grid-column:1/-1">
+
+                <div class="empty-icon">🔎</div>
+
+                <p>Nenhum filme encontrado.</p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    list.forEach(movie=>{
+
+        grid.innerHTML+=createCard(movie);
+
+    });
+
+}
+
+
+function searchMovies(){
+
+    const input=document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const results=movies.filter(movie=>
+
+        movie.title.toLowerCase().includes(input) ||
+        movie.category.toLowerCase().includes(input)
+
+    );
+
+    renderExplore(results);
+
+}
+
+
+/* =========================
+   PESQUISA
+========================= */
+
+function openSearch(){
+
+    showScreen("explorar");
+
+    setTimeout(()=>{
+
+        const input=document.getElementById("searchInput");
+
+        if(input){
+
+            input.focus();
+
+        }
+
+    },100);
+
+}
+
+
+/* =========================
+   CATEGORIA
+========================= */
+
+function filterCategory(category){
+
+    showScreen("explorar");
+
+    const results=movies.filter(movie=>
+
+        movie.category.toLowerCase()===category.toLowerCase()
+
+    );
+
+    renderExplore(results);
+
+}
+
+
+/* =========================
+   DETALHES
+========================= */
+
+function openMovie(title){
+
+    const movie=movies.find(m=>m.title===title);
+
+    if(!movie) return;
+
+    currentMovie=movie;
+
+    document.getElementById("detailImage").src=movie.image;
+
+    document.getElementById("detailTitle").textContent=movie.title;
+
+    document.getElementById("detailMeta").textContent=
+        `${movie.category} • ${movie.year} • ${movie.duration}`;
+
+    document.getElementById("detailDescription").textContent=
+        movie.description;
+
+    createEpisodes(movie);
+
+    showScreen("detalhes");
+
+}
+
+
+/* =========================
+   EPISÓDIOS
+========================= */
+
+function createEpisodes(movie){
+
+    const container=document.getElementById("episodes");
+
+    container.innerHTML="";
+
+    for(let i=1;i<=3;i++){
+
+        container.innerHTML+=`
+
+            <div class="episode">
+
+                <div class="episode-number">
+                    ${i}
+                </div>
+
+                <div class="episode-info">
+
+                    <h3>Episódio ${i}</h3>
+
+                    <p>
+                        ${i===1 ? "Começar a assistir" : "Episódio de demonstração"}
+                    </p>
+
+                </div>
+
+                <button onclick="playMovie('${escapeQuotes(movie.title)}')">
+                    ▶
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   PLAYER
+========================= */
+
+function playCurrentMovie(){
+
+    if(!currentMovie) return;
+
+    playMovie(currentMovie.title);
+
+}
+
+
+function playMovie(title){
+
+    const movie=movies.find(m=>m.title===title);
+
+    if(!movie) return;
+
+    currentMovie=movie;
+
+    const player=document.getElementById("videoPlayer");
+
+    player.pause();
+
+    player.src=movie.video;
+
+    document.getElementById("playerTitle").textContent=
+        movie.title;
+
+    showScreen("player");
+
+    player.load();
+
+    player.play().catch(()=>{
+
+        console.log("O navegador bloqueou o autoplay. Toque em Play no vídeo.");
+
+    });
+
+}
+
+
+/* =========================
+   FAVORITOS
+========================= */
+
+function getFavorites(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem("empireFavorites") || "[]"
+        );
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function saveFavorites(list){
+
+    localStorage.setItem(
+        "empireFavorites",
+        JSON.stringify(list)
+    );
+
+}
+
+
+function addFavorite(title){
+
+    const list=getFavorites();
+
+    if(!list.includes(title)){
+
+        list.push(title);
+
+        saveFavorites(list);
+
+    }
+
+    renderFavorites();
+
+}
+
+
+function favoriteCurrentMovie(){
+
+    if(!currentMovie) return;
+
+    addFavorite(currentMovie.title);
+
+    alert("Adicionado aos favoritos ❤️");
+
+}
+
+
+function renderFavorites(){
+
+    const grid=document.getElementById("favoriteGrid");
+
+    const favorites=getFavorites();
+
+    grid.innerHTML="";
+
+    if(favorites.length===0){
+
+        grid.innerHTML=`
+
+            <div class="empty" style="grid-column:1/-1">
+
+                <div class="empty-icon">❤️</div>
+
+                <p>Você ainda não adicionou filmes aos favoritos.</p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    favorites.forEach(title=>{
+
+        const movie=movies.find(m=>m.title===title);
+
+        if(movie){
+
+            grid.innerHTML+=createCard(movie);
+
+        }
+
+    });
+
+}
+
+
+/* =========================
+   UTILIDADE
+========================= */
+
+function escapeQuotes(text){
+
+    return text
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'");
+
+}
+
+</script>
+
+</body>
+</html>
