@@ -1,72 +1,1287 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Teste Empire Filmes</title>
+<meta name="theme-color" content="#050505">
+<title>Empire Filmes</title>
 
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-    margin:0;
     background:#050505;
-    color:white;
-    font-family:Arial,sans-serif;
-    padding:20px;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-h1{
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.app{
+    max-width:600px;
+    margin:auto;
+    min-height:100vh;
+    padding-bottom:80px;
+}
+
+.top{
+    height:62px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 15px;
+    background:rgba(5,5,5,.96);
+    backdrop-filter:blur(10px);
+}
+
+.logo{
+    font-size:21px;
+    font-weight:900;
+}
+
+.logo span{
     color:#e50914;
+}
+
+.searchBtn{
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:50%;
+    background:#1d1d1d;
+    color:white;
+    font-size:20px;
+}
+
+.screen{
+    display:none;
+    padding:14px;
+}
+
+.screen.active{
+    display:block;
+}
+
+/* HERO */
+
+.hero{
+    height:390px;
+    position:relative;
+    overflow:hidden;
+    border-radius:18px;
+    background:
+    linear-gradient(to top,#050505 8%,transparent 70%),
+    url("https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png")
+    center/cover;
+}
+
+.heroContent{
+    position:absolute;
+    left:18px;
+    right:18px;
+    bottom:20px;
+}
+
+.tag{
+    display:inline-block;
+    background:#e50914;
+    padding:5px 9px;
+    border-radius:5px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.hero h1{
+    font-size:30px;
+    margin:8px 0;
+}
+
+.hero p{
+    color:#ddd;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.buttons{
+    display:flex;
+    gap:8px;
+    margin-top:14px;
+}
+
+.primary{
+    background:white;
+    color:#000;
+    border:0;
+    border-radius:8px;
+    padding:12px 18px;
+    font-weight:bold;
+}
+
+.secondary{
+    background:#292929;
+    color:white;
+    border:0;
+    border-radius:8px;
+    padding:12px 18px;
+}
+
+/* SEÇÕES */
+
+.section{
+    margin-top:25px;
+}
+
+.title{
+    font-size:19px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+/* CATEGORIAS */
+
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.category{
+    flex:none;
+    background:#191919;
+    color:white;
+    border:1px solid #292929;
+    border-radius:20px;
+    padding:9px 14px;
+}
+
+/* CARDS */
+
+.row{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    scrollbar-width:none;
+}
+
+.row::-webkit-scrollbar{
+    display:none;
+}
+
+.card{
+    flex:0 0 125px;
+    cursor:pointer;
+}
+
+.poster{
+    height:180px;
+    overflow:hidden;
+    border-radius:10px;
+    background:#222;
+}
+
+.poster img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.card h3{
+    font-size:13px;
+    margin-top:7px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.card p{
+    color:#999;
+    font-size:11px;
+    margin-top:4px;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.grid .card{
+    min-width:0;
+    width:100%;
+}
+
+.grid .poster{
+    height:200px;
+}
+
+/* BUSCA */
+
+.searchBox{
+    display:flex;
+    gap:8px;
+    margin-bottom:20px;
+}
+
+.searchBox input{
+    flex:1;
+    background:#181818;
+    border:1px solid #292929;
+    color:white;
+    padding:13px;
+    border-radius:9px;
+    outline:none;
+}
+
+.searchBox button{
+    width:50px;
+    border:0;
+    border-radius:9px;
+    background:#e50914;
+    color:white;
+}
+
+/* DETALHES */
+
+.back{
+    border:0;
+    background:none;
+    color:white;
+    margin-bottom:12px;
+    font-size:15px;
+}
+
+.detailImage{
+    width:100%;
+    height:310px;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+.detail h1{
+    font-size:27px;
+    margin-top:15px;
+}
+
+.meta{
+    color:#999;
+    margin:8px 0 14px;
+    font-size:13px;
+}
+
+.description{
+    color:#ddd;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.full{
+    width:100%;
+    margin-top:15px;
+}
+
+.favorite{
+    width:100%;
+    margin-top:9px;
+    padding:13px;
+    background:#222;
+    border:0;
+    border-radius:8px;
+    color:white;
+}
+
+/* EPISÓDIOS */
+
+.episode{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px;
+    background:#151515;
+    border-radius:10px;
+    margin-top:8px;
+}
+
+.number{
+    width:40px;
+    height:40px;
+    border-radius:8px;
+    background:#292929;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.epInfo{
+    flex:1;
+}
+
+.epInfo h3{
+    font-size:14px;
+}
+
+.epInfo p{
+    color:#888;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.epPlay{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:0;
+    background:#e50914;
+    color:white;
+}
+
+/* PLAYER */
+
+.videoBox{
+    background:#000;
+    border-radius:12px;
+    overflow:hidden;
 }
 
 video{
     width:100%;
-    max-width:600px;
+    display:block;
     background:#000;
-    border-radius:12px;
 }
 
-button{
-    margin-top:20px;
-    padding:15px 25px;
-    border:0;
+.playerTitle{
+    margin-top:14px;
+}
+
+.playerTitle h2{
+    font-size:20px;
+}
+
+.playerTitle p{
+    color:#999;
+    margin-top:5px;
+}
+
+.videoError{
+    display:none;
+    background:#191919;
+    padding:15px;
+    margin-top:10px;
     border-radius:8px;
-    background:#e50914;
-    color:white;
-    font-size:16px;
+    color:#ffb3b3;
+    font-size:13px;
 }
 
-</style>
+/* PERFIL */
 
+.profile{
+    text-align:center;
+    padding:30px 0;
+}
+
+.avatar{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#222;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    font-size:40px;
+}
+
+.profile h2{
+    margin-top:15px;
+}
+
+.profile p{
+    color:#999;
+    margin-top:5px;
+}
+
+.profileItem{
+    width:100%;
+    padding:16px;
+    margin-top:9px;
+    background:#181818;
+    border:1px solid #292929;
+    border-radius:9px;
+    color:white;
+    text-align:left;
+}
+
+/* VAZIO */
+
+.empty{
+    text-align:center;
+    padding:60px 20px;
+    color:#999;
+}
+
+/* MENU */
+
+.nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    height:68px;
+    background:#101010;
+    border-top:1px solid #252525;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    z-index:100;
+}
+
+.nav button{
+    border:0;
+    background:none;
+    color:#777;
+    font-size:11px;
+}
+
+.nav button.active{
+    color:white;
+}
+
+.navIcon{
+    display:block;
+    font-size:21px;
+    margin-bottom:3px;
+}
+
+@media(max-width:380px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+</style>
 </head>
 
 <body>
 
-<h1>EMPIRE FILMES</h1>
+<div class="app">
 
-<p>Teste do player</p>
+<header class="top">
 
-<video
-    id="player"
-    controls
-    playsinline
-    preload="metadata">
+    <div class="logo">
+        EMPIRE <span>FILMES</span>
+    </div>
 
-    <source
-        const VIDEO_TESTE =
-"https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4";
-    Seu navegador não suporta vídeo.
+    <button class="searchBtn" onclick="goSearch()">
+        🔍
+    </button>
 
-</video>
+</header>
 
-<br>
 
-<button onclick="document.getElementById('player').play()">
-▶ TESTAR VÍDEO
-</button>
+<!-- HOME -->
 
-</body>
+<section id="home" class="screen active">
 
-</html>
+    <div class="hero">
+
+        <div class="heroContent">
+
+            <span class="tag">
+                DESTAQUE
+            </span>
+
+            <h1>
+                Big Buck Bunny
+            </h1>
+
+            <p>
+                Uma animação da Blender Foundation.
+                Conteúdo de demonstração para testar o player.
+            </p>
+
+            <div class="buttons">
+
+                <button class="primary"
+                        onclick="openMovie('Big Buck Bunny')">
+                    ▶ Assistir
+                </button>
+
+                <button class="secondary"
+                        onclick="favorite('Big Buck Bunny')">
+                    + Minha lista
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="title">
+            🔥 Filmes
+        </div>
+
+        <div class="row" id="homeList"></div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="title">
+            📂 Categorias
+        </div>
+
+        <div class="categories">
+
+            <button class="category" onclick="category('Ação')">
+                Ação
+            </button>
+
+            <button class="category" onclick="category('Terror')">
+                Terror
+            </button>
+
+            <button class="category" onclick="category('Romance')">
+                Romance
+            </button>
+
+            <button class="category" onclick="category('Comédia')">
+                Comédia
+            </button>
+
+            <button class="category" onclick="category('Animação')">
+                Animação
+            </button>
+
+            <button class="category" onclick="category('Documentário')">
+                Documentário
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="title">
+            ▶ Continue assistindo
+        </div>
+
+        <div class="row">
+
+            <div class="card"
+                 onclick="openMovie('Big Buck Bunny')">
+
+                <div class="poster">
+
+                    <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png"
+                    alt="Big Buck Bunny">
+
+                </div>
+
+                <h3>
+                    Big Buck Bunny
+                </h3>
+
+                <p>
+                    Continuar assistindo
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EXPLORAR -->
+
+<section id="explorar" class="screen">
+
+    <div class="title">
+        🔎 Explorar
+    </div>
+
+    <div class="searchBox">
+
+        <input
+        id="search"
+        placeholder="Buscar filme..."
+        oninput="searchMovies()">
+
+        <button onclick="searchMovies()">
+            🔍
+        </button>
+
+    </div>
+
+    <div id="exploreList" class="grid"></div>
+
+</section>
+
+
+<!-- FAVORITOS -->
+
+<section id="favoritos" class="screen">
+
+    <div class="title">
+        ❤️ Favoritos
+    </div>
+
+    <div id="favoritesList" class="grid"></div>
+
+</section>
+
+
+<!-- PERFIL -->
+
+<section id="perfil" class="screen">
+
+    <div class="profile">
+
+        <div class="avatar">
+            👤
+        </div>
+
+        <h2>
+            Meu Perfil
+        </h2>
+
+        <p>
+            Bem-vindo ao Empire Filmes
+        </p>
+
+        <button class="profileItem">
+            👤 Minha conta
+        </button>
+
+        <button class="profileItem">
+            ⚙️ Configurações
+        </button>
+
+        <button class="profileItem">
+            🔔 Notificações
+        </button>
+
+        <button class="profileItem">
+            ℹ️ Sobre o aplicativo
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- DETALHES -->
+
+<section id="detalhes" class="screen">
+
+    <button class="back" onclick="show('home')">
+        ← Voltar
+    </button>
+
+    <img id="detailImage"
+         class="detailImage"
+         src=""
+         alt="">
+
+    <div class="detail">
+
+        <h1 id="detailTitle"></h1>
+
+        <div id="detailMeta"
+             class="meta">
+        </div>
+
+        <p id="detailDescription"
+           class="description">
+        </p>
+
+        <button class="primary full"
+                onclick="playCurrent()">
+
+            ▶ ASSISTIR
+
+        </button>
+
+        <button class="favorite"
+                onclick="favoriteCurrent()">
+
+            ❤️ Adicionar aos favoritos
+
+        </button>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="title">
+            📺 Episódios
+        </div>
+
+        <div id="episodes"></div>
+
+    </div>
+
+</section>
+
+
+<!-- PLAYER -->
+
+<section id="player" class="screen">
+
+    <button class="back"
+            onclick="backFromPlayer()">
+
+        ← Voltar
+
+    </button>
+
+    <div class="videoBox">
+
+        <video
+        id="video"
+        controls
+        playsinline
+        preload="metadata">
+
+            Seu navegador não consegue reproduzir este vídeo.
+
+        </video>
+
+    </div>
+
+    <div id="videoError"
+         class="videoError">
+
+        Não foi possível carregar este vídeo.
+        Verifique se a URL do vídeo está funcionando.
+
+    </div>
+
+    <div class="playerTitle">
+
+        <h2 id="playerTitle">
+            Vídeo
+        </h2>
+
+        <p>
+            Empire Filmes • Demonstração
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- MENU -->
+
+<nav class="nav">
+
+    <button class="active"
+            onclick="show('home',this)">
+
+        <span class="navIcon">
+            🏠
+        </span>
+
+        Início
+
+    </button>
+
+
+    <button onclick="show('explorar',this)">
+
+        <span class="navIcon">
+            🔎
+        </span>
+
+        Explorar
+
+    </button>
+
+
+    <button onclick="show('favoritos',this)">
+
+        <span class="navIcon">
+            ❤️
+        </span>
+
+        Favoritos
+
+    </button>
+
+
+    <button onclick="show('perfil',this)">
+
+        <span class="navIcon">
+            👤
+        </span>
+
+        Perfil
+
+    </button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   URL DO VÍDEO DE TESTE
+========================================== */
+
+const VIDEO_TESTE =
+"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
+
+/* ==========================================
+   FILMES
+========================================== */
+
+const movies = [
+
+{
+    title:"Big Buck Bunny",
+    category:"Animação",
+    year:"2008",
+    duration:"9 min",
+
+    description:
+    "Big Buck Bunny é uma animação da Blender Foundation usada aqui como conteúdo de demonstração.",
+
+    image:
+    "https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png",
+
+    video:VIDEO_TESTE
+},
+
+{
+    title:"Projeto Eclipse",
+    category:"Ação",
+    year:"2026",
+    duration:"1h 48min",
+
+    description:
+    "Filme fictício para demonstrar o catálogo Empire Filmes.",
+
+    image:
+    "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
+
+    video:VIDEO_TESTE
+},
+
+{
+    title:"Noite Sombria",
+    category:"Terror",
+    year:"2026",
+    duration:"1h 35min",
+
+    description:
+    "Filme fictício de demonstração da categoria Terror.",
+
+    image:
+    "https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=700&q=80",
+
+    video:VIDEO_TESTE
+},
+
+{
+    title:"Último Verão",
+    category:"Romance",
+    year:"2026",
+    duration:"1h 38min",
+
+    description:
+    "Filme fictício de demonstração da categoria Romance.",
+
+    image:
+    "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80",
+
+    video:VIDEO_TESTE
+},
+
+{
+    title:"Cidade em Chamas",
+    category:"Ação",
+    year:"2026",
+    duration:"2h 01min",
+
+    description:
+    "Filme fictício de demonstração da categoria Ação.",
+
+    image:
+    "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80",
+
+    video:VIDEO_TESTE
+},
+
+{
+    title:"Riso Garantido",
+    category:"Comédia",
+    year:"2026",
+    duration:"1h 30min",
+
+    description:
+    "Filme fictício de demonstração da categoria Comédia.",
+
+    image:
+    "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80",
+
+    video:VIDEO_TESTE
+},
+
+{
+    title:"Horizonte",
+    category:"Drama",
+    year:"2026",
+    duration:"1h 42min",
+
+    description:
+    "Filme fictício de demonstração.",
+
+    image:
+    "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=700&q=80",
+
+    video:VIDEO_TESTE
+},
+
+{
+    title:"A Última Jornada",
+    category:"Ação",
+    year:"2026",
+    duration:"1h 55min",
+
+    description:
+    "Filme fictício de demonstração.",
+
+    image:
+    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80",
+
+    video:VIDEO_TESTE
+},
+
+{
+    title:"Além das Estrelas",
+    category:"Romance",
+    year:"2026",
+    duration:"1h 44min",
+
+    description:
+    "Filme fictício de demonstração.",
+
+    image:
+    "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80",
+
+    video:VIDEO_TESTE
+},
+
+{
+    title:"Mundo Selvagem",
+    category:"Documentário",
+    year:"2026",
+    duration:"52 min",
+
+    description:
+    "Filme fictício de demonstração.",
+
+    image:
+    "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=700&q=80",
+
+    video:VIDEO_TESTE
+}
+
+];
+
+
+let currentMovie=null;
+
+
+/* ==========================================
+   INICIAR
+========================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    renderHome();
+    renderExplore();
+    renderFavorites();
+
+});
+
+
+/* ==========================================
+   NAVEGAÇÃO
+========================================== */
+
+function show(id,button){
+
+    document.querySelectorAll(".screen")
+    .forEach(function(screen){
+
+        screen.classList.remove("active");
+
+    });
+
+    document.getElementById(id)
+    .classList.add("active");
+
+
+    document.querySelectorAll(".nav button")
+    .forEach(function(btn){
+
+        btn.classList.remove("active");
+
+    });
+
+
+    if(button){
+
+        button.classList.add("active");
+
+    }
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* ==========================================
+   PESQUISA
+========================================== */
+
+function goSearch(){
+
+    show("explorar");
+
+    setTimeout(function(){
+
+        document.getElementById("search").focus();
+
+    },100);
+
+}
+
+
+/* ==========================================
+   CARD
+========================================== */
+
+function card(movie){
+
+    const safeTitle =
+    movie.title.replace(/'/g,"\\'");
+
+    return `
+
+        <div class="card"
+             onclick="openMovie('${safeTitle}')">
+
+            <div class="poster">
+
+                <img
+                src="${movie.image}"
+                alt="${movie.title}"
+                loading="lazy">
+
+            </div>
+
+            <h3>
+                ${movie.title}
+            </h3>
+
+            <p>
+                ${movie.category} • ${movie.year}
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==========================================
+   HOME
+========================================== */
+
+function renderHome(){
+
+    const list=
+    document.getElementById("homeList");
+
+    list.innerHTML="";
+
+    movies.forEach(function(movie){
+
+        list.innerHTML+=card(movie);
+
+    });
+
+}
+
+
+/* ==========================================
+   EXPLORAR
+========================================== */
+
+function renderExplore(list=movies){
+
+    const container=
+    document.getElementById("exploreList");
+
+    container.innerHTML="";
+
+    if(list.length===0){
+
+        container.innerHTML=`
+
+            <div class="empty"
+                 style="grid-column:1/-1">
+
+                🔎
+
+                <br><br>
+
+                Nenhum filme encontrado.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.forEach(function(movie){
+
+        container.innerHTML+=card(movie);
+
+    });
+
+}
+
+
+function searchMovies(){
+
+    const text=
+    document.getElementById("search")
+    .value
+    .toLowerCase()
+    .trim();
+
+
+    const result=
+    movies.filter(function(movie){
+
+        return movie.title
+        .toLowerCase()
+        .includes(text)
+
+        ||
+
+        movie.category
+        .toLowerCase()
+        .includes(text);
+
+    });
+
+
+    renderExplore(result);
+
+}
+
+
+/* ==========================================
+   CATEGORIA
+========================================== */
+
+function category(cat){
+
+    show("explorar");
+
+    renderExplore(
+
+        movies.filter(function(movie){
+
+            return movie.category===cat;
+
+        })
+
+    );
+
+}
+
+
+/* ==========================================
+   DETALHES
+========================================== */
+
+function openMovie(title){
+
+    const movie=
+    movies.find(function(item){
+
+        return item.title===title;
+
+    });
+
+
+    if(!movie)return;
+
+
+    currentMovie=movie;
+
+
+    document.getElementById("detailImage")
+    .src=movie.image;
+
+
+    document.getElementById("detailTitle")
+    .textContent=movie.title;
+
+
+    document.getElementById("detailMeta")
+    .textContent=
+    `${movie.category} • ${movie.year} • ${movie.duration}`;
+
+
+    document.getElementById("detailDescription")
+    .textContent=movie.description;
+
+
+    createEpisodes(movie);
+
+
+    show("detalhes");
+
+}
+
+
+/* ==================
