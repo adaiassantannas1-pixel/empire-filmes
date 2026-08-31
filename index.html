@@ -2,9 +2,14 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#050505">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta name="theme-color"
+content="#050505">
 
 <title>Empire Filmes</title>
 
@@ -18,12 +23,15 @@ padding:0
 
 body{
 background:#050505;
-color:#fff;
+color:white;
 font-family:Arial,Helvetica,sans-serif
 }
 
+button,input,textarea,select{
+font-family:inherit
+}
+
 button{
-font-family:inherit;
 cursor:pointer
 }
 
@@ -31,7 +39,7 @@ cursor:pointer
 max-width:600px;
 margin:auto;
 min-height:100vh;
-padding-bottom:80px
+padding-bottom:85px
 }
 
 /* TOPO */
@@ -45,7 +53,7 @@ display:flex;
 align-items:center;
 justify-content:space-between;
 padding:0 15px;
-background:rgba(5,5,5,.96);
+background:rgba(5,5,5,.97);
 backdrop-filter:blur(10px)
 }
 
@@ -79,13 +87,14 @@ padding:14px
 display:block
 }
 
-/* DESTAQUE */
+/* HERO */
 
 .hero{
 height:390px;
 position:relative;
 overflow:hidden;
 border-radius:18px;
+
 background:
 linear-gradient(to top,#050505 8%,transparent 75%),
 url("https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png")
@@ -436,6 +445,162 @@ color:white;
 text-align:left
 }
 
+/* ADMIN */
+
+.adminTitle{
+font-size:25px;
+font-weight:bold;
+margin-bottom:5px
+}
+
+.adminSubtitle{
+color:#999;
+font-size:13px;
+margin-bottom:20px
+}
+
+.form{
+background:#111;
+padding:15px;
+border-radius:14px;
+border:1px solid #252525
+}
+
+.field{
+margin-bottom:14px
+}
+
+.field label{
+display:block;
+font-size:13px;
+color:#bbb;
+margin-bottom:6px
+}
+
+.field input,
+.field textarea,
+.field select{
+width:100%;
+background:#1c1c1c;
+border:1px solid #333;
+border-radius:8px;
+padding:12px;
+color:white;
+outline:none
+}
+
+.field textarea{
+min-height:90px;
+resize:vertical
+}
+
+.adminButton{
+width:100%;
+padding:13px;
+border:0;
+border-radius:8px;
+background:#e50914;
+color:white;
+font-weight:bold
+}
+
+.adminButton.dark{
+background:#292929
+}
+
+.adminButton.delete{
+background:#7d1118
+}
+
+.adminActions{
+display:flex;
+gap:8px;
+margin-top:10px
+}
+
+.adminActions button{
+flex:1
+}
+
+.adminMovie{
+background:#151515;
+border-radius:12px;
+padding:10px;
+margin-top:10px;
+display:flex;
+gap:10px;
+align-items:center
+}
+
+.adminMovie img{
+width:55px;
+height:75px;
+object-fit:cover;
+border-radius:7px
+}
+
+.adminMovieInfo{
+flex:1
+}
+
+.adminMovieInfo h3{
+font-size:14px
+}
+
+.adminMovieInfo p{
+font-size:11px;
+color:#888;
+margin-top:4px
+}
+
+.adminMovie button{
+background:#7d1118;
+color:white;
+border:0;
+border-radius:7px;
+padding:8px;
+font-size:11px
+}
+
+.pinBox{
+text-align:center;
+padding:30px 10px
+}
+
+.pinBox h2{
+margin-bottom:8px
+}
+
+.pinBox p{
+color:#888;
+font-size:13px;
+margin-bottom:18px
+}
+
+.pinInput{
+width:100%;
+background:#181818;
+border:1px solid #333;
+color:white;
+padding:14px;
+border-radius:8px;
+text-align:center;
+font-size:20px;
+letter-spacing:5px;
+outline:none
+}
+
+.adminNotice{
+background:#171717;
+border-left:3px solid #e50914;
+padding:12px;
+border-radius:7px;
+margin-bottom:15px;
+font-size:12px;
+color:#bbb;
+line-height:1.5
+}
+
 /* VAZIO */
 
 .empty{
@@ -444,7 +609,7 @@ padding:60px 20px;
 color:#999
 }
 
-/* NAVEGAÇÃO */
+/* MENU */
 
 .nav{
 position:fixed;
@@ -488,11 +653,16 @@ grid-template-columns:repeat(2,1fr)
 }
 
 </style>
+
 </head>
+
 
 <body>
 
 <div class="app">
+
+
+<!-- TOPO -->
 
 <header class="top">
 
@@ -500,8 +670,12 @@ grid-template-columns:repeat(2,1fr)
 EMPIRE <span>FILMES</span>
 </div>
 
-<button class="searchBtn" onclick="goSearch()">
+<button
+class="searchBtn"
+onclick="goSearch()">
+
 🔍
+
 </button>
 
 </header>
@@ -509,7 +683,10 @@ EMPIRE <span>FILMES</span>
 
 <!-- HOME -->
 
-<section id="home" class="screen active">
+<section
+id="home"
+class="screen active">
+
 
 <div class="hero">
 
@@ -524,19 +701,21 @@ Big Buck Bunny
 </h1>
 
 <p>
-Conteúdo de demonstração para testar o Empire Filmes.
+Conteúdo de demonstração do Empire Filmes.
 </p>
 
 <div class="buttons">
 
-<button class="primary"
+<button
+class="primary"
 onclick="openMovie('Big Buck Bunny')">
 
 ▶ Assistir
 
 </button>
 
-<button class="secondary"
+<button
+class="secondary"
 onclick="favorite('Big Buck Bunny')">
 
 + Minha lista
@@ -556,7 +735,10 @@ onclick="favorite('Big Buck Bunny')">
 🔥 Lançamentos
 </div>
 
-<div class="row" id="homeList"></div>
+<div
+class="row"
+id="homeList">
+</div>
 
 </div>
 
@@ -569,37 +751,44 @@ onclick="favorite('Big Buck Bunny')">
 
 <div class="categories">
 
-<button class="category"
+<button
+class="category"
 onclick="category('Ação')">
 Ação
 </button>
 
-<button class="category"
+<button
+class="category"
 onclick="category('Terror')">
 Terror
 </button>
 
-<button class="category"
+<button
+class="category"
 onclick="category('Romance')">
 Romance
 </button>
 
-<button class="category"
+<button
+class="category"
 onclick="category('Comédia')">
 Comédia
 </button>
 
-<button class="category"
+<button
+class="category"
 onclick="category('Nacional')">
 Nacional
 </button>
 
-<button class="category"
+<button
+class="category"
 onclick="category('Documentário')">
 Documentário
 </button>
 
-<button class="category"
+<button
+class="category"
 onclick="category('Animação')">
 Animação
 </button>
@@ -617,7 +806,8 @@ Animação
 
 <div class="row">
 
-<div class="card"
+<div
+class="card"
 onclick="openMovie('Big Buck Bunny')">
 
 <div class="poster">
@@ -647,7 +837,9 @@ Progresso 35%
 
 <!-- EXPLORAR -->
 
-<section id="explorar" class="screen">
+<section
+id="explorar"
+class="screen">
 
 <div class="title">
 🔎 Explorar
@@ -660,33 +852,44 @@ id="search"
 placeholder="Buscar filme..."
 oninput="searchMovies()">
 
-<button onclick="searchMovies()">
+<button
+onclick="searchMovies()">
 🔍
 </button>
 
 </div>
 
-<div id="exploreList" class="grid"></div>
+<div
+id="exploreList"
+class="grid">
+</div>
 
 </section>
 
 
 <!-- FAVORITOS -->
 
-<section id="favoritos" class="screen">
+<section
+id="favoritos"
+class="screen">
 
 <div class="title">
 ❤️ Favoritos
 </div>
 
-<div id="favoritesList" class="grid"></div>
+<div
+id="favoritesList"
+class="grid">
+</div>
 
 </section>
 
 
 <!-- PERFIL -->
 
-<section id="perfil" class="screen">
+<section
+id="perfil"
+class="screen">
 
 <div class="profile">
 
@@ -699,23 +902,36 @@ Meu Perfil
 </h2>
 
 <p>
-Bem-vindo ao Empire Filmes
+Empire Filmes
 </p>
 
-<button class="profileItem">
-👤 Minha conta
+<button
+class="profileItem"
+onclick="openAdmin()">
+
+🔐 Painel do administrador
+
 </button>
 
-<button class="profileItem">
+<button
+class="profileItem">
+
 ⚙️ Configurações
+
 </button>
 
-<button class="profileItem">
+<button
+class="profileItem">
+
 🔔 Notificações
+
 </button>
 
-<button class="profileItem">
+<button
+class="profileItem">
+
 ℹ️ Sobre o aplicativo
+
 </button>
 
 </div>
@@ -725,14 +941,20 @@ Bem-vindo ao Empire Filmes
 
 <!-- DETALHES -->
 
-<section id="detalhes" class="screen">
+<section
+id="detalhes"
+class="screen">
 
-<button class="back"
+<button
+class="back"
 onclick="show('home')">
+
 ← Voltar
+
 </button>
 
-<img id="detailImage"
+<img
+id="detailImage"
 class="detailImage"
 src=""
 alt="">
@@ -741,22 +963,26 @@ alt="">
 
 <h1 id="detailTitle"></h1>
 
-<div id="detailMeta"
+<div
+id="detailMeta"
 class="meta">
 </div>
 
-<p id="detailDescription"
+<p
+id="detailDescription"
 class="description">
 </p>
 
-<button class="primary full"
+<button
+class="primary full"
 onclick="playCurrent()">
 
 ▶ ASSISTIR
 
 </button>
 
-<button class="favorite"
+<button
+class="favorite"
 onclick="favoriteCurrent()">
 
 ❤️ Adicionar aos favoritos
@@ -772,7 +998,8 @@ onclick="favoriteCurrent()">
 📺 Episódios
 </div>
 
-<div id="episodes"></div>
+<div id="episodes">
+</div>
 
 </div>
 
@@ -781,9 +1008,12 @@ onclick="favoriteCurrent()">
 
 <!-- PLAYER -->
 
-<section id="player" class="screen">
+<section
+id="player"
+class="screen">
 
-<button class="back"
+<button
+class="back"
 onclick="backFromPlayer()">
 
 ← Voltar
@@ -804,10 +1034,11 @@ Seu navegador não suporta vídeo.
 
 </div>
 
-<div id="videoError"
+<div
+id="videoError"
 class="videoError">
 
-Não foi possível carregar o vídeo.
+Não foi possível carregar este vídeo.
 
 </div>
 
@@ -826,11 +1057,252 @@ Empire Filmes • Player
 </section>
 
 
+<!-- ADMIN -->
+
+<section
+id="admin"
+class="screen">
+
+
+<div id="adminLogin">
+
+<div class="pinBox">
+
+<h2>
+🔐 Administrador
+</h2>
+
+<p>
+Digite o PIN para acessar.
+</p>
+
+<input
+id="adminPin"
+class="pinInput"
+type="password"
+inputmode="numeric"
+maxlength="6"
+placeholder="••••••">
+
+<br><br>
+
+<button
+class="adminButton"
+onclick="loginAdmin()">
+
+ENTRAR
+
+</button>
+
+</div>
+
+</div>
+
+
+<div
+id="adminPanel"
+style="display:none">
+
+
+<button
+class="back"
+onclick="show('perfil')">
+
+← Voltar
+
+</button>
+
+
+<div class="adminTitle">
+Painel Admin
+</div>
+
+<div class="adminSubtitle">
+Gerencie seu catálogo pelo celular.
+</div>
+
+
+<div class="adminNotice">
+
+⚠️ Os filmes cadastrados aqui ficam salvos
+neste navegador/dispositivo. Para um catálogo
+compartilhado com todos os usuários,
+precisaremos adicionar um banco de dados.
+
+</div>
+
+
+<div class="form">
+
+<div class="field">
+
+<label>
+Nome do filme *
+</label>
+
+<input
+id="movieName"
+placeholder="Ex: Minha Aventura">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Categoria *
+</label>
+
+<select id="movieCategory">
+
+<option value="Ação">
+Ação
+</option>
+
+<option value="Terror">
+Terror
+</option>
+
+<option value="Romance">
+Romance
+</option>
+
+<option value="Comédia">
+Comédia
+</option>
+
+<option value="Nacional">
+Nacional
+</option>
+
+<option value="Documentário">
+Documentário
+</option>
+
+<option value="Animação">
+Animação
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Ano
+</label>
+
+<input
+id="movieYear"
+type="number"
+placeholder="2026">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Duração
+</label>
+
+<input
+id="movieDuration"
+placeholder="1h 30min">
+
+</div>
+
+
+<div class="field">
+
+<label>
+URL da capa *
+</label>
+
+<input
+id="movieImage"
+type="url"
+placeholder="https://...">
+
+</div>
+
+
+<div class="field">
+
+<label>
+URL direta do vídeo *
+</label>
+
+<input
+id="movieVideo"
+type="url"
+placeholder="https://...mp4">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Descrição
+</label>
+
+<textarea
+id="movieDescription"
+placeholder="Descrição do filme...">
+</textarea>
+
+</div>
+
+
+<button
+class="adminButton"
+onclick="addMovie()">
+
+➕ CADASTRAR FILME
+
+</button>
+
+</div>
+
+
+<div class="section">
+
+<div class="title">
+🎬 Meus filmes
+</div>
+
+<div id="adminMovies">
+</div>
+
+</div>
+
+
+<div class="section">
+
+<button
+class="adminButton dark"
+onclick="logoutAdmin()">
+
+🔒 Sair do painel
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
 <!-- MENU -->
 
 <nav class="nav">
 
-<button class="active"
+<button
+class="active"
 onclick="show('home',this)">
 
 <span class="navIcon">
@@ -842,7 +1314,8 @@ Início
 </button>
 
 
-<button onclick="show('explorar',this)">
+<button
+onclick="show('explorar',this)">
 
 <span class="navIcon">
 🔎
@@ -853,7 +1326,8 @@ Explorar
 </button>
 
 
-<button onclick="show('favoritos',this)">
+<button
+onclick="show('favoritos',this)">
 
 <span class="navIcon">
 ❤️
@@ -864,7 +1338,8 @@ Favoritos
 </button>
 
 
-<button onclick="show('perfil',this)">
+<button
+onclick="show('perfil',this)">
 
 <span class="navIcon">
 👤
@@ -881,28 +1356,36 @@ Perfil
 
 <script>
 
-/* =========================================
-   URL QUE JÁ FOI TESTADA NO SEU SITE
-========================================= */
+
+/* =================================================
+   VÍDEO DE TESTE
+================================================= */
 
 const VIDEO_TESTE =
 "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4";
 
 
-/* =========================================
-   FILMES
-========================================= */
+/* =================================================
+   FILMES INICIAIS
+================================================= */
 
-const movies = [
+const defaultMovies = [
 
 {
 title:"Big Buck Bunny",
 category:"Animação",
 year:"2008",
 duration:"10 segundos",
-description:"Vídeo de demonstração para testar o player do Empire Filmes.",
-image:"https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png",
-video:VIDEO_TESTE
+
+description:
+"Vídeo de demonstração utilizado para testar o player do Empire Filmes.",
+
+image:
+"https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png",
+
+video:VIDEO_TESTE,
+
+episodes:[]
 },
 
 {
@@ -910,9 +1393,16 @@ title:"Projeto Eclipse",
 category:"Ação",
 year:"2026",
 duration:"1h 48min",
-description:"Filme fictício de demonstração.",
-image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+
+description:
+"Filme fictício de demonstração.",
+
+image:
+"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
+
+video:VIDEO_TESTE,
+
+episodes:[]
 },
 
 {
@@ -920,9 +1410,16 @@ title:"Noite Sombria",
 category:"Terror",
 year:"2026",
 duration:"1h 35min",
-description:"Filme fictício de demonstração.",
-image:"https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+
+description:
+"Filme fictício de demonstração.",
+
+image:
+"https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=700&q=80",
+
+video:VIDEO_TESTE,
+
+episodes:[]
 },
 
 {
@@ -930,9 +1427,16 @@ title:"Último Verão",
 category:"Romance",
 year:"2026",
 duration:"1h 38min",
-description:"Filme fictício de demonstração.",
-image:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+
+description:
+"Filme fictício de demonstração.",
+
+image:
+"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80",
+
+video:VIDEO_TESTE,
+
+episodes:[]
 },
 
 {
@@ -940,9 +1444,16 @@ title:"Cidade em Chamas",
 category:"Ação",
 year:"2026",
 duration:"2h 01min",
-description:"Filme fictício de demonstração.",
-image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+
+description:
+"Filme fictício de demonstração.",
+
+image:
+"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80",
+
+video:VIDEO_TESTE,
+
+episodes:[]
 },
 
 {
@@ -950,9 +1461,16 @@ title:"Riso Garantido",
 category:"Comédia",
 year:"2026",
 duration:"1h 30min",
-description:"Filme fictício de demonstração.",
-image:"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+
+description:
+"Filme fictício de demonstração.",
+
+image:
+"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80",
+
+video:VIDEO_TESTE,
+
+episodes:[]
 },
 
 {
@@ -960,9 +1478,16 @@ title:"Horizonte",
 category:"Nacional",
 year:"2026",
 duration:"1h 42min",
-description:"Filme fictício de demonstração.",
-image:"https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+
+description:
+"Filme fictício de demonstração.",
+
+image:
+"https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=700&q=80",
+
+video:VIDEO_TESTE,
+
+episodes:[]
 },
 
 {
@@ -970,9 +1495,16 @@ title:"A Última Jornada",
 category:"Ação",
 year:"2026",
 duration:"1h 55min",
-description:"Filme fictício de demonstração.",
-image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+
+description:
+"Filme fictício de demonstração.",
+
+image:
+"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80",
+
+video:VIDEO_TESTE,
+
+episodes:[]
 },
 
 {
@@ -980,9 +1512,16 @@ title:"Além das Estrelas",
 category:"Romance",
 year:"2026",
 duration:"1h 44min",
-description:"Filme fictício de demonstração.",
-image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+
+description:
+"Filme fictício de demonstração.",
+
+image:
+"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80",
+
+video:VIDEO_TESTE,
+
+episodes:[]
 },
 
 {
@@ -990,22 +1529,80 @@ title:"Mundo Selvagem",
 category:"Documentário",
 year:"2026",
 duration:"52 min",
-description:"Filme fictício de demonstração.",
-image:"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+
+description:
+"Filme fictício de demonstração.",
+
+image:
+"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=700&q=80",
+
+video:VIDEO_TESTE,
+
+episodes:[]
 }
 
 ];
 
 
+/* =================================================
+   CARREGAR FILMES
+================================================= */
+
+function getMovies(){
+
+try{
+
+const saved=
+localStorage.getItem("empireMovies");
+
+if(saved){
+
+return JSON.parse(saved);
+
+}
+
+localStorage.setItem(
+"empireMovies",
+JSON.stringify(defaultMovies)
+);
+
+return defaultMovies;
+
+}catch(e){
+
+return defaultMovies;
+
+}
+
+}
+
+
+function saveMovies(list){
+
+localStorage.setItem(
+"empireMovies",
+JSON.stringify(list)
+);
+
+}
+
+
+/* =================================================
+   VARIÁVEIS
+================================================= */
+
+let movies=getMovies();
+
 let currentMovie=null;
 
 
-/* =========================================
-   INICIALIZAÇÃO
-========================================= */
+/* =================================================
+   INICIAR
+================================================= */
 
-document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener(
+"DOMContentLoaded",
+function(){
 
 renderHome();
 
@@ -1013,27 +1610,34 @@ renderExplore();
 
 renderFavorites();
 
-});
+renderAdminMovies();
+
+}
+);
 
 
-/* =========================================
+/* =================================================
    NAVEGAÇÃO
-========================================= */
+================================================= */
 
 function show(id,button){
 
-document.querySelectorAll(".screen")
+document
+.querySelectorAll(".screen")
 .forEach(function(screen){
 
 screen.classList.remove("active");
 
 });
 
-document.getElementById(id)
+
+document
+.getElementById(id)
 .classList.add("active");
 
 
-document.querySelectorAll(".nav button")
+document
+.querySelectorAll(".nav button")
 .forEach(function(btn){
 
 btn.classList.remove("active");
@@ -1052,9 +1656,9 @@ window.scrollTo(0,0);
 }
 
 
-/* =========================================
+/* =================================================
    PESQUISA
-========================================= */
+================================================= */
 
 function goSearch(){
 
@@ -1062,23 +1666,30 @@ show("explorar");
 
 setTimeout(function(){
 
-document.getElementById("search").focus();
+document
+.getElementById("search")
+.focus();
 
 },100);
 
 }
 
 
-/* =========================================
+/* =================================================
    CARD
-========================================= */
+================================================= */
 
 function card(movie){
 
+const title=
+movie.title
+.replace(/'/g,"\\'");
+
 return `
 
-<div class="card"
-onclick="openMovie('${movie.title.replace(/'/g,"\\'")}')">
+<div
+class="card"
+onclick="openMovie('${title}')">
 
 <div class="poster">
 
@@ -1104,9 +1715,9 @@ ${movie.category} • ${movie.year}
 }
 
 
-/* =========================================
+/* =================================================
    HOME
-========================================= */
+================================================= */
 
 function renderHome(){
 
@@ -1124,9 +1735,9 @@ list.innerHTML+=card(movie);
 }
 
 
-/* =========================================
+/* =================================================
    EXPLORAR
-========================================= */
+================================================= */
 
 function renderExplore(list=movies){
 
@@ -1135,11 +1746,13 @@ document.getElementById("exploreList");
 
 container.innerHTML="";
 
+
 if(list.length===0){
 
 container.innerHTML=`
 
-<div class="empty"
+<div
+class="empty"
 style="grid-column:1/-1">
 
 🔎
@@ -1166,397 +1779,12 @@ container.innerHTML+=card(movie);
 }
 
 
-/* =========================================
-   BUSCA
-========================================= */
+/* =================================================
+   PESQUISA
+================================================= */
 
 function searchMovies(){
 
 const text=
-document.getElementById("search")
-.value
-.toLowerCase()
-.trim();
-
-
-const result=
-movies.filter(function(movie){
-
-return movie.title
-.toLowerCase()
-.includes(text)
-
-||
-
-movie.category
-.toLowerCase()
-.includes(text);
-
-});
-
-
-renderExplore(result);
-
-}
-
-
-/* =========================================
-   CATEGORIA
-========================================= */
-
-function category(cat){
-
-show("explorar");
-
-renderExplore(
-
-movies.filter(function(movie){
-
-return movie.category===cat;
-
-})
-
-);
-
-}
-
-
-/* =========================================
-   DETALHES
-========================================= */
-
-function openMovie(title){
-
-const movie=
-movies.find(function(item){
-
-return item.title===title;
-
-});
-
-
-if(!movie)return;
-
-currentMovie=movie;
-
-
-document.getElementById("detailImage")
-.src=movie.image;
-
-
-document.getElementById("detailTitle")
-.textContent=movie.title;
-
-
-document.getElementById("detailMeta")
-.textContent=
-`${movie.category} • ${movie.year} • ${movie.duration}`;
-
-
-document.getElementById("detailDescription")
-.textContent=movie.description;
-
-
-createEpisodes(movie);
-
-show("detalhes");
-
-}
-
-
-/* =========================================
-   EPISÓDIOS
-========================================= */
-
-function createEpisodes(movie){
-
-const box=
-document.getElementById("episodes");
-
-box.innerHTML="";
-
-
-for(let i=1;i<=3;i++){
-
-box.innerHTML+=`
-
-<div class="episode">
-
-<div class="number">
-${i}
-</div>
-
-<div class="epInfo">
-
-<h3>
-Episódio ${i}
-</h3>
-
-<p>
-Demonstração
-</p>
-
-</div>
-
-<button
-class="epPlay"
-onclick="playMovie('${movie.title.replace(/'/g,"\\'")}')">
-
-▶
-
-</button>
-
-</div>
-
-`;
-
-}
-
-}
-
-
-/* =========================================
-   ABRIR PLAYER
-========================================= */
-
-function playCurrent(){
-
-if(currentMovie){
-
-playMovie(currentMovie.title);
-
-}
-
-}
-
-
-function playMovie(title){
-
-const movie=
-movies.find(function(item){
-
-return item.title===title;
-
-});
-
-
-if(!movie)return;
-
-currentMovie=movie;
-
-
-const video=
-document.getElementById("video");
-
-
-const error=
-document.getElementById("videoError");
-
-
-error.style.display="none";
-
-
-document.getElementById("playerTitle")
-.textContent=movie.title;
-
-
-/*
-IMPORTANTE:
-paramos o vídeo anterior,
-limpamos a fonte e colocamos
-a nova URL.
-*/
-
-video.pause();
-
-video.removeAttribute("src");
-
-video.load();
-
-video.src=movie.video;
-
-video.load();
-
-
-show("player");
-
-
-/*
-Não forçamos autoplay.
-No celular o navegador pode bloquear
-autoplay.
-
-O usuário toca no ▶ do próprio player.
-*/
-
-}
-
-
-/* =========================================
-   ERRO
-========================================= */
-
-document.addEventListener("DOMContentLoaded",function(){
-
-const video=
-document.getElementById("video");
-
-
-video.addEventListener("error",function(){
-
-document.getElementById("videoError")
-.style.display="block";
-
-});
-
-});
-
-
-/* =========================================
-   VOLTAR
-========================================= */
-
-function backFromPlayer(){
-
-if(currentMovie){
-
-openMovie(currentMovie.title);
-
-}else{
-
-show("home");
-
-}
-
-}
-
-
-/* =========================================
-   FAVORITOS
-========================================= */
-
-function getFavorites(){
-
-try{
-
-return JSON.parse(
-localStorage.getItem("empireFavorites")
-||"[]"
-);
-
-}catch(e){
-
-return [];
-
-}
-
-}
-
-
-function saveFavorites(list){
-
-localStorage.setItem(
-"empireFavorites",
-JSON.stringify(list)
-);
-
-}
-
-
-function favorite(title){
-
-let list=getFavorites();
-
-
-if(!list.includes(title)){
-
-list.push(title);
-
-saveFavorites(list);
-
-alert("Adicionado aos favoritos ❤️");
-
-}else{
-
-alert("Esse filme já está nos favoritos.");
-
-}
-
-
-renderFavorites();
-
-}
-
-
-function favoriteCurrent(){
-
-if(currentMovie){
-
-favorite(currentMovie.title);
-
-}
-
-}
-
-
-function renderFavorites(){
-
-const box=
-document.getElementById("favoritesList");
-
-
-const list=
-getFavorites();
-
-
-box.innerHTML="";
-
-
-if(list.length===0){
-
-box.innerHTML=`
-
-<div class="empty"
-style="grid-column:1/-1">
-
-<div style="font-size:45px">
-❤️
-</div>
-
-<br>
-
-Você ainda não possui favoritos.
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-list.forEach(function(title){
-
-const movie=
-movies.find(function(item){
-
-return item.title===title;
-
-});
-
-
-if(movie){
-
-box.innerHTML+=card(movie);
-
-}
-
-});
-
-}
-
-</script>
-
-</body>
-    </html>
+document
+.
