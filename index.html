@@ -4,196 +4,150 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050505">
-<meta name="description" content="Empire Filmes - Filmes, séries e episódios">
 <title>Empire Filmes</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-:root{
-    --bg:#050505;
-    --card:#151515;
-    --text:#ffffff;
-    --muted:#a7a7a7;
-    --accent:#e50914;
-    --border:#252525;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:Arial,Helvetica,sans-serif;
-    min-height:100vh;
+    background:#050505;
+    color:#fff;
+    font-family:Arial,sans-serif;
 }
 
-button{
-    font-family:inherit;
-    cursor:pointer;
-}
+button{font-family:inherit;cursor:pointer}
 
 .app{
     max-width:600px;
     margin:auto;
-    min-height:100vh;
-    padding-bottom:75px;
+    padding-bottom:80px;
 }
 
-/* TOPO */
-
-.topbar{
+.top{
     position:sticky;
     top:0;
-    z-index:50;
+    z-index:20;
     height:62px;
+    padding:0 15px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 16px;
-    background:rgba(5,5,5,.95);
-    backdrop-filter:blur(12px);
+    background:rgba(5,5,5,.96);
 }
 
 .logo{
-    font-size:22px;
+    font-size:21px;
     font-weight:900;
-    letter-spacing:-1px;
 }
 
-.logo span{
-    color:var(--accent);
-}
+.logo span{color:#e50914}
 
-.icon-btn{
+.searchBtn{
     width:42px;
     height:42px;
     border:0;
     border-radius:50%;
     background:#1d1d1d;
-    color:#fff;
+    color:white;
     font-size:20px;
 }
 
-/* TELAS */
-
 .screen{
     display:none;
-    padding:0 14px;
+    padding:14px;
 }
 
-.screen.active{
-    display:block;
-}
+.screen.active{display:block}
 
 /* HERO */
 
 .hero{
-    position:relative;
-    min-height:390px;
+    height:390px;
     border-radius:18px;
     overflow:hidden;
-    margin-bottom:22px;
+    position:relative;
     background:
-        linear-gradient(to top,#050505 5%,transparent 65%),
-        linear-gradient(135deg,#343434,#111);
+    linear-gradient(to top,#050505 8%,transparent 70%),
+    url("https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png")
+    center/cover;
 }
 
-.hero-content{
+.heroContent{
     position:absolute;
     bottom:20px;
     left:18px;
     right:18px;
 }
 
-.hero-tag{
+.tag{
     display:inline-block;
-    background:var(--accent);
+    background:#e50914;
     padding:5px 9px;
     border-radius:5px;
     font-size:11px;
     font-weight:bold;
-    margin-bottom:8px;
 }
 
 .hero h1{
     font-size:30px;
-    margin-bottom:7px;
+    margin:8px 0;
 }
 
 .hero p{
     color:#ddd;
     font-size:13px;
     line-height:1.4;
-    max-width:450px;
 }
 
-.hero-buttons{
+.buttons{
     display:flex;
-    gap:9px;
+    gap:8px;
     margin-top:14px;
 }
 
-.primary-btn,
-.secondary-btn{
+.primary{
+    background:#fff;
+    color:#000;
     border:0;
     border-radius:8px;
-    padding:12px 17px;
+    padding:12px 18px;
     font-weight:bold;
 }
 
-.primary-btn{
-    background:#fff;
-    color:#000;
+.secondary{
+    background:#292929;
+    color:white;
+    border:0;
+    border-radius:8px;
+    padding:12px 18px;
 }
 
-.secondary-btn{
-    background:#333;
-    color:#fff;
-}
+/* SECTIONS */
 
-/* SEÇÕES */
+.section{margin-top:25px}
 
-.section{
-    margin-bottom:27px;
-}
-
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.title{
+    font-size:19px;
+    font-weight:bold;
     margin-bottom:12px;
 }
 
-.section-title h2{
-    font-size:19px;
-}
-
-.section-title small{
-    color:var(--muted);
-}
-
-/* CATEGORIAS */
+/* CATEGORIES */
 
 .categories{
     display:flex;
     gap:8px;
     overflow-x:auto;
-    padding-bottom:5px;
-    scrollbar-width:none;
 }
 
-.categories::-webkit-scrollbar{
-    display:none;
-}
+.categories::-webkit-scrollbar,
+.row::-webkit-scrollbar{display:none}
 
 .category{
-    flex:0 0 auto;
-    background:#1b1b1b;
-    border:1px solid #292929;
+    flex:none;
+    background:#191919;
     color:#fff;
+    border:1px solid #292929;
     border-radius:20px;
     padding:9px 14px;
 }
@@ -204,15 +158,9 @@ button{
     display:flex;
     gap:12px;
     overflow-x:auto;
-    scrollbar-width:none;
-    padding-bottom:5px;
 }
 
-.row::-webkit-scrollbar{
-    display:none;
-}
-
-.movie-card{
+.card{
     flex:0 0 125px;
     cursor:pointer;
 }
@@ -222,70 +170,26 @@ button{
     border-radius:10px;
     overflow:hidden;
     background:#222;
-    position:relative;
 }
 
 .poster img{
     width:100%;
     height:100%;
     object-fit:cover;
-    display:block;
 }
 
-.movie-card h3{
+.card h3{
     font-size:13px;
-    margin-top:8px;
+    margin-top:7px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
 }
 
-.movie-card p{
-    color:var(--muted);
+.card p{
+    color:#999;
     font-size:11px;
-    margin-top:3px;
-}
-
-/* PROGRESSO */
-
-.progress{
-    height:4px;
-    background:#333;
-    margin-top:7px;
-    border-radius:5px;
-    overflow:hidden;
-}
-
-.progress span{
-    display:block;
-    height:100%;
-    background:var(--accent);
-}
-
-/* EXPLORAR */
-
-.search-box{
-    display:flex;
-    gap:8px;
-    margin:10px 0 20px;
-}
-
-.search-box input{
-    flex:1;
-    background:#171717;
-    border:1px solid #292929;
-    color:white;
-    border-radius:10px;
-    padding:13px;
-    outline:none;
-}
-
-.search-box button{
-    border:0;
-    border-radius:10px;
-    background:var(--accent);
-    color:#fff;
-    width:50px;
+    margin-top:4px;
 }
 
 /* GRID */
@@ -293,248 +197,238 @@ button{
 .grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:13px;
+    gap:12px;
 }
 
-.grid .movie-card{
+.grid .card{
     min-width:0;
     width:100%;
 }
 
-.grid .poster{
-    height:200px;
-}
+.grid .poster{height:200px}
 
-/* FAVORITOS */
+/* SEARCH */
 
-.empty{
-    text-align:center;
-    padding:70px 20px;
-    color:var(--muted);
-}
-
-.empty-icon{
-    font-size:50px;
-    margin-bottom:15px;
-}
-
-/* PERFIL */
-
-.profile{
-    text-align:center;
-    padding:30px 10px;
-}
-
-.avatar{
-    width:90px;
-    height:90px;
-    margin:auto;
-    border-radius:50%;
-    background:#222;
+.searchBox{
     display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:40px;
+    gap:8px;
+    margin-bottom:20px;
 }
 
-.profile h2{
-    margin-top:15px;
-}
-
-.profile p{
-    color:var(--muted);
-    margin-top:6px;
-}
-
-.profile-menu{
-    margin-top:25px;
-}
-
-.profile-item{
-    width:100%;
-    padding:16px;
-    margin-bottom:8px;
-    background:#171717;
-    border:1px solid #242424;
-    border-radius:10px;
+.searchBox input{
+    flex:1;
+    background:#181818;
+    border:1px solid #292929;
     color:#fff;
-    text-align:left;
+    padding:13px;
+    border-radius:9px;
+    outline:none;
 }
 
-/* DETALHES */
+.searchBox button{
+    width:50px;
+    border:0;
+    border-radius:9px;
+    background:#e50914;
+    color:#fff;
+}
+
+/* DETAILS */
 
 .back{
-    margin:12px 0;
     border:0;
     background:none;
-    color:white;
+    color:#fff;
+    margin-bottom:12px;
     font-size:15px;
 }
 
-.detail-cover{
-    height:300px;
-    border-radius:15px;
-    overflow:hidden;
-    background:#222;
-}
-
-.detail-cover img{
+.detailImage{
     width:100%;
-    height:100%;
+    height:310px;
     object-fit:cover;
+    border-radius:15px;
 }
 
-.detail-info{
-    padding:18px 3px;
-}
-
-.detail-info h1{
+.detail h1{
     font-size:27px;
+    margin-top:15px;
 }
 
 .meta{
-    color:var(--muted);
-    margin:8px 0 15px;
+    color:#999;
+    margin:8px 0 14px;
     font-size:13px;
 }
 
 .description{
     color:#ddd;
-    line-height:1.5;
     font-size:14px;
+    line-height:1.5;
 }
 
-.favorite-btn{
-    margin-top:12px;
+.full{
     width:100%;
-    background:#252525;
-    color:white;
-    border:0;
+    margin-top:15px;
+}
+
+.favorite{
+    width:100%;
+    margin-top:9px;
     padding:13px;
+    background:#222;
+    border:0;
     border-radius:8px;
+    color:white;
 }
 
-/* PLAYER */
-
-.player{
-    position:relative;
-    background:#000;
-    border-radius:12px;
-    overflow:hidden;
-}
-
-.player video{
-    width:100%;
-    display:block;
-    background:#000;
-    max-height:70vh;
-}
-
-.player-title{
-    padding:14px 2px;
-}
-
-.player-title h2{
-    font-size:19px;
-}
-
-.player-title p{
-    color:var(--muted);
-    margin-top:5px;
-}
-
-/* EPISÓDIOS */
+/* EPISODES */
 
 .episode{
     display:flex;
-    gap:12px;
     align-items:center;
+    gap:12px;
+    padding:11px;
     background:#151515;
-    border:1px solid #222;
     border-radius:10px;
-    padding:10px;
-    margin-bottom:9px;
+    margin-top:8px;
 }
 
-.episode-number{
-    width:42px;
-    height:42px;
+.number{
+    width:40px;
+    height:40px;
     border-radius:8px;
-    background:#252525;
+    background:#292929;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:bold;
 }
 
-.episode-info{
-    flex:1;
-}
+.epInfo{flex:1}
 
-.episode-info h3{
-    font-size:14px;
-}
+.epInfo h3{font-size:14px}
 
-.episode-info p{
-    color:var(--muted);
+.epInfo p{
+    color:#888;
     font-size:11px;
     margin-top:4px;
 }
 
-.episode button{
-    border:0;
-    background:var(--accent);
-    color:#fff;
-    border-radius:50%;
+.epPlay{
     width:38px;
     height:38px;
+    border-radius:50%;
+    border:0;
+    background:#e50914;
+    color:white;
 }
 
-/* MENU INFERIOR */
+/* PLAYER */
 
-.bottom-nav{
+.videoBox{
+    background:#000;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+video{
+    width:100%;
+    display:block;
+    background:#000;
+}
+
+.playerTitle{
+    margin-top:14px;
+}
+
+.playerTitle h2{font-size:20px}
+
+.playerTitle p{
+    color:#999;
+    margin-top:5px;
+}
+
+/* PROFILE */
+
+.profile{
+    text-align:center;
+    padding:30px 0;
+}
+
+.avatar{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#222;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    font-size:40px;
+}
+
+.profile h2{margin-top:15px}
+
+.profile p{
+    color:#999;
+    margin-top:5px;
+}
+
+.profileItem{
+    width:100%;
+    padding:16px;
+    margin-top:9px;
+    background:#181818;
+    border:1px solid #292929;
+    border-radius:9px;
+    color:white;
+    text-align:left;
+}
+
+/* EMPTY */
+
+.empty{
+    text-align:center;
+    padding:60px 20px;
+    color:#999;
+}
+
+/* NAV */
+
+.nav{
     position:fixed;
-    z-index:100;
     bottom:0;
     left:50%;
     transform:translateX(-50%);
     width:100%;
     max-width:600px;
     height:68px;
-    background:rgba(12,12,12,.97);
-    border-top:1px solid #222;
+    background:#101010;
+    border-top:1px solid #252525;
     display:flex;
     justify-content:space-around;
     align-items:center;
+    z-index:50;
 }
 
-.nav-btn{
-    background:none;
+.nav button{
     border:0;
+    background:none;
     color:#777;
     font-size:11px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:4px;
 }
 
-.nav-btn span{
+.nav button.active{color:white}
+
+.navIcon{
+    display:block;
     font-size:21px;
-}
-
-.nav-btn.active{
-    color:#fff;
+    margin-bottom:3px;
 }
 
 @media(max-width:380px){
-    .grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .grid .poster{
-        height:230px;
-    }
+    .grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -543,133 +437,137 @@ button{
 
 <div class="app">
 
-<!-- TOPO -->
-<header class="topbar">
+<header class="top">
     <div class="logo">EMPIRE <span>FILMES</span></div>
-    <button class="icon-btn" onclick="openSearch()">🔍</button>
+    <button class="searchBtn" onclick="goSearch()">🔍</button>
 </header>
 
 
 <!-- HOME -->
+
 <section id="home" class="screen active">
 
     <div class="hero">
-        <div class="hero-content">
-            <span class="hero-tag">DESTAQUE</span>
-            <h1>Projeto Eclipse</h1>
+
+        <div class="heroContent">
+
+            <span class="tag">DESTAQUE</span>
+
+            <h1>Big Buck Bunny</h1>
+
             <p>
-                Um grupo de exploradores recebe uma missão que pode mudar
-                o destino da humanidade.
+                Uma animação da Blender Foundation.
+                Assista ao filme aberto diretamente no Empire Filmes.
             </p>
 
-            <div class="hero-buttons">
-                <button class="primary-btn" onclick="openMovie('Projeto Eclipse')">
+            <div class="buttons">
+
+                <button class="primary"
+                        onclick="openMovie('Big Buck Bunny')">
                     ▶ Assistir
                 </button>
 
-                <button class="secondary-btn" onclick="addFavorite('Projeto Eclipse')">
+                <button class="secondary"
+                        onclick="favorite('Big Buck Bunny')">
                     + Minha lista
                 </button>
+
             </div>
+
         </div>
+
     </div>
 
 
     <div class="section">
-        <div class="section-title">
-            <h2>🔥 Lançamentos</h2>
-        </div>
 
-        <div class="row" id="homeMovies"></div>
+        <div class="title">🔥 Lançamentos</div>
+
+        <div class="row" id="homeList"></div>
+
     </div>
 
 
     <div class="section">
-        <div class="section-title">
-            <h2>📂 Categorias</h2>
-        </div>
+
+        <div class="title">📂 Categorias</div>
 
         <div class="categories">
-            <button class="category" onclick="filterCategory('Ação')">Ação</button>
-            <button class="category" onclick="filterCategory('Terror')">Terror</button>
-            <button class="category" onclick="filterCategory('Romance')">Romance</button>
-            <button class="category" onclick="filterCategory('Comédia')">Comédia</button>
-            <button class="category" onclick="filterCategory('Nacional')">Nacional</button>
-            <button class="category" onclick="filterCategory('Documentário')">Documentário</button>
-            <button class="category" onclick="filterCategory('Canais')">Canais</button>
+
+            <button class="category" onclick="category('Ação')">Ação</button>
+            <button class="category" onclick="category('Terror')">Terror</button>
+            <button class="category" onclick="category('Romance')">Romance</button>
+            <button class="category" onclick="category('Comédia')">Comédia</button>
+            <button class="category" onclick="category('Animação')">Animação</button>
+            <button class="category" onclick="category('Documentário')">Documentário</button>
+
         </div>
+
     </div>
 
 
     <div class="section">
-        <div class="section-title">
-            <h2>▶ Continue assistindo</h2>
-        </div>
+
+        <div class="title">▶ Continue assistindo</div>
 
         <div class="row">
 
-            <div class="movie-card" onclick="openMovie('Projeto Eclipse')">
+            <div class="card"
+                 onclick="openMovie('Big Buck Bunny')">
+
                 <div class="poster">
-                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=500&q=80">
+
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png">
+
                 </div>
 
-                <h3>Projeto Eclipse</h3>
-                <p>32 min restantes</p>
+                <h3>Big Buck Bunny</h3>
 
-                <div class="progress">
-                    <span style="width:65%"></span>
-                </div>
-            </div>
+                <p>Continuar assistindo</p>
 
-            <div class="movie-card" onclick="openMovie('Horizonte')">
-                <div class="poster">
-                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=500&q=80">
-                </div>
-
-                <h3>Horizonte</h3>
-                <p>18 min restantes</p>
-
-                <div class="progress">
-                    <span style="width:35%"></span>
-                </div>
             </div>
 
         </div>
+
     </div>
 
 </section>
 
 
 <!-- EXPLORAR -->
+
 <section id="explorar" class="screen">
 
-    <div class="section-title">
-        <h2>Explorar</h2>
-    </div>
+    <div class="title">🔎 Explorar</div>
 
-    <div class="search-box">
-        <input id="searchInput" placeholder="Buscar filmes..." oninput="searchMovies()">
+    <div class="searchBox">
+
+        <input id="search"
+               placeholder="Buscar filme..."
+               oninput="searchMovies()">
+
         <button onclick="searchMovies()">🔍</button>
+
     </div>
 
-    <div id="exploreGrid" class="grid"></div>
+    <div id="exploreList" class="grid"></div>
 
 </section>
 
 
 <!-- FAVORITOS -->
+
 <section id="favoritos" class="screen">
 
-    <div class="section-title">
-        <h2>❤️ Favoritos</h2>
-    </div>
+    <div class="title">❤️ Favoritos</div>
 
-    <div id="favoriteGrid" class="grid"></div>
+    <div id="favoritesList" class="grid"></div>
 
 </section>
 
 
 <!-- PERFIL -->
+
 <section id="perfil" class="screen">
 
     <div class="profile">
@@ -677,27 +575,13 @@ button{
         <div class="avatar">👤</div>
 
         <h2>Meu Perfil</h2>
+
         <p>Bem-vindo ao Empire Filmes</p>
 
-        <div class="profile-menu">
-
-            <button class="profile-item">
-                👤 Minha conta
-            </button>
-
-            <button class="profile-item">
-                ⚙️ Configurações
-            </button>
-
-            <button class="profile-item">
-                🔔 Notificações
-            </button>
-
-            <button class="profile-item">
-                ℹ️ Sobre o Empire Filmes
-            </button>
-
-        </div>
+        <button class="profileItem">👤 Minha conta</button>
+        <button class="profileItem">⚙️ Configurações</button>
+        <button class="profileItem">🔔 Notificações</button>
+        <button class="profileItem">ℹ️ Sobre o aplicativo</button>
 
     </div>
 
@@ -705,42 +589,42 @@ button{
 
 
 <!-- DETALHES -->
+
 <section id="detalhes" class="screen">
 
-    <button class="back" onclick="showScreen('home')">
+    <button class="back" onclick="show('home')">
         ← Voltar
     </button>
 
-    <div class="detail-cover">
-        <img id="detailImage" src="">
-    </div>
+    <img id="detailImage"
+         class="detailImage"
+         src="">
 
-    <div class="detail-info">
+    <div class="detail">
 
         <h1 id="detailTitle"></h1>
 
-        <div class="meta" id="detailMeta"></div>
+        <div id="detailMeta" class="meta"></div>
 
-        <p class="description" id="detailDescription"></p>
+        <p id="detailDescription"
+           class="description"></p>
 
-        <button class="primary-btn"
-                style="width:100%;margin-top:16px"
-                onclick="playCurrentMovie()">
+        <button class="primary full"
+                onclick="playCurrent()">
             ▶ ASSISTIR
         </button>
 
-        <button class="favorite-btn"
-                onclick="favoriteCurrentMovie()">
+        <button class="favorite"
+                onclick="favoriteCurrent()">
             ❤️ Adicionar aos favoritos
         </button>
 
     </div>
 
+
     <div class="section">
 
-        <div class="section-title">
-            <h2>📺 Episódios</h2>
-        </div>
+        <div class="title">📺 Episódios</div>
 
         <div id="episodes"></div>
 
@@ -750,15 +634,16 @@ button{
 
 
 <!-- PLAYER -->
+
 <section id="player" class="screen">
 
-    <button class="back" onclick="showScreen('detalhes')">
+    <button class="back" onclick="show('detalhes')">
         ← Voltar
     </button>
 
-    <div class="player">
+    <div class="videoBox">
 
-        <video id="videoPlayer"
+        <video id="video"
                controls
                playsinline
                preload="metadata">
@@ -766,35 +651,48 @@ button{
 
     </div>
 
-    <div class="player-title">
-        <h2 id="playerTitle">Vídeo</h2>
-        <p>Reprodução de demonstração</p>
+    <div class="playerTitle">
+
+        <h2 id="playerTitle"></h2>
+
+        <p>Empire Filmes • Reprodução de demonstração</p>
+
     </div>
 
 </section>
 
 
-<!-- MENU -->
-<nav class="bottom-nav">
+<!-- NAV -->
 
-    <button class="nav-btn active" onclick="showScreen('home',this)">
-        <span>🏠</span>
+<nav class="nav">
+
+    <button class="active"
+            onclick="show('home',this)">
+
+        <span class="navIcon">🏠</span>
         Início
+
     </button>
 
-    <button class="nav-btn" onclick="showScreen('explorar',this)">
-        <span>🔎</span>
+    <button onclick="show('explorar',this)">
+
+        <span class="navIcon">🔎</span>
         Explorar
+
     </button>
 
-    <button class="nav-btn" onclick="showScreen('favoritos',this)">
-        <span>❤️</span>
+    <button onclick="show('favoritos',this)">
+
+        <span class="navIcon">❤️</span>
         Favoritos
+
     </button>
 
-    <button class="nav-btn" onclick="showScreen('perfil',this)">
-        <span>👤</span>
+    <button onclick="show('perfil',this)">
+
+        <span class="navIcon">👤</span>
         Perfil
+
     </button>
 
 </nav>
@@ -804,499 +702,540 @@ button{
 
 <script>
 
-/* =========================
-   BANCO DE FILMES DE TESTE
-========================= */
+/* =====================================
+   FILMES DE DEMONSTRAÇÃO
+===================================== */
+
+const VIDEO =
+"https://www.radiantmediaplayer.com/media/bbb-360p.mp4";
+
 
 const movies = [
 
-    {
-        title:"Projeto Eclipse",
-        category:"Ação",
-        year:"2026",
-        duration:"1h 48min",
-        description:"Um grupo de exploradores recebe uma missão que pode mudar o destino da humanidade.",
-        image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
-        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
-    },
+{
+title:"Big Buck Bunny",
+category:"Animação",
+year:"2008",
+duration:"9 min",
+description:
+"Big Buck Bunny é um Open Movie da Blender Foundation. Este título é usado aqui como conteúdo de demonstração.",
+image:
+"https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png",
+video:VIDEO
+},
 
-    {
-        title:"Horizonte",
-        category:"Drama",
-        year:"2026",
-        duration:"1h 42min",
-        description:"Uma viagem inesperada coloca antigas escolhas diante de uma nova oportunidade.",
-        image:"https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=700&q=80",
-        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
-    },
+{
+title:"Projeto Eclipse",
+category:"Ação",
+year:"2026",
+duration:"1h 48min",
+description:
+"Filme fictício de demonstração do catálogo Empire Filmes.",
+image:
+"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
+video:VIDEO
+},
 
-    {
-        title:"Noite Sombria",
-        category:"Terror",
-        year:"2025",
-        duration:"1h 35min",
-        description:"Uma casa abandonada guarda um segredo que ninguém deveria descobrir.",
-        image:"https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=700&q=80",
-        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
-    },
+{
+title:"Noite Sombria",
+category:"Terror",
+year:"2026",
+duration:"1h 35min",
+description:
+"Título fictício utilizado para demonstrar a categoria Terror.",
+image:
+"https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=700&q=80",
+video:VIDEO
+},
 
-    {
-        title:"Último Verão",
-        category:"Romance",
-        year:"2025",
-        duration:"1h 38min",
-        description:"Duas pessoas se encontram no momento mais inesperado de suas vidas.",
-        image:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80",
-        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
-    },
+{
+title:"Último Verão",
+category:"Romance",
+year:"2026",
+duration:"1h 38min",
+description:
+"Título fictício utilizado para demonstrar a categoria Romance.",
+image:
+"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80",
+video:VIDEO
+},
 
-    {
-        title:"Cidade em Chamas",
-        category:"Ação",
-        year:"2026",
-        duration:"2h 01min",
-        description:"Uma cidade entra em colapso e um pequeno grupo tenta encontrar uma saída.",
-        image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80",
-        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
-    },
+{
+title:"Cidade em Chamas",
+category:"Ação",
+year:"2026",
+duration:"2h 01min",
+description:
+"Título fictício utilizado para demonstrar a categoria Ação.",
+image:
+"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80",
+video:VIDEO
+},
 
-    {
-        title:"Riso Garantido",
-        category:"Comédia",
-        year:"2025",
-        duration:"1h 30min",
-        description:"Uma sequência de acontecimentos transforma um dia comum em uma grande confusão.",
-        image:"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80",
-        video:"https://www.radiantmediaplayer.com/media/bbb-360p.mp4"
-    }
+{
+title:"Riso Garantido",
+category:"Comédia",
+year:"2026",
+duration:"1h 30min",
+description:
+"Título fictício utilizado para demonstrar a categoria Comédia.",
+image:
+"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80",
+video:VIDEO
+},
+
+{
+title:"Horizonte",
+category:"Drama",
+year:"2026",
+duration:"1h 42min",
+description:
+"Título fictício utilizado para demonstrar o catálogo.",
+image:
+"https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=700&q=80",
+video:VIDEO
+},
+
+{
+title:"A Última Jornada",
+category:"Ação",
+year:"2026",
+duration:"1h 55min",
+description:
+"Título fictício de demonstração.",
+image:
+"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80",
+video:VIDEO
+},
+
+{
+title:"Além das Estrelas",
+category:"Romance",
+year:"2026",
+duration:"1h 44min",
+description:
+"Título fictício de demonstração.",
+image:
+"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80",
+video:VIDEO
+},
+
+{
+title:"Mundo Selvagem",
+category:"Documentário",
+year:"2026",
+duration:"52 min",
+description:
+"Título fictício de demonstração.",
+image:
+"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=700&q=80",
+video:VIDEO
+},
+
+{
+title:"Aventura Final",
+category:"Ação",
+year:"2026",
+duration:"1h 50min",
+description:
+"Título fictício de demonstração.",
+image:
+"https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=700&q=80",
+video:VIDEO
+}
 
 ];
 
 
-/* =========================
-   VARIÁVEIS
-========================= */
-
-let currentMovie = null;
+let currentMovie=null;
 
 
-/* =========================
-   INICIALIZAÇÃO
-========================= */
+/* =====================================
+   INICIAR
+===================================== */
 
-document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener("DOMContentLoaded",()=>{
 
-    renderHome();
-    renderExplore();
-    renderFavorites();
+renderHome();
+renderExplore();
+renderFavorites();
 
 });
 
 
-/* =========================
+/* =====================================
    NAVEGAÇÃO
-========================= */
+===================================== */
 
-function showScreen(id,button){
+function show(id,button){
 
-    document.querySelectorAll(".screen").forEach(screen=>{
-        screen.classList.remove("active");
-    });
+document.querySelectorAll(".screen")
+.forEach(x=>x.classList.remove("active"));
 
-    const screen=document.getElementById(id);
+document.getElementById(id)
+.classList.add("active");
 
-    if(screen){
-        screen.classList.add("active");
-    }
+document.querySelectorAll(".nav button")
+.forEach(x=>x.classList.remove("active"));
 
-    document.querySelectorAll(".nav-btn").forEach(btn=>{
-        btn.classList.remove("active");
-    });
+if(button) button.classList.add("active");
 
-    if(button){
-        button.classList.add("active");
-    }
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+window.scrollTo(0,0);
 
 }
 
 
-/* =========================
+function goSearch(){
+
+show("explorar");
+
+setTimeout(()=>{
+
+document.getElementById("search").focus();
+
+},100);
+
+}
+
+
+/* =====================================
+   CARDS
+===================================== */
+
+function card(movie){
+
+return `
+
+<div class="card"
+onclick="openMovie('${movie.title.replace(/'/g,"\\'")}')">
+
+<div class="poster">
+
+<img src="${movie.image}"
+alt="${movie.title}"
+loading="lazy">
+
+</div>
+
+<h3>${movie.title}</h3>
+
+<p>${movie.category} • ${movie.year}</p>
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================
    HOME
-========================= */
+===================================== */
 
 function renderHome(){
 
-    const container=document.getElementById("homeMovies");
+const list=document.getElementById("homeList");
 
-    container.innerHTML="";
+list.innerHTML="";
 
-    movies.forEach(movie=>{
+movies.forEach(movie=>{
 
-        container.innerHTML+=createCard(movie);
+list.innerHTML+=card(movie);
 
-    });
-
-}
-
-
-/* =========================
-   CARD
-========================= */
-
-function createCard(movie){
-
-    return `
-
-        <div class="movie-card"
-             onclick="openMovie('${escapeQuotes(movie.title)}')">
-
-            <div class="poster">
-
-                <img src="${movie.image}"
-                     alt="${movie.title}"
-                     loading="lazy">
-
-            </div>
-
-            <h3>${movie.title}</h3>
-
-            <p>${movie.category} • ${movie.year}</p>
-
-        </div>
-
-    `;
+});
 
 }
 
 
-/* =========================
+/* =====================================
    EXPLORAR
-========================= */
+===================================== */
 
 function renderExplore(list=movies){
 
-    const grid=document.getElementById("exploreGrid");
+const container=document.getElementById("exploreList");
 
-    grid.innerHTML="";
+container.innerHTML="";
 
-    if(list.length===0){
+if(list.length===0){
 
-        grid.innerHTML=`
+container.innerHTML=`
 
-            <div class="empty" style="grid-column:1/-1">
+<div class="empty"
+style="grid-column:1/-1">
 
-                <div class="empty-icon">🔎</div>
+🔎<br><br>
+Nenhum filme encontrado.
 
-                <p>Nenhum filme encontrado.</p>
+</div>
 
-            </div>
+`;
 
-        `;
+return;
 
-        return;
+}
 
-    }
+list.forEach(movie=>{
 
-    list.forEach(movie=>{
+container.innerHTML+=card(movie);
 
-        grid.innerHTML+=createCard(movie);
-
-    });
+});
 
 }
 
 
 function searchMovies(){
 
-    const input=document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
+const text=
+document.getElementById("search")
+.value
+.toLowerCase();
 
-    const results=movies.filter(movie=>
+const result=movies.filter(movie=>
 
-        movie.title.toLowerCase().includes(input) ||
-        movie.category.toLowerCase().includes(input)
+movie.title.toLowerCase()
+.includes(text)
 
-    );
+||
 
-    renderExplore(results);
+movie.category.toLowerCase()
+.includes(text)
 
-}
+);
 
-
-/* =========================
-   PESQUISA
-========================= */
-
-function openSearch(){
-
-    showScreen("explorar");
-
-    setTimeout(()=>{
-
-        const input=document.getElementById("searchInput");
-
-        if(input){
-
-            input.focus();
-
-        }
-
-    },100);
+renderExplore(result);
 
 }
 
 
-/* =========================
-   CATEGORIA
-========================= */
+function category(cat){
 
-function filterCategory(category){
+show("explorar");
 
-    showScreen("explorar");
-
-    const results=movies.filter(movie=>
-
-        movie.category.toLowerCase()===category.toLowerCase()
-
-    );
-
-    renderExplore(results);
+renderExplore(
+movies.filter(movie=>
+movie.category===cat
+)
+);
 
 }
 
 
-/* =========================
+/* =====================================
    DETALHES
-========================= */
+===================================== */
 
 function openMovie(title){
 
-    const movie=movies.find(m=>m.title===title);
+const movie=
+movies.find(x=>x.title===title);
 
-    if(!movie) return;
+if(!movie)return;
 
-    currentMovie=movie;
+currentMovie=movie;
 
-    document.getElementById("detailImage").src=movie.image;
+document.getElementById("detailImage")
+.src=movie.image;
 
-    document.getElementById("detailTitle").textContent=movie.title;
+document.getElementById("detailTitle")
+.textContent=movie.title;
 
-    document.getElementById("detailMeta").textContent=
-        `${movie.category} • ${movie.year} • ${movie.duration}`;
+document.getElementById("detailMeta")
+.textContent=
+`${movie.category} • ${movie.year} • ${movie.duration}`;
 
-    document.getElementById("detailDescription").textContent=
-        movie.description;
+document.getElementById("detailDescription")
+.textContent=movie.description;
 
-    createEpisodes(movie);
+createEpisodes(movie);
 
-    showScreen("detalhes");
+show("detalhes");
 
 }
 
-
-/* =========================
-   EPISÓDIOS
-========================= */
 
 function createEpisodes(movie){
 
-    const container=document.getElementById("episodes");
+const box=document.getElementById("episodes");
 
-    container.innerHTML="";
+box.innerHTML="";
 
-    for(let i=1;i<=3;i++){
+for(let i=1;i<=3;i++){
 
-        container.innerHTML+=`
+box.innerHTML+=`
 
-            <div class="episode">
+<div class="episode">
 
-                <div class="episode-number">
-                    ${i}
-                </div>
+<div class="number">${i}</div>
 
-                <div class="episode-info">
+<div class="epInfo">
 
-                    <h3>Episódio ${i}</h3>
+<h3>Episódio ${i}</h3>
 
-                    <p>
-                        ${i===1 ? "Começar a assistir" : "Episódio de demonstração"}
-                    </p>
+<p>Conteúdo de demonstração</p>
 
-                </div>
+</div>
 
-                <button onclick="playMovie('${escapeQuotes(movie.title)}')">
-                    ▶
-                </button>
+<button class="epPlay"
+onclick="playMovie('${movie.title.replace(/'/g,"\\'")}')">
 
-            </div>
+▶
 
-        `;
+</button>
 
-    }
+</div>
+
+`;
+
+}
 
 }
 
 
-/* =========================
+/* =====================================
    PLAYER
-========================= */
+===================================== */
 
-function playCurrentMovie(){
+function playCurrent(){
 
-    if(!currentMovie) return;
+if(currentMovie){
 
-    playMovie(currentMovie.title);
+playMovie(currentMovie.title);
+
+}
 
 }
 
 
 function playMovie(title){
 
-    const movie=movies.find(m=>m.title===title);
+const movie=
+movies.find(x=>x.title===title);
 
-    if(!movie) return;
+if(!movie)return;
 
-    currentMovie=movie;
+currentMovie=movie;
 
-    const player=document.getElementById("videoPlayer");
+const video=
+document.getElementById("video");
 
-    player.pause();
+video.pause();
 
-    player.src=movie.video;
+video.src=movie.video;
 
-    document.getElementById("playerTitle").textContent=
-        movie.title;
+document.getElementById("playerTitle")
+.textContent=movie.title;
 
-    showScreen("player");
+show("player");
 
-    player.load();
+video.load();
 
-    player.play().catch(()=>{
+video.play().catch(()=>{
 
-        console.log("O navegador bloqueou o autoplay. Toque em Play no vídeo.");
+console.log(
+"Autoplay bloqueado. Toque no botão Play."
+);
 
-    });
+});
 
 }
 
 
-/* =========================
+/* =====================================
    FAVORITOS
-========================= */
+===================================== */
 
 function getFavorites(){
 
-    try{
-
-        return JSON.parse(
-            localStorage.getItem("empireFavorites") || "[]"
-        );
-
-    }catch(e){
-
-        return [];
-
-    }
+return JSON.parse(
+localStorage.getItem("empireFavorites")||"[]"
+);
 
 }
 
 
 function saveFavorites(list){
 
-    localStorage.setItem(
-        "empireFavorites",
-        JSON.stringify(list)
-    );
+localStorage.setItem(
+"empireFavorites",
+JSON.stringify(list)
+);
 
 }
 
 
-function addFavorite(title){
+function favorite(title){
 
-    const list=getFavorites();
+let list=getFavorites();
 
-    if(!list.includes(title)){
+if(!list.includes(title)){
 
-        list.push(title);
+list.push(title);
 
-        saveFavorites(list);
+saveFavorites(list);
 
-    }
+}
 
-    renderFavorites();
+renderFavorites();
+
+alert("Adicionado aos favoritos ❤️");
 
 }
 
 
-function favoriteCurrentMovie(){
+function favoriteCurrent(){
 
-    if(!currentMovie) return;
+if(currentMovie){
 
-    addFavorite(currentMovie.title);
+favorite(currentMovie.title);
 
-    alert("Adicionado aos favoritos ❤️");
+}
 
 }
 
 
 function renderFavorites(){
 
-    const grid=document.getElementById("favoriteGrid");
+const box=
+document.getElementById("favoritesList");
 
-    const favorites=getFavorites();
+const list=getFavorites();
 
-    grid.innerHTML="";
+box.innerHTML="";
 
-    if(favorites.length===0){
+if(list.length===0){
 
-        grid.innerHTML=`
+box.innerHTML=`
 
-            <div class="empty" style="grid-column:1/-1">
+<div class="empty"
+style="grid-column:1/-1">
 
-                <div class="empty-icon">❤️</div>
+<div style="font-size:45px">❤️</div>
 
-                <p>Você ainda não adicionou filmes aos favoritos.</p>
+<br>
 
-            </div>
+Você ainda não possui favoritos.
 
-        `;
+</div>
 
-        return;
+`;
 
-    }
-
-    favorites.forEach(title=>{
-
-        const movie=movies.find(m=>m.title===title);
-
-        if(movie){
-
-            grid.innerHTML+=createCard(movie);
-
-        }
-
-    });
+return;
 
 }
 
+list.forEach(title=>{
 
-/* =========================
-   UTILIDADE
-========================= */
+const movie=
+movies.find(x=>x.title===title);
 
-function escapeQuotes(text){
+if(movie){
 
-    return text
-        .replace(/\\/g,"\\\\")
-        .replace(/'/g,"\\'");
+box.innerHTML+=card(movie);
+
+}
+
+});
 
 }
 
