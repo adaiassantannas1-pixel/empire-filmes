@@ -2,454 +2,445 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Empire Filmes</title>
 
 <style>
 *{
-box-sizing:border-box;
-margin:0;
-padding:0
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-background:#050505;
-color:white;
-font-family:Arial,sans-serif
-}
-
-.app{
-max-width:600px;
-margin:auto;
-padding-bottom:85px
-}
-
-header{
-height:60px;
-background:#111;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 15px;
-position:sticky;
-top:0;
-z-index:10
-}
-
-.logo{
-font-size:20px;
-font-weight:bold
-}
-
-.logo span{
-color:#e50914
-}
-
-header button{
-background:#222;
-color:white;
-border:0;
-border-radius:50%;
-width:40px;
-height:40px;
-font-size:18px
-}
-
-.page{
-display:none;
-padding:15px
-}
-
-.page.active{
-display:block
-}
-
-.hero{
-height:350px;
-border-radius:15px;
-overflow:hidden;
-position:relative;
-background:
-linear-gradient(transparent,#050505),
-url("https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png")
-center/cover
-}
-
-.heroText{
-position:absolute;
-bottom:20px;
-left:18px;
-right:18px
-}
-
-.hero h1{
-font-size:28px;
-margin:8px 0
-}
-
-.hero p{
-color:#ddd;
-font-size:13px
+    background:#050505;
+    color:#fff;
+    font-family:Arial,sans-serif;
 }
 
 button{
-cursor:pointer
+    cursor:pointer;
+}
+
+.app{
+    max-width:600px;
+    margin:auto;
+    min-height:100vh;
+    padding-bottom:80px;
+}
+
+header{
+    height:60px;
+    background:#111;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 15px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#e50914;
+}
+
+.searchBtn{
+    width:40px;
+    height:40px;
+    border:0;
+    border-radius:50%;
+    background:#222;
+    color:white;
+    font-size:18px;
+}
+
+.page{
+    display:none;
+    padding:15px;
+}
+
+.page.active{
+    display:block;
+}
+
+/* HERO */
+
+.hero{
+    height:340px;
+    border-radius:15px;
+    overflow:hidden;
+    position:relative;
+    background:
+    linear-gradient(to top,#050505 5%,transparent 70%),
+    url("https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png")
+    center/cover;
+}
+
+.heroText{
+    position:absolute;
+    bottom:20px;
+    left:18px;
+    right:18px;
+}
+
+.heroText small{
+    color:#ddd;
+}
+
+.hero h1{
+    margin:8px 0;
+    font-size:28px;
+}
+
+.hero p{
+    color:#ddd;
+    font-size:13px;
 }
 
 .watch{
-margin-top:15px;
-background:white;
-color:black;
-border:0;
-border-radius:8px;
-padding:12px 18px;
-font-weight:bold
+    margin-top:14px;
+    border:0;
+    border-radius:8px;
+    background:white;
+    color:#000;
+    padding:12px 18px;
+    font-weight:bold;
 }
 
+/* SEÇÕES */
+
 .section{
-margin-top:25px
+    margin-top:25px;
 }
 
 .section h2{
-font-size:19px;
-margin-bottom:12px
+    font-size:19px;
+    margin-bottom:12px;
 }
 
 .cards{
-display:flex;
-gap:12px;
-overflow-x:auto
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    padding-bottom:5px;
 }
 
 .card{
-min-width:125px;
-cursor:pointer
+    min-width:125px;
 }
 
 .card img{
-width:125px;
-height:180px;
-object-fit:cover;
-border-radius:9px;
-background:#222
+    width:125px;
+    height:180px;
+    object-fit:cover;
+    border-radius:9px;
+    background:#181818;
 }
 
 .card h3{
-font-size:13px;
-margin-top:6px
+    font-size:13px;
+    margin-top:6px;
 }
 
 .card p{
-color:#888;
-font-size:11px;
-margin-top:4px
-}
-
-.categories{
-display:flex;
-gap:8px;
-overflow-x:auto
-}
-
-.category{
-flex:none;
-padding:9px 14px;
-border-radius:20px;
-border:1px solid #333;
-background:#191919;
-color:white
+    color:#888;
+    font-size:11px;
+    margin-top:4px;
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
 }
 
 .grid .card{
-min-width:0
+    min-width:0;
 }
 
 .grid .card img{
-width:100%;
-height:190px
+    width:100%;
+    height:190px;
 }
 
+/* CATEGORIAS */
+
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+}
+
+.category{
+    flex:none;
+    background:#191919;
+    color:white;
+    border:1px solid #333;
+    border-radius:20px;
+    padding:9px 14px;
+}
+
+/* PESQUISA */
+
 .search{
-display:flex;
-gap:8px;
-margin-bottom:20px
+    display:flex;
+    gap:8px;
+    margin:15px 0 20px;
 }
 
 .search input{
-flex:1;
-padding:13px;
-background:#191919;
-color:white;
-border:1px solid #333;
-border-radius:8px;
-outline:none
+    flex:1;
+    background:#191919;
+    color:white;
+    border:1px solid #333;
+    border-radius:8px;
+    padding:13px;
+    outline:none;
 }
 
 .search button{
-width:50px;
-background:#e50914;
-color:white;
-border:0;
-border-radius:8px
+    width:50px;
+    border:0;
+    border-radius:8px;
+    background:#e50914;
+    color:white;
 }
 
+/* DETALHES */
+
 .back{
-background:none;
-border:0;
-color:white;
-font-size:16px;
-margin-bottom:15px
+    border:0;
+    background:none;
+    color:white;
+    font-size:16px;
+    margin-bottom:15px;
 }
 
 .detail img{
-width:100%;
-height:300px;
-object-fit:cover;
-border-radius:14px
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    border-radius:14px;
 }
 
 .detail h1{
-margin-top:15px;
-font-size:27px
+    font-size:27px;
+    margin-top:15px;
 }
 
 .meta{
-color:#888;
-margin:8px 0
+    color:#888;
+    margin:8px 0 15px;
 }
 
 .description{
-color:#ddd;
-line-height:1.5;
-font-size:14px
+    color:#ddd;
+    font-size:14px;
+    line-height:1.5;
 }
 
 .full{
-width:100%
+    width:100%;
 }
 
 .favorite{
-width:100%;
-margin-top:8px;
-padding:13px;
-border:0;
-border-radius:8px;
-background:#222;
-color:white
+    width:100%;
+    margin-top:8px;
+    padding:13px;
+    border:0;
+    border-radius:8px;
+    background:#222;
+    color:white;
 }
 
-video{
-width:100%;
-background:black;
-border-radius:10px
+/* PLAYER */
+
+.playerVideo{
+    width:100%;
+    background:#000;
+    border-radius:10px;
+    display:block;
 }
 
 .playerTitle{
-margin-top:15px
+    margin-top:15px;
 }
 
 .playerTitle p{
-color:#888;
-margin-top:5px
+    color:#888;
+    margin-top:5px;
 }
 
+/* PERFIL */
+
 .profile{
-text-align:center;
-padding-top:30px
+    text-align:center;
+    padding-top:30px;
 }
 
 .avatar{
-width:90px;
-height:90px;
-border-radius:50%;
-background:#222;
-display:flex;
-align-items:center;
-justify-content:center;
-margin:auto;
-font-size:40px
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#222;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+    font-size:40px;
 }
 
 .profile h2{
-margin-top:15px
+    margin-top:15px;
 }
 
 .profile p{
-color:#888;
-margin-top:5px
+    color:#888;
+    margin-top:5px;
 }
 
 .profile button{
-width:100%;
-margin-top:10px;
-padding:15px;
-background:#181818;
-color:white;
-border:1px solid #292929;
-border-radius:8px;
-text-align:left
+    width:100%;
+    margin-top:10px;
+    padding:14px;
+    border-radius:8px;
+    border:1px solid #292929;
+    background:#181818;
+    color:white;
+    text-align:left;
 }
-
-.bottom{
-position:fixed;
-bottom:0;
-left:50%;
-transform:translateX(-50%);
-width:100%;
-max-width:600px;
-height:68px;
-background:#111;
-border-top:1px solid #292929;
-display:flex;
-justify-content:space-around;
-align-items:center;
-z-index:20
-}
-
-.bottom button{
-background:none;
-border:0;
-color:#888;
-font-size:11px
-}
-
-.bottom button span{
-display:block;
-font-size:21px;
-margin-bottom:3px
-}
-
-.empty{
-text-align:center;
-color:#888;
-padding:50px 10px
-}
-
 
 /* ADMIN */
 
-.admin-title{
-font-size:24px;
-margin-bottom:6px
+.adminBox{
+    background:#151515;
+    padding:15px;
+    border-radius:14px;
 }
 
-.admin-subtitle{
-color:#888;
-font-size:13px;
-margin-bottom:20px
+.adminBox label{
+    display:block;
+    color:#aaa;
+    font-size:12px;
+    margin-bottom:6px;
 }
 
-.admin-box{
-background:#151515;
-padding:15px;
-border-radius:14px
+.adminBox input,
+.adminBox select,
+.adminBox textarea{
+    width:100%;
+    padding:13px;
+    margin-bottom:14px;
+    border:1px solid #333;
+    border-radius:8px;
+    background:#222;
+    color:white;
+    outline:none;
 }
 
-.admin-label{
-display:block;
-font-size:12px;
-color:#aaa;
-margin-bottom:6px
+.adminBox textarea{
+    height:80px;
+    resize:none;
 }
 
-.admin-input,
-.admin-select,
-.admin-textarea{
-width:100%;
-padding:14px;
-margin-bottom:14px;
-background:#222;
-color:white;
-border:1px solid #333;
-border-radius:9px;
-outline:none;
-font-size:14px
+.adminAdd{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:8px;
+    background:#e50914;
+    color:white;
+    font-weight:bold;
 }
 
-.admin-textarea{
-height:90px;
-resize:none
+.adminMovie{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#181818;
+    padding:9px;
+    margin-top:9px;
+    border-radius:9px;
 }
 
-.admin-add{
-width:100%;
-padding:15px;
-background:#e50914;
-color:white;
-border:0;
-border-radius:9px;
-font-size:15px;
-font-weight:bold
+.adminMovie img{
+    width:50px;
+    height:65px;
+    object-fit:cover;
+    border-radius:6px;
 }
 
-.admin-list-title{
-margin-top:25px;
-margin-bottom:10px
+.adminInfo{
+    flex:1;
+    min-width:0;
 }
 
-.admin-movie{
-display:flex;
-align-items:center;
-gap:10px;
-background:#181818;
-padding:10px;
-margin-bottom:9px;
-border-radius:10px
+.adminInfo strong{
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }
 
-.admin-movie img{
-width:50px;
-height:68px;
-object-fit:cover;
-border-radius:6px
+.adminInfo small{
+    color:#888;
 }
 
-.admin-info{
-flex:1;
-min-width:0
+.delete{
+    border:0;
+    border-radius:7px;
+    background:#8b0000;
+    color:white;
+    padding:9px;
 }
 
-.admin-info strong{
-display:block;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis
+/* BARRA */
+
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    height:68px;
+    background:#111;
+    border-top:1px solid #292929;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    z-index:20;
 }
 
-.admin-info small{
-color:#888
+.bottom button{
+    background:none;
+    border:0;
+    color:#888;
+    font-size:11px;
 }
 
-.delete-btn{
-background:#8b0000;
-color:white;
-border:0;
-padding:9px;
-border-radius:7px
+.bottom span{
+    display:block;
+    font-size:21px;
+    margin-bottom:3px;
 }
 
-.clear-btn{
-width:100%;
-margin-top:15px;
-padding:12px;
-background:#222;
-border:1px solid #333;
-color:#aaa;
-border-radius:8px
+.empty{
+    color:#777;
+    text-align:center;
+    padding:40px 10px;
 }
 
 @media(max-width:380px){
-
-.grid{
-grid-template-columns:repeat(2,1fr)
-}
-
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
 </style>
 </head>
@@ -458,579 +449,1166 @@ grid-template-columns:repeat(2,1fr)
 
 <div class="app">
 
-
 <header>
+    <div class="logo">
+        EMPIRE <span>FILMES</span>
+    </div>
 
-<div class="logo">
-EMPIRE <span>FILMES</span>
-</div>
-
-<button onclick="go('explorar')">
-🔍
-</button>
-
+    <button class="searchBtn" onclick="go('explorar')">
+        🔍
+    </button>
 </header>
 
 
 <!-- HOME -->
 
-<div id="home" class="page active">
+<section id="home" class="page active">
 
-<div class="hero">
+    <div class="hero">
 
-<div class="heroText">
+        <div class="heroText">
 
-<small>DESTAQUE</small>
+            <small>DESTAQUE</small>
 
-<h1>Big Buck Bunny</h1>
+            <h1>Big Buck Bunny</h1>
 
-<p>
-Vídeo de demonstração do Empire Filmes.
-</p>
+            <p>
+                Vídeo público de demonstração.
+            </p>
 
-<button class="watch" onclick="playMovie(0)">
-▶ Assistir
-</button>
+            <button class="watch" onclick="playMovie(0)">
+                ▶ Assistir
+            </button>
 
-</div>
+        </div>
 
-</div>
-
-
-<div class="section">
-
-<h2>🔥 Lançamentos</h2>
-
-<div id="homeCards" class="cards"></div>
-
-</div>
+    </div>
 
 
-<div class="section">
+    <div class="section">
 
-<h2>📂 Categorias</h2>
+        <h2>🔥 Lançamentos</h2>
 
-<div class="categories">
+        <div id="homeCards" class="cards"></div>
 
-<button class="category"
-onclick="filterCategory('Ação')">
-Ação
-</button>
+    </div>
 
-<button class="category"
-onclick="filterCategory('Terror')">
-Terror
-</button>
 
-<button class="category"
-onclick="filterCategory('Romance')">
-Romance
-</button>
+    <div class="section">
 
-<button class="category"
-onclick="filterCategory('Comédia')">
-Comédia
-</button>
+        <h2>📂 Categorias</h2>
 
-<button class="category"
-onclick="filterCategory('Nacional')">
-Nacional
-</button>
+        <div class="categories">
 
-<button class="category"
-onclick="filterCategory('Documentário')">
-Documentário
-</button>
+            <button class="category" onclick="filterCategory('Ação')">
+                Ação
+            </button>
 
-</div>
+            <button class="category" onclick="filterCategory('Terror')">
+                Terror
+            </button>
 
-</div>
+            <button class="category" onclick="filterCategory('Romance')">
+                Romance
+            </button>
 
-</div>
+            <button class="category" onclick="filterCategory('Comédia')">
+                Comédia
+            </button>
+
+            <button class="category" onclick="filterCategory('Nacional')">
+                Nacional
+            </button>
+
+            <button class="category" onclick="filterCategory('Documentário')">
+                Documentário
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 <!-- EXPLORAR -->
 
-<div id="explorar" class="page">
+<section id="explorar" class="page">
 
-<h2>🔎 Explorar</h2>
+    <h2>🔎 Explorar</h2>
 
-<br>
+    <div class="search">
 
-<div class="search">
+        <input
+            id="searchInput"
+            placeholder="Buscar filme..."
+            oninput="searchMovies()">
 
-<input
-id="searchInput"
-placeholder="Buscar filme..."
-oninput="searchMovies()">
+        <button onclick="searchMovies()">
+            🔍
+        </button>
 
-<button onclick="searchMovies()">
-🔍
-</button>
+    </div>
 
-</div>
+    <div id="exploreCards" class="grid"></div>
 
-<div id="exploreCards" class="grid"></div>
-
-</div>
+</section>
 
 
 <!-- FAVORITOS -->
 
-<div id="favoritos" class="page">
+<section id="favoritos" class="page">
 
-<h2>❤️ Favoritos</h2>
+    <h2>❤️ Favoritos</h2>
 
-<br>
+    <br>
 
-<div id="favoriteCards" class="grid"></div>
+    <div id="favoriteCards" class="grid"></div>
 
-</div>
+</section>
 
 
 <!-- PERFIL -->
 
-<div id="perfil" class="page">
+<section id="perfil" class="page">
 
-<div class="profile">
+    <div class="profile">
 
-<div class="avatar">
-👤
-</div>
+        <div class="avatar">
+            👤
+        </div>
 
-<h2>Meu Perfil</h2>
+        <h2>Meu Perfil</h2>
 
-<p>Empire Filmes</p>
+        <p>Empire Filmes</p>
 
-<button>
-👤 Minha conta
-</button>
+        <button>
+            👤 Minha conta
+        </button>
 
-<button>
-⚙️ Configurações
-</button>
+        <button>
+            ⚙️ Configurações
+        </button>
 
-<button>
-🔔 Notificações
-</button>
+        <button>
+            🔔 Notificações
+        </button>
 
-<button>
-ℹ️ Sobre o aplicativo
-</button>
+        <button>
+            ℹ️ Sobre o aplicativo
+        </button>
 
-<button onclick="openAdmin()">
-🔐 Painel Admin
-</button>
+        <button onclick="openAdmin()">
+            🔐 Painel Admin
+        </button>
 
-</div>
+    </div>
 
-</div>
+</section>
 
 
 <!-- ADMIN -->
 
-<div id="admin" class="page">
+<section id="admin" class="page">
 
-<button class="back" onclick="go('perfil')">
-← Voltar
-</button>
+    <button class="back" onclick="go('perfil')">
+        ← Voltar
+    </button>
 
-<h1 class="admin-title">
-🎬 Adicionar filme
-</h1>
+    <h2>🎬 Cadastro de filme</h2>
 
-<p class="admin-subtitle">
-Preencha os dados abaixo e toque em cadastrar.
-</p>
+    <br>
 
+    <div class="adminBox">
 
-<div class="admin-box">
+        <label>Nome do filme</label>
 
-
-<label class="admin-label">
-Nome do filme
-</label>
-
-<input
-id="adminName"
-class="admin-input"
-placeholder="Ex: Meu Filme">
+        <input
+            id="movieName"
+            placeholder="Nome do filme">
 
 
-<label class="admin-label">
-Categoria
-</label>
+        <label>Categoria</label>
 
-<select
-id="adminCategory"
-class="admin-select">
+        <select id="movieCategory">
 
-<option>Ação</option>
-<option>Terror</option>
-<option>Romance</option>
-<option>Comédia</option>
-<option>Nacional</option>
-<option>Documentário</option>
-<option>Animação</option>
+            <option>Ação</option>
+            <option>Terror</option>
+            <option>Romance</option>
+            <option>Comédia</option>
+            <option>Nacional</option>
+            <option>Documentário</option>
+            <option>Animação</option>
 
-</select>
+        </select>
 
 
-<label class="admin-label">
-Ano
-</label>
+        <label>Ano</label>
 
-<input
-id="adminYear"
-class="admin-input"
-type="number"
-placeholder="2026">
+        <input
+            id="movieYear"
+            type="number"
+            placeholder="2026">
 
 
-<label class="admin-label">
-Duração
-</label>
+        <label>Duração</label>
 
-<input
-id="adminDuration"
-class="admin-input"
-placeholder="Ex: 1h 30min">
+        <input
+            id="movieDuration"
+            placeholder="Ex: 1h 30min">
 
 
-<label class="admin-label">
-Imagem da capa
-</label>
+        <label>URL da imagem</label>
 
-<input
-id="adminImage"
-class="admin-input"
-type="url"
-placeholder="Cole aqui a URL da imagem">
+        <input
+            id="movieImage"
+            type="url"
+            placeholder="https://...">
 
 
-<label class="admin-label">
-Vídeo
-</label>
+        <label>URL direta do vídeo</label>
 
-<input
-id="adminVideo"
-class="admin-input"
-type="url"
-placeholder="Cole aqui a URL direta do vídeo .mp4">
+        <input
+            id="movieVideo"
+            type="url"
+            placeholder="https://...mp4">
 
 
-<label class="admin-label">
-Descrição
-</label>
+        <label>Descrição</label>
 
-<textarea
-id="adminDescription"
-class="admin-textarea"
-placeholder="Digite uma descrição do filme">
-</textarea>
+        <textarea
+            id="movieDescription"
+            placeholder="Descrição do filme"></textarea>
 
 
-<button
-class="admin-add"
-onclick="adminAddMovie()">
+        <button
+            class="adminAdd"
+            onclick="addMovie()">
 
-➕ CADASTRAR FILME
+            ➕ CADASTRAR FILME
 
-</button>
+        </button>
 
-</div>
-
-
-<h3 class="admin-list-title">
-📚 Filmes cadastrados
-</h3>
-
-<div id="adminMovieList"></div>
+    </div>
 
 
-<button
-class="clear-btn"
-onclick="clearAddedMovies()">
+    <div class="section">
 
-🗑️ Apagar somente os filmes adicionados
+        <h2>📚 Meus filmes</h2>
 
-</button>
+        <div id="adminList"></div>
 
-</div>
+    </div>
+
+</section>
 
 
 <!-- DETALHES -->
 
-<div id="detalhes" class="page">
+<section id="detalhes" class="page">
 
-<button class="back" onclick="backFromDetails()">
-← Voltar
-</button>
+    <button class="back" onclick="go('home')">
+        ← Voltar
+    </button>
 
-<div class="detail">
+    <div class="detail">
 
-<img id="detailImage">
+        <img id="detailImage" alt="">
 
-<h1 id="detailTitle"></h1>
+        <h1 id="detailTitle"></h1>
 
-<div id="detailMeta" class="meta"></div>
+        <div id="detailMeta" class="meta"></div>
 
-<p id="detailDescription" class="description"></p>
+        <p
+            id="detailDescription"
+            class="description">
+        </p>
 
-<button
-class="watch full"
-onclick="playCurrent()">
+        <button
+            class="watch full"
+            onclick="playCurrent()">
 
-▶ Assistir
+            ▶ Assistir
 
-</button>
+        </button>
 
-<button
-class="favorite"
-onclick="addFavorite()">
+        <button
+            class="favorite"
+            onclick="addFavorite()">
 
-❤️ Adicionar aos favoritos
+            ❤️ Adicionar aos favoritos
 
-</button>
+        </button>
 
-</div>
+    </div>
 
-</div>
+</section>
 
 
 <!-- PLAYER -->
 
-<div id="player" class="page">
+<section id="player" class="page">
 
-<button class="back" onclick="backDetails()">
-← Voltar
-</button>
+    <button class="back" onclick="backPlayer()">
+        ← Voltar
+    </button>
 
-<video
-id="video"
-controls
-playsinline
-preload="metadata">
-</video>
+    <video
+        id="videoPlayer"
+        class="playerVideo"
+        controls
+        playsinline
+        preload="metadata">
+    </video>
 
-<div class="playerTitle">
+    <div class="playerTitle">
 
-<h2 id="playerName">
-Vídeo
-</h2>
+        <h2 id="playerTitle">
+            Vídeo
+        </h2>
 
-<p>
-Empire Filmes
-</p>
+        <p>
+            Empire Filmes
+        </p>
 
-</div>
+    </div>
 
-</div>
+</section>
 
 
 <!-- MENU -->
 
-<div class="bottom">
+<nav class="bottom">
 
-<button onclick="go('home')">
+    <button onclick="go('home')">
+        <span>🏠</span>
+        Início
+    </button>
 
-<span>🏠</span>
+    <button onclick="go('explorar')">
+        <span>🔎</span>
+        Explorar
+    </button>
 
-Início
+    <button onclick="go('favoritos')">
+        <span>❤️</span>
+        Favoritos
+    </button>
 
-</button>
+    <button onclick="go('perfil')">
+        <span>👤</span>
+        Perfil
+    </button>
 
-
-<button onclick="go('explorar')">
-
-<span>🔎</span>
-
-Explorar
-
-</button>
-
-
-<button onclick="go('favoritos')">
-
-<span>❤️</span>
-
-Favoritos
-
-</button>
-
-
-<button onclick="go('perfil')">
-
-<span>👤</span>
-
-Perfil
-
-</button>
-
-</div>
+</nav>
 
 </div>
 
 
 <script>
 
-
-/* =========================
+/* =================================
    VÍDEO DE TESTE
-========================= */
+================================= */
 
 const VIDEO_TESTE =
 "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4";
 
 
-/* =========================
+/* =================================
    FILMES PADRÃO
-========================= */
+================================= */
 
-const filmesPadrao = [
+const defaultMovies = [
 
 {
-title:"Big Buck Bunny",
-category:"Animação",
-year:"2008",
-duration:"10 segundos",
-description:
-"Vídeo de demonstração para testar o player do Empire Filmes.",
-image:
-"https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png",
-video:VIDEO_TESTE
+    title:"Big Buck Bunny",
+    category:"Animação",
+    year:"2008",
+    duration:"10 segundos",
+    description:
+    "Vídeo público de demonstração para testar o player.",
+    image:
+    "https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png",
+    video:VIDEO_TESTE
 },
 
 {
-title:"Projeto Eclipse",
-category:"Ação",
-year:"2026",
-duration:"1h 48min",
-description:
-"Filme fictício de demonstração.",
-image:
-"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+    title:"Projeto Eclipse",
+    category:"Ação",
+    year:"2026",
+    duration:"1h 48min",
+    description:
+    "Filme fictício de demonstração.",
+    image:
+    "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
+    video:VIDEO_TESTE
 },
 
 {
-title:"Noite Sombria",
-category:"Terror",
-year:"2026",
-duration:"1h 35min",
-description:
-"Filme fictício de demonstração.",
-image:
-"https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+    title:"Noite Sombria",
+    category:"Terror",
+    year:"2026",
+    duration:"1h 35min",
+    description:
+    "Filme fictício de demonstração.",
+    image:
+    "https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=700&q=80",
+    video:VIDEO_TESTE
 },
 
 {
-title:"Último Verão",
-category:"Romance",
-year:"2026",
-duration:"1h 38min",
-description:
-"Filme fictício de demonstração.",
-image:
-"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+    title:"Último Verão",
+    category:"Romance",
+    year:"2026",
+    duration:"1h 38min",
+    description:
+    "Filme fictício de demonstração.",
+    image:
+    "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80",
+    video:VIDEO_TESTE
 },
 
 {
-title:"Riso Garantido",
-category:"Comédia",
-year:"2026",
-duration:"1h 30min",
-description:
-"Filme fictício de demonstração.",
-image:
-"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+    title:"Riso Garantido",
+    category:"Comédia",
+    year:"2026",
+    duration:"1h 30min",
+    description:
+    "Filme fictício de demonstração.",
+    image:
+    "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80",
+    video:VIDEO_TESTE
 },
 
 {
-title:"Horizonte",
-category:"Nacional",
-year:"2026",
-duration:"1h 42min",
-description:
-"Filme fictício de demonstração.",
-image:
-"https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=700&q=80",
-video:VIDEO_TESTE
+    title:"Horizonte",
+    category:"Nacional",
+    year:"2026",
+    duration:"1h 42min",
+    description:
+    "Filme fictício de demonstração.",
+    image:
+    "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=700&q=80",
+    video:VIDEO_TESTE
 }
 
 ];
 
 
-/* =========================
+/* =================================
    FILMES ADICIONADOS
-========================= */
+================================= */
 
-let filmesAdicionados = [];
+let addedMovies = [];
 
 try{
 
-const dados =
-localStorage.getItem("empireFilmesAdicionados");
+    const saved =
+    localStorage.getItem("empire_movies");
 
-if(dados){
+    if(saved){
+        addedMovies = JSON.parse(saved);
+    }
 
-filmesAdicionados =
-JSON.parse(dados);
+}catch(error){
 
-}
-
-}catch(e){
-
-filmesAdicionados = [];
+    addedMovies = [];
 
 }
 
-
-/* =========================
-   COMBINAR CATÁLOGO
-========================= */
 
 let movies =
-filmesPadrao.concat(filmesAdicionados);
+defaultMovies.concat(addedMovies);
 
 let currentMovie = null;
 
 
-/* =========================
-   SALVAR
-========================= */
+/* =================================
+   NAVEGAÇÃO
+================================= */
 
-function salvarFilmes(){
+function go(page){
 
-try{
+    document
+    .querySelectorAll(".page")
+    .forEach(function(item){
 
-localStorage.setItem(
-"empireFilmesAdicionados",
-JSON.stringify(filmesAdicionados)
-);
+        item.classList.remove("active");
 
-}catch(e){
+    });
 
-alert(
-"Não foi possível salvar no navegador."
-);
+
+    const selected =
+    document.getElementById(page);
+
+
+    if(selected){
+
+        selected.classList.add("active");
+
+    }
+
+
+    window.scrollTo(0,0);
 
 }
 
+
+/* =================================
+   CARD
+================================= */
+
+function createCard(movie,index){
+
+    return `
+
+    <div class="card"
+         onclick="openMovie(${index})">
+
+        <img
+            src="${movie.image}"
+            alt="${movie.title}">
+
+        <h3>
+            ${movie.title}
+        </h3>
+
+        <p>
+            ${movie.category} • ${movie.year}
+        </p>
+
+    </div>
+
+    `;
+
 }
 
 
-/* =========================
-   ATUALIZAR CATÁLOGO
-========================= */
+/* =================================
+   HOME
+================================= */
 
-function atualizarCatalogo(){
+function renderHome(){
 
-movies =
-filmesPadrao.concat(filmesAdicionados);
+    const box =
+    document.getElementById("homeCards");
+
+    box.innerHTML="";
+
+
+    movies.forEach(function(movie,index){
+
+        box.innerHTML +=
+        createCard(movie,index);
+
+    });
+
+}
+
+
+/* =================================
+   EXPLORAR
+================================= */
+
+function renderExplore(list){
+
+    const box =
+    document.getElementById("exploreCards");
+
+    box.innerHTML="";
+
+
+    if(list.length===0){
+
+        box.innerHTML =
+        '<div class="empty" style="grid-column:1/-1">Nenhum filme encontrado.</div>';
+
+        return;
+
+    }
+
+
+    list.forEach(function(movie){
+
+        const index =
+        movies.indexOf(movie);
+
+        box.innerHTML +=
+        createCard(movie,index);
+
+    });
+
+}
+
+
+/* =================================
+   PESQUISA
+================================= */
+
+function searchMovies(){
+
+    const input =
+    document.getElementById("searchInput");
+
+    const text =
+    input.value.toLowerCase().trim();
+
+
+    const result =
+    movies.filter(function(movie){
+
+        return movie.title
+        .toLowerCase()
+        .includes(text)
+
+        ||
+
+        movie.category
+        .toLowerCase()
+        .includes(text);
+
+    });
+
+
+    renderExplore(result);
+
+}
+
+
+/* =================================
+   CATEGORIA
+================================= */
+
+function filterCategory(category){
+
+    go("explorar");
+
+
+    const result =
+    movies.filter(function(movie){
+
+        return movie.category === category;
+
+    });
+
+
+    renderExplore(result);
+
+}
+
+
+/* =================================
+   DETALHES
+================================= */
+
+function openMovie(index){
+
+    const movie =
+    movies[index];
+
+    if(!movie)return;
+
+
+    currentMovie = index;
+
+
+    document
+    .getElementById("detailImage")
+    .src = movie.image;
+
+
+    document
+    .getElementById("detailTitle")
+    .textContent = movie.title;
+
+
+    document
+    .getElementById("detailMeta")
+    .textContent =
+    movie.category +
+    " • " +
+    movie.year +
+    " • " +
+    movie.duration;
+
+
+    document
+    .getElementById("detailDescription")
+    .textContent =
+    movie.description;
+
+
+    go("detalhes");
+
+}
+
+
+/* =================================
+   PLAYER
+================================= */
+
+function playCurrent(){
+
+    if(currentMovie !== null){
+
+        playMovie(currentMovie);
+
+    }
+
+}
+
+
+function playMovie(index){
+
+    const movie =
+    movies[index];
+
+    if(!movie){
+
+        return;
+
+    }
+
+
+    if(!movie.video){
+
+        alert(
+        "Este filme não possui uma URL de vídeo."
+        );
+
+        return;
+
+    }
+
+
+    currentMovie = index;
+
+
+    const player =
+    document.getElementById("videoPlayer");
+
+
+    player.pause();
+
+    player.removeAttribute("src");
+
+    player.load();
+
+
+    player.src =
+    movie.video;
+
+
+    player.load();
+
+
+    document
+    .getElementById("playerTitle")
+    .textContent =
+    movie.title;
+
+
+    go("player");
+
+}
+
+
+/* =================================
+   VOLTAR DO PLAYER
+================================= */
+
+function backPlayer(){
+
+    if(currentMovie !== null){
+
+        openMovie(currentMovie);
+
+    }else{
+
+        go("home");
+
+    }
+
+}
+
+
+/* =================================
+   FAVORITOS
+================================= */
+
+function getFavorites(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem("empire_favorites")
+            || "[]"
+        );
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function saveFavorites(list){
+
+    localStorage.setItem(
+        "empire_favorites",
+        JSON.stringify(list)
+    );
+
+}
+
+
+function addFavorite(){
+
+    if(currentMovie === null)return;
+
+
+    const movie =
+    movies[currentMovie];
+
+
+    let favorites =
+    getFavorites();
+
+
+    if(!favorites.includes(movie.title)){
+
+        favorites.push(movie.title);
+
+        saveFavorites(favorites);
+
+        alert(
+        "❤️ Filme adicionado aos favoritos!"
+        );
+
+    }else{
+
+        alert(
+        "Esse filme já está nos favoritos."
+        );
+
+    }
+
+
+    renderFavorites();
+
+}
+
+
+function renderFavorites(){
+
+    const box =
+    document.getElementById("favoriteCards");
+
+    const favorites =
+    getFavorites();
+
+
+    box.innerHTML="";
+
+
+    if(favorites.length===0){
+
+        box.innerHTML =
+        '<div class="empty" style="grid-column:1/-1">❤️<br><br>Nenhum favorito ainda.</div>';
+
+        return;
+
+    }
+
+
+    favorites.forEach(function(title){
+
+        const index =
+        movies.findIndex(function(movie){
+
+            return movie.title === title;
+
+        });
+
+
+        if(index >= 0){
+
+            box.innerHTML +=
+            createCard(
+                movies[index],
+                index
+            );
+
+        }
+
+    });
+
+}
+
+
+/* =================================
+   ADMIN
+================================= */
+
+function openAdmin(){
+   const pin =
+    prompt(
+    "Digite o PIN do administrador:"
+    );
+
+
+    if(pin !== "123456"){
+
+        alert("PIN incorreto.");
+
+        return;
+
+    }
+
+
+    go("admin");
+
+    renderAdmin();
+
+}
+
+
+/* =================================
+   ADICIONAR FILME
+================================= */
+
+function addMovie(){
+
+    const name =
+    document.getElementById("movieName")
+    .value.trim();
+
+
+    const category =
+    document.getElementById("movieCategory")
+    .value;
+
+
+    const year =
+    document.getElementById("movieYear")
+    .value.trim();
+
+
+    const duration =
+    document.getElementById("movieDuration")
+    .value.trim();
+
+
+    const image =
+    document.getElementById("movieImage")
+    .value.trim();
+
+
+    const video =
+    document.getElementById("movieVideo")
+    .value.trim();
+
+
+    const description =
+    document.getElementById("movieDescription")
+    .value.trim();
+
+
+    if(!name){
+
+        alert("Digite o nome do filme.");
+
+        return;
+
+    }
+
+
+    if(!image){
+
+        alert("Cole a URL da imagem.");
+
+        return;
+
+    }
+
+
+    if(!video){
+
+        alert("Cole a URL direta do vídeo.");
+
+        return;
+
+    }
+
+
+    const movie = {
+
+        title:name,
+
+        category:category,
+
+        year:year || "2026",
+
+        duration:duration || "",
+
+        image:image,
+
+        video:video,
+
+        description:
+        description ||
+        "Filme cadastrado no Empire Filmes."
+
+    };
+
+
+    addedMovies.push(movie);
+
+
+    localStorage.setItem(
+        "empire_movies",
+        JSON.stringify(addedMovies)
+    );
+
+
+    movies =
+    defaultMovies.concat(addedMovies);
+
+
+    document.getElementById("movieName").value="";
+
+    document.getElementById("movieYear").value="";
+
+    document.getElementById("movieDuration").value="";
+
+    document.getElementById("movieImage").value="";
+
+    document.getElementById("movieVideo").value="";
+
+    document.getElementById("movieDescription").value="";
+
+
+    renderHome();
+
+    renderExplore(movies);
+
+    renderAdmin();
+
+
+    alert(
+    "🎬 Filme cadastrado com sucesso!"
+    );
+
+}
+
+
+/* =================================
+   LISTA ADMIN
+================================= */
+
+function renderAdmin(){
+
+    const box =
+    document.getElementById("adminList");
+
+
+    box.innerHTML="";
+
+
+    if(addedMovies.length===0){
+
+        box.innerHTML =
+        '<div class="empty">Nenhum filme cadastrado ainda.</div>';
+
+        return;
+
+    }
+
+
+    addedMovies.forEach(function(movie,index){
+
+        box.innerHTML += `
+
+        <div class="adminMovie">
+
+            <img
+                src="${movie.image}"
+                alt="">
+
+            <div class="adminInfo">
+
+                <strong>
+                    ${movie.title}
+                </strong>
+
+                <small>
+                    ${movie.category} • ${movie.year}
+                </small>
+
+            </div>
+
+            <button
+                class="delete"
+                onclick="deleteMovie(${index})">
+
+                🗑️
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =================================
+   EXCLUIR
+================================= */
+
+function deleteMovie(index){
+
+    if(!confirm(
+    "Excluir este filme?"
+    )){
+
+        return;
+
+    }
+
+
+    addedMovies.splice(index,1);
+
+
+    localStorage.setItem(
+        "empire_movies",
+        JSON.stringify(addedMovies)
+    );
+
+
+    movies =
+    defaultMovies.concat(addedMovies);
+
+
+    renderHome();
+
+    renderExplore(movies);
+
+    renderAdmin();
+
+    renderFavorites();
+
+}
+
+
+/* =================================
+   INICIAR
+================================= */
 
 renderHome();
 
@@ -1038,688 +1616,7 @@ renderExplore(movies);
 
 renderFavorites();
 
-renderAdminMovies();
+</script>
 
-}
-
-
-/* =========================
-   NAVEGAÇÃO
-========================= */
-
-function go(page){
-
-document
-.querySelectorAll(".page")
-.forEach(function(p){
-
-p.classList.remove("active");
-
-});
-
-const selected =
-document.getElementById(page);
-
-if(selected){
-
-selected.classList.add("active");
-
-}
-
-window.scrollTo(0,0);
-
-}
-
-
-/* =========================
-   CARDS
-========================= */
-
-function createCard(movie,index){
-
-return `
-
-<div
-class="card"
-onclick="openMovie(${index})">
-
-<img
-src="${movie.image}"
-alt="${movie.title}"
-onerror="this.style.opacity='.3'">
-
-<h3>${movie.title}</h3>
-
-<p>
-${movie.category} • ${movie.year}
-</p>
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-   HOME
-========================= */
-
-function renderHome(){
-
-const box =
-document.getElementById("homeCards");
-
-if(!box)return;
-
-box.innerHTML="";
-
-movies.forEach(function(movie,index){
-
-box.innerHTML +=
-createCard(movie,index);
-
-});
-
-}
-
-
-/* =========================
-   EXPLORAR
-========================= */
-
-function renderExplore(list){
-
-const box =
-document.getElementById("exploreCards");
-
-if(!box)return;
-
-box.innerHTML="";
-
-if(list.length===0){
-
-box.innerHTML =
-'<div class="empty" style="grid-column:1/-1">Nenhum filme encontrado.</div>';
-
-return;
-
-}
-
-list.forEach(function(movie){
-
-const index =
-movies.indexOf(movie);
-
-box.innerHTML +=
-createCard(movie,index);
-
-});
-
-}
-
-
-/* =========================
-   PESQUISA
-========================= */
-
-function searchMovies(){
-
-const text =
-document
-.getElementById("searchInput")
-.value
-.toLowerCase()
-.trim();
-
-const result =
-movies.filter(function(movie){
-
-return movie.title
-.toLowerCase()
-.includes(text)
-
-||
-
-movie.category
-.toLowerCase()
-.includes(text);
-
-});
-
-renderExplore(result);
-
-}
-
-
-/* =========================
-   CATEGORIA
-========================= */
-
-function filterCategory(category){
-
-go("explorar");
-
-const result =
-movies.filter(function(movie){
-
-return movie.category === category;
-
-});
-
-renderExplore(result);
-
-}
-
-
-/* =========================
-   DETALHES
-========================= */
-
-function openMovie(index){
-
-const movie =
-movies[index];
-
-if(!movie)return;
-
-currentMovie = index;
-
-document
-.getElementById("detailImage")
-.src = movie.image;
-
-document
-.getElementById("detailTitle")
-.textContent = movie.title;
-
-document
-.getElementById("detailMeta")
-.textContent =
-movie.category +
-" • " +
-movie.year +
-" • " +
-movie.duration;
-
-document
-.getElementById("detailDescription")
-.textContent =
-movie.description;
-
-go("detalhes");
-
-}
-
-
-/* =========================
-   PLAYER
-========================= */
-
-function playCurrent(){
-
-if(currentMovie !== null){
-
-playMovie(currentMovie);
-
-}
-
-}
-
-
-function playMovie(index){
-
-const movie =
-movies[index];
-
-if(!movie)return;
-
-if(!movie.video){
-
-alert(
-"Este filme ainda não possui vídeo."
-);
-
-return;
-
-}
-
-currentMovie = index;
-
-const video =
-document.getElementById("video");
-
-video.pause();
-
-video.removeAttribute("src");
-
-video.load();
-
-video.src =
-movie.video;
-
-video.load();
-
-document
-.getElementById("playerName")
-.textContent =
-movie.title;
-
-go("player");
-
-}
-
-
-/* =========================
-   VOLTAR DETALHES
-========================= */
-
-function backFromDetails(){
-
-go("home");
-
-}
-
-
-/* =========================
-   VOLTAR PLAYER
-========================= */
-
-function backDetails(){
-
-if(currentMovie !== null){
-
-openMovie(currentMovie);
-
-}else{
-
-go("home");
-
-}
-
-}
-
-
-/* =========================
-   FAVORITOS
-========================= */
-
-function getFavorites(){
-
-try{
-
-return JSON.parse(
-localStorage.getItem(
-"empireFavorites"
-) || "[]"
-);
-
-}catch(e){
-
-return [];
-
-}
-
-}
-
-
-function saveFavorites(list){
-
-localStorage.setItem(
-"empireFavorites",
-JSON.stringify(list)
-);
-
-}
-
-
-function addFavorite(){
-
-if(currentMovie === null)return;
-
-const movie =
-movies[currentMovie];
-
-let favorites =
-getFavorites();
-
-if(!favorites.includes(movie.title)){
-
-favorites.push(movie.title);
-
-saveFavorites(favorites);
-
-alert(
-"Adicionado aos favoritos ❤️"
-);
-
-}else{
-
-alert(
-"Esse filme já está nos favoritos."
-);
-
-}
-
-renderFavorites();
-
-}
-
-
-function renderFavorites(){
-
-const box =
-document.getElementById(
-"favoriteCards"
-);
-
-if(!box)return;
-
-const favorites =
-getFavorites();
-
-box.innerHTML="";
-
-if(favorites.length===0){
-
-box.innerHTML =
-'<div class="empty" style="grid-column:1/-1">❤️<br><br>Você ainda não possui favoritos.</div>';
-
-return;
-
-}
-
-favorites.forEach(function(title){
-
-const index =
-movies.findIndex(function(movie){
-
-return movie.title === title;
-
-});
-
-if(index >= 0){
-
-box.innerHTML +=
-createCard(
-movies[index],
-index
-);
-
-}
-
-});
-
-}
-
-
-/* =========================
-   ABRIR ADMIN
-========================= */
-
-function openAdmin(){
-
-const pin =
-prompt(
-"Digite o PIN do administrador:"
-);
-
-if(pin !== "123456"){
-
-alert("PIN incorreto.");
-
-return;
-
-}
-
-go("admin");
-
-renderAdminMovies();
-
-}
-
-
-/* =========================
-   CADASTRAR FILME
-========================= */
-
-function adminAddMovie(){
-
-const name =
-document
-.getElementById("adminName")
-.value
-.trim();
-
-const category =
-document
-.getElementById("adminCategory")
-.value;
-
-const year =
-document
-.getElementById("adminYear")
-.value
-.trim();
-
-const duration =
-document
-.getElementById("adminDuration")
-.value
-.trim();
-
-const image =
-document
-.getElementById("adminImage")
-.value
-.trim();
-
-const video =
-document
-.getElementById("adminVideo")
-.value
-.trim();
-
-const description =
-document
-.getElementById("adminDescription")
-.value
-.trim();
-
-
-if(!name){
-
-alert("Digite o nome do filme.");
-
-return;
-
-}
-
-if(!image){
-
-alert("Cole a URL da capa.");
-
-return;
-
-}
-
-if(!video){
-
-alert("Cole a URL direta do vídeo.");
-
-return;
-
-}
-
-
-const novoFilme = {
-
-title:name,
-
-category:category,
-
-year:year || "2026",
-
-duration:duration || "",
-
-description:
-description ||
-"Filme do Empire Filmes.",
-
-image:image,
-
-video:video
-
-};
-
-
-filmesAdicionados.push(
-novoFilme
-);
-
-salvarFilmes();
-
-atualizarCatalogo();
-
-
-document
-.getElementById("adminName")
-.value="";
-
-document
-.getElementById("adminYear")
-.value="";
-
-document
-.getElementById("adminDuration")
-.value="";
-
-document
-.getElementById("adminImage")
-.value="";
-
-document
-.getElementById("adminVideo")
-.value="";
-
-document
-.getElementById("adminDescription")
-.value="";
-
-
-alert(
-"🎬 Filme cadastrado com sucesso!"
-);
-
-}
-
-
-/* =========================
-   LISTA ADMIN
-========================= */
-
-function renderAdminMovies(){
-
-const box =
-document.getElementById(
-"adminMovieList"
-);
-
-if(!box)return;
-
-box.innerHTML="";
-
-
-if(filmesAdicionados.length===0){
-
-box.innerHTML =
-'<div class="empty">Nenhum filme adicionado ainda.</div>';
-
-return;
-
-}
-
-
-filmesAdicionados.forEach(
-function(movie,index){
-
-box.innerHTML += `
-
-<div class="admin-movie">
-
-<img
-src="${movie.image}"
-onerror="this.style.opacity='.3'">
-
-<div class="admin-info">
-
-<strong>
-${movie.title}
-</strong>
-
-<small>
-${movie.category} • ${movie.year}
-</small>
-
-</div>
-
-<button
-class="delete-btn"
-onclick="adminDeleteMovie(${index})">
-
-🗑️
-
-</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-
-/* =========================
-   EXCLUIR FILME
-========================= */
-
-function adminDeleteMovie(index){
-
-if(!confirm(
-"Excluir este filme?"
-)){
-
-return;
-
-}
-
-filmesAdicionados.splice(
-index,
-1
-);
-
-salvarFilmes();
-
-atualizarCatalogo();
-
-alert(
-"Filme excluído."
-);
-
-}
-
-
-/* =========================
-   LIMPAR ADICIONADOS
-========================= */
-
-function clearAddedMovies(){
-
-if(filmesAdicionados.length===0){
-
-alert(
-"Não há filmes adicionados."
-);
-
-retu
+</body>
+</html>
