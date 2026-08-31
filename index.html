@@ -554,6 +554,17 @@ header{
 
 </section>
 
+    <!-- SERIES -->
+
+<section id="series" class="page">
+
+    <h2>📺 Séries</h2>
+
+    <br>
+
+    <div id="seriesCards" class="grid"></div>
+
+</section>
 
 <!-- FAVORITOS -->
 
@@ -784,6 +795,11 @@ header{
         <span>🏠</span>
         Início
     </button>
+
+    <button onclick="go('series')">
+    <span>📺</span>
+    Séries
+</button>
 
     <button onclick="go('explorar')">
         <span>🔎</span>
@@ -1605,6 +1621,88 @@ function deleteMovie(index){
 
 }
 
+
+    /* =================================
+   SERIES
+================================= */
+
+function renderSeries(){
+
+    const box =
+    document.getElementById("seriesCards");
+
+    if(!box){
+        return;
+    }
+
+    box.innerHTML = "";
+
+    const series = JSON.parse(
+        localStorage.getItem("empire_series") || "[]"
+    );
+
+    if(series.length === 0){
+
+        box.innerHTML =
+        '<div class="empty" style="grid-column:1/-1">📺<br><br>Nenhuma série cadastrada ainda.</div>';
+
+        return;
+    }
+
+    series.forEach(function(serie,index){
+
+        box.innerHTML += `
+
+        <div class="card"
+             onclick="openSeries(${index})">
+
+            <img
+                src="${serie.image}"
+                alt="${serie.title}">
+
+            <h3>
+                ${serie.title}
+            </h3>
+
+            <p>
+                ${serie.category} • ${serie.year}
+            </p>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+function openSeries(index){
+
+    const series = JSON.parse(
+        localStorage.getItem("empire_series") || "[]"
+    );
+
+    const serie = series[index];
+
+    if(!serie){
+        return;
+    }
+
+    alert(
+        "📺 " + serie.title +
+        "\n\nCadastro de episódios será adicionado na próxima etapa."
+    );
+
+}
+
+
+/* =================================
+   ATUALIZAR SERIES
+================================= */
+
+renderSeries();
+    
 
 /* =================================
    INICIAR
