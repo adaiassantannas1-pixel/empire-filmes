@@ -554,6 +554,72 @@ header{
 
 </section>
 
+<!-- CADASTRO DE SERIES -->
+
+<section id="seriesAdmin" class="page">
+
+    <button class="back" onclick="go('perfil')">
+        ← Voltar
+    </button>
+
+    <h2>📺 Cadastrar Série</h2>
+
+    <br>
+
+    <div class="adminBox">
+
+        <label>Nome da série</label>
+
+        <input
+            id="seriesName"
+            placeholder="Ex: Cidade Sombria">
+
+        <label>Categoria</label>
+
+        <select id="seriesCategory">
+
+            <option>Ação</option>
+            <option>Terror</option>
+            <option>Romance</option>
+            <option>Comédia</option>
+            <option>Nacional</option>
+            <option>Documentário</option>
+            <option>Animação</option>
+
+        </select>
+
+        <label>Ano</label>
+
+        <input
+            id="seriesYear"
+            type="number"
+            placeholder="2026">
+
+        <label>URL da capa</label>
+
+        <input
+            id="seriesImage"
+            type="url"
+            placeholder="https://...">
+
+        <label>Descrição</label>
+
+        <textarea
+            id="seriesDescription"
+            placeholder="Descrição da série"></textarea>
+
+        <button
+            class="adminAdd"
+            onclick="addSeries()">
+
+            ➕ CADASTRAR SÉRIE
+
+        </button>
+
+    </div>
+
+</section>
+    
     <!-- SERIES -->
 
 <section id="series" class="page">
@@ -612,6 +678,10 @@ header{
         <button onclick="openAdmin()">
             🔐 Painel Admin
         </button>
+
+        <button onclick="openSeriesAdmin()">
+    📺 Cadastrar Série
+</button>
 
     </div>
 
@@ -1621,7 +1691,132 @@ function deleteMovie(index){
 
 }
 
+/* =================================
+   ADMIN SERIES
+================================= */
 
+function openSeriesAdmin(){
+
+    const pin = prompt(
+        "Digite o PIN do administrador:"
+    );
+
+    if(pin !== "123456"){
+
+        alert("PIN incorreto.");
+
+        return;
+    }
+
+    go("seriesAdmin");
+
+}
+
+
+function addSeries(){
+
+    const title =
+    document.getElementById("seriesName")
+    .value.trim();
+
+    const category =
+    document.getElementById("seriesCategory")
+    .value;
+
+    const year =
+    document.getElementById("seriesYear")
+    .value.trim();
+
+    const image =
+    document.getElementById("seriesImage")
+    .value.trim();
+
+    const description =
+    document.getElementById("seriesDescription")
+    .value.trim();
+
+
+    if(!title){
+
+        alert("Digite o nome da série.");
+
+        return;
+    }
+
+
+    if(!image){
+
+        alert("Cole a URL da capa.");
+
+        return;
+    }
+
+
+    let series = [];
+
+    try{
+
+        series = JSON.parse(
+            localStorage.getItem("empire_series")
+            || "[]"
+        );
+
+    }catch(error){
+
+        series = [];
+
+    }
+
+
+    const serie = {
+
+        title:title,
+
+        category:category,
+
+        year:year || "2026",
+
+        image:image,
+
+        description:
+        description ||
+        "Série cadastrada no Empire Filmes.",
+
+        episodes:[]
+
+    };
+
+
+    series.push(serie);
+
+
+    localStorage.setItem(
+        "empire_series",
+        JSON.stringify(series)
+    );
+
+
+    document.getElementById("seriesName").value="";
+
+    document.getElementById("seriesYear").value="";
+
+    document.getElementById("seriesImage").value="";
+
+    document.getElementById("seriesDescription").value="";
+
+
+    renderSeries();
+
+
+    alert(
+        "📺 Série cadastrada com sucesso!"
+    );
+
+    go("series");
+
+}
+
+        
     /* =================================
    SERIES
 ================================= */
