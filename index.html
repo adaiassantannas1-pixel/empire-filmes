@@ -1,17 +1,12 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Empire Filmes</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
     box-sizing:border-box;
@@ -31,60 +26,55 @@ body{
     overflow-x:hidden;
 }
 
-button{
+button,
+input,
+textarea,
+select{
     font-family:inherit;
+}
+
+button{
     cursor:pointer;
 }
 
 img{
-    display:block;
     max-width:100%;
+    display:block;
 }
 
-
-/* =====================================================
+/* =========================
    APP
-===================================================== */
+========================= */
 
 .app{
     width:100%;
-    max-width:650px;
+    max-width:700px;
     min-height:100vh;
     margin:auto;
-    background:#050505;
-    padding-bottom:80px;
+    padding-bottom:90px;
 }
 
+/* =========================
+   HEADER
+========================= */
 
-/* =====================================================
-   TOPO
-===================================================== */
-
-header{
-    position:fixed;
+.header{
+    height:64px;
+    position:sticky;
     top:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    max-width:650px;
-    height:62px;
-
+    z-index:100;
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     padding:0 16px;
 
-    background:rgba(5,5,5,.90);
+    background:rgba(5,5,5,.94);
     backdrop-filter:blur(15px);
-
     border-bottom:1px solid rgba(255,255,255,.06);
-
-    z-index:100;
 }
 
 .logo{
-    font-size:20px;
+    font-size:21px;
     font-weight:900;
     letter-spacing:-.5px;
 }
@@ -93,266 +83,185 @@ header{
     color:#e50914;
 }
 
-.topButton{
+.header-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
     width:40px;
     height:40px;
-
     border:0;
     border-radius:50%;
-
-    background:#1c1c1c;
+    background:#171717;
     color:#fff;
-
     font-size:18px;
 }
 
-
-/* =====================================================
-   PÁGINAS
-===================================================== */
+/* =========================
+   PAGES
+========================= */
 
 .page{
     display:none;
-    min-height:100vh;
-    padding:80px 14px 95px;
+    padding:16px;
+    animation:pageIn .22s ease;
 }
 
 .page.active{
     display:block;
 }
 
-
-/* =====================================================
-   FEED REELS
-===================================================== */
-
-.reels{
-    height:calc(100vh - 145px);
-
-    overflow-y:auto;
-
-    scroll-snap-type:y mandatory;
-
-    scrollbar-width:none;
-
-    border-radius:18px;
+@keyframes pageIn{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-.reels::-webkit-scrollbar{
-    display:none;
-}
+/* =========================
+   HERO
+========================= */
 
-.reel{
+.hero{
+    height:390px;
+    border-radius:22px;
+    overflow:hidden;
     position:relative;
 
-    height:calc(100vh - 145px);
-    min-height:500px;
-
-    margin-bottom:12px;
-
-    border-radius:18px;
-    overflow:hidden;
-
-    scroll-snap-align:start;
-
-    background:#111;
-}
-
-.reel img{
-    position:absolute;
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    background:#151515;
-}
-
-.reelOverlay{
-    position:absolute;
-
-    inset:0;
-
     background:
-    linear-gradient(
-        to top,
-        rgba(0,0,0,.95) 0%,
-        rgba(0,0,0,.60) 30%,
-        rgba(0,0,0,.05) 65%,
-        rgba(0,0,0,.10)
-    );
+        linear-gradient(
+            to top,
+            #050505 2%,
+            rgba(5,5,5,.2) 55%,
+            rgba(5,5,5,.05)
+        ),
+        url("https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png")
+        center/cover;
 }
 
-.reelInfo{
+.hero-content{
     position:absolute;
-
-    left:18px;
-    right:80px;
-    bottom:24px;
+    bottom:22px;
+    left:20px;
+    right:20px;
 }
 
-.reelBadge{
+.badge{
     display:inline-block;
-
-    padding:6px 9px;
-
-    border-radius:6px;
-
     background:#e50914;
-
+    padding:6px 10px;
+    border-radius:20px;
     font-size:10px;
     font-weight:bold;
-    text-transform:uppercase;
-
-    margin-bottom:9px;
+    letter-spacing:.8px;
 }
 
-.reelInfo h1{
-    font-size:27px;
-    line-height:1.05;
-    margin-bottom:8px;
+.hero h1{
+    font-size:32px;
+    margin:9px 0 5px;
 }
 
-.reelInfo p{
+.hero p{
     color:#ddd;
     font-size:13px;
-    line-height:1.4;
-
-    display:-webkit-box;
-    -webkit-line-clamp:3;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
+    line-height:1.5;
+    max-width:430px;
 }
 
-.reelMeta{
-    color:#bbb;
-    font-size:11px;
-    margin-top:8px;
-}
+/* =========================
+   BUTTONS
+========================= */
 
-.reelWatch{
-    margin-top:13px;
-
-    padding:11px 17px;
-
+.btn{
     border:0;
-    border-radius:8px;
-
-    background:#fff;
-    color:#000;
-
+    border-radius:10px;
+    padding:12px 17px;
     font-weight:bold;
+    color:white;
 }
 
-.reelActions{
-    position:absolute;
-
-    right:12px;
-    bottom:24px;
-
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+.btn-red{
+    background:#e50914;
 }
 
-.actionButton{
-    width:47px;
-    height:47px;
-
-    border:0;
-    border-radius:50%;
-
-    background:rgba(0,0,0,.58);
-    color:#fff;
-
-    font-size:20px;
-
-    backdrop-filter:blur(8px);
+.btn-dark{
+    background:#222;
 }
 
-.actionButton small{
-    display:block;
-    font-size:9px;
-    margin-top:2px;
+.btn-light{
+    background:white;
+    color:#000;
 }
 
-
-/* =====================================================
-   INDICADOR REELS
-===================================================== */
-
-.reelsHint{
-    text-align:center;
-    color:#777;
-    font-size:11px;
-    margin-top:10px;
+.btn-full{
+    width:100%;
 }
 
+.watch-btn{
+    margin-top:15px;
+}
 
-/* =====================================================
-   SEÇÕES
-===================================================== */
+/* =========================
+   SECTIONS
+========================= */
 
 .section{
-    margin-top:24px;
+    margin-top:28px;
 }
 
-.sectionTitle{
+.section-title{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-
-    margin-bottom:12px;
+    justify-content:space-between;
+    margin-bottom:13px;
 }
 
-.sectionTitle h2{
-    font-size:18px;
+.section-title h2{
+    font-size:19px;
 }
 
-.sectionTitle span{
+.section-title small{
     color:#777;
-    font-size:11px;
 }
 
+/* =========================
+   HORIZONTAL CARDS
+========================= */
 
-/* =====================================================
-   CARDS
-===================================================== */
-
-.horizontal{
+.cards{
     display:flex;
-    gap:11px;
+    gap:12px;
     overflow-x:auto;
+    padding-bottom:5px;
     scrollbar-width:none;
 }
 
-.horizontal::-webkit-scrollbar{
+.cards::-webkit-scrollbar{
     display:none;
 }
 
 .card{
-    min-width:125px;
-    max-width:125px;
-
-    cursor:pointer;
+    min-width:130px;
+    width:130px;
+    position:relative;
 }
 
-.card img{
-    width:125px;
-    height:178px;
-
+.card-img{
+    width:130px;
+    height:185px;
     object-fit:cover;
-
-    border-radius:10px;
-
+    border-radius:12px;
     background:#171717;
 }
 
 .card h3{
-    font-size:13px;
     margin-top:7px;
-
+    font-size:13px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -360,14 +269,13 @@ header{
 
 .card p{
     color:#777;
-    font-size:10px;
+    font-size:11px;
     margin-top:4px;
 }
 
-
-/* =====================================================
+/* =========================
    GRID
-===================================================== */
+========================= */
 
 .grid{
     display:grid;
@@ -376,62 +284,23 @@ header{
 }
 
 .grid .card{
+    width:100%;
     min-width:0;
-    max-width:none;
 }
 
-.grid .card img{
+.grid .card-img{
     width:100%;
     height:190px;
 }
 
-
-/* =====================================================
-   PESQUISA
-===================================================== */
-
-.searchBox{
-    display:flex;
-    gap:8px;
-    margin:18px 0;
-}
-
-.searchBox input{
-    flex:1;
-
-    padding:14px;
-
-    background:#171717;
-    color:#fff;
-
-    border:1px solid #292929;
-    border-radius:10px;
-
-    outline:none;
-}
-
-.searchBox button{
-    width:50px;
-
-    border:0;
-    border-radius:10px;
-
-    background:#e50914;
-    color:#fff;
-
-    font-size:17px;
-}
-
-
-/* =====================================================
-   CATEGORIAS
-===================================================== */
+/* =========================
+   CATEGORIES
+========================= */
 
 .categories{
     display:flex;
     gap:8px;
     overflow-x:auto;
-
     scrollbar-width:none;
 }
 
@@ -441,266 +310,157 @@ header{
 
 .category{
     flex:none;
-
-    padding:9px 14px;
-
-    border:1px solid #303030;
-    border-radius:20px;
-
+    padding:9px 15px;
+    border-radius:25px;
     background:#171717;
-    color:#fff;
-
-    font-size:12px;
+    border:1px solid #292929;
+    color:white;
 }
 
+/* =========================
+   SEARCH
+========================= */
 
-/* =====================================================
-   DETALHES
-===================================================== */
-
-.detailCover{
-    position:relative;
+.search{
+    display:flex;
+    gap:8px;
+    margin:15px 0;
 }
 
-.detailCover img{
+.search input{
+    flex:1;
+    min-width:0;
+    padding:13px 14px;
+    border-radius:10px;
+    border:1px solid #303030;
+    outline:0;
+    background:#171717;
+    color:white;
+}
+
+.search button{
+    width:48px;
+    border:0;
+    border-radius:10px;
+    background:#e50914;
+    color:white;
+}
+
+/* =========================
+   DETAIL
+========================= */
+
+.back{
+    background:none;
+    border:0;
+    color:white;
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+.detail-cover{
     width:100%;
-    height:360px;
-
+    height:330px;
     object-fit:cover;
-
-    border-radius:16px;
+    border-radius:18px;
 }
 
-.detailGradient{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    height:150px;
-
-    background:linear-gradient(transparent,#050505);
-
-    border-radius:16px;
-}
-
-.detailContent{
-    margin-top:-35px;
-    position:relative;
-    padding:0 8px;
-}
-
-.detailContent h1{
+.detail h1{
     font-size:28px;
-    margin-bottom:7px;
+    margin-top:16px;
 }
 
 .meta{
     color:#888;
-    font-size:12px;
-    margin-bottom:12px;
+    margin:8px 0 13px;
+    font-size:13px;
 }
 
 .description{
-    color:#ccc;
-    line-height:1.55;
+    color:#ddd;
     font-size:14px;
+    line-height:1.6;
 }
 
-.detailButtons{
+.detail-actions{
     display:flex;
     gap:8px;
-    margin-top:16px;
+    margin-top:17px;
 }
 
-.watchButton{
+.detail-actions button{
     flex:1;
-
-    padding:13px;
-
-    border:0;
-    border-radius:9px;
-
-    background:#fff;
-    color:#000;
-
-    font-weight:bold;
 }
 
-.favoriteButton{
-    width:50px;
-
-    border:0;
-    border-radius:9px;
-
-    background:#222;
-    color:#fff;
-
-    font-size:18px;
-}
-
-
-/* =====================================================
+/* =========================
    PLAYER
-===================================================== */
+========================= */
 
-.playerPage{
-    padding-left:0;
-    padding-right:0;
-}
-
-.playerBack{
-    padding-left:14px;
-}
-
-.playerBox{
-    width:100%;
+.player-box{
     background:#000;
+    border-radius:16px;
+    overflow:hidden;
 }
 
 video{
     width:100%;
-    max-height:75vh;
+    display:block;
     background:#000;
-    display:block;
+    max-height:75vh;
 }
 
-.playerInfo{
-    padding:15px;
+.player-title{
+    margin-top:16px;
 }
 
-.playerInfo h2{
-    font-size:20px;
+.player-title h2{
+    font-size:22px;
 }
 
-.playerInfo p{
+.player-title p{
     color:#777;
-    font-size:12px;
-    margin-top:6px;
+    margin-top:5px;
 }
 
+/* =========================
+   FAVORITES
+========================= */
 
-/* =====================================================
-   SÉRIE
-===================================================== */
-
-.seriesHero{
-    position:relative;
-}
-
-.seriesHero img{
-    width:100%;
-    height:340px;
-
-    object-fit:cover;
-
-    border-radius:16px;
-}
-
-.seriesInfo{
-    margin-top:-30px;
-    position:relative;
-    padding:0 8px;
-}
-
-.seriesInfo h1{
-    font-size:28px;
-}
-
-.episodeList{
-    margin-top:22px;
-}
-
-.seasonTitle{
-    font-size:17px;
-    margin:18px 0 9px;
-}
-
-.episode{
-    display:flex;
-    align-items:center;
-
-    gap:10px;
-
-    padding:11px;
-
-    margin-bottom:8px;
-
-    background:#151515;
-
-    border-radius:10px;
-}
-
-.episodeNumber{
-    width:40px;
-    height:40px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:8px;
-
-    background:#252525;
-
-    font-weight:bold;
-    font-size:13px;
-}
-
-.episodeInfo{
-    flex:1;
-}
-
-.episodeInfo strong{
-    display:block;
-    font-size:13px;
-}
-
-.episodeInfo small{
+.empty{
+    grid-column:1/-1;
+    text-align:center;
     color:#777;
-    display:block;
-    margin-top:4px;
+    padding:60px 15px;
 }
 
-.episodePlay{
-    width:42px;
-    height:42px;
-
-    border:0;
-    border-radius:50%;
-
-    background:#e50914;
-    color:#fff;
+.empty-icon{
+    font-size:45px;
+    margin-bottom:12px;
 }
 
-
-/* =====================================================
-   PERFIL
-===================================================== */
+/* =========================
+   PROFILE
+========================= */
 
 .profile{
     text-align:center;
-    padding-top:20px;
+    padding:25px 0;
 }
 
 .avatar{
-    width:85px;
-    height:85px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    margin:auto;
-
+    width:90px;
+    height:90px;
     border-radius:50%;
-
-    background:linear-gradient(135deg,#e50914,#661019);
-
-    font-size:36px;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:38px;
+    background:linear-gradient(135deg,#e50914,#641018);
 }
 
 .profile h2{
-    margin-top:12px;
+    margin-top:13px;
 }
 
 .profile p{
@@ -708,277 +468,388 @@ video{
     margin-top:5px;
 }
 
-.profileButton{
+.profile-menu{
+    margin-top:25px;
+}
+
+.profile-menu button{
     width:100%;
-
     padding:15px;
-
     margin-top:9px;
-
-    text-align:left;
-
-    border:1px solid #292929;
-    border-radius:10px;
-
     background:#171717;
-    color:#fff;
+    border:1px solid #252525;
+    color:white;
+    border-radius:11px;
+    text-align:left;
 }
 
+/* =========================
+   BOTTOM NAV
+========================= */
 
-/* =====================================================
-   ADMIN
-===================================================== */
-
-.adminCard{
-    background:#151515;
-
-    padding:15px;
-
-    border-radius:14px;
-
-    margin-bottom:12px;
-}
-
-.adminCard h3{
-    font-size:16px;
-    margin-bottom:5px;
-}
-
-.adminCard p{
-    color:#777;
-    font-size:12px;
-    margin-bottom:8px;
-}
-
-.adminButtons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-}
-
-.adminButton{
-    padding:9px 11px;
-
-    border:0;
-    border-radius:7px;
-
-    background:#333;
-    color:#fff;
-
-    font-size:11px;
-}
-
-.adminButton.red{
-    background:#8b0000;
-}
-
-.primary{
-    width:100%;
-
-    padding:14px;
-
-    border:0;
-    border-radius:9px;
-
-    background:#e50914;
-    color:#fff;
-
-    font-weight:bold;
-}
-
-
-/* =====================================================
-   FORMULÁRIOS
-===================================================== */
-
-.formBox{
-    background:#151515;
-
-    padding:15px;
-
-    border-radius:14px;
-}
-
-.formBox label{
-    display:block;
-
-    color:#999;
-
-    font-size:11px;
-
-    margin-bottom:6px;
-}
-
-.formBox input,
-.formBox select,
-.formBox textarea{
-    width:100%;
-
-    padding:13px;
-
-    margin-bottom:13px;
-
-    border:1px solid #303030;
-    border-radius:8px;
-
-    background:#222;
-    color:#fff;
-
-    outline:none;
-}
-
-.formBox textarea{
-    min-height:90px;
-    resize:vertical;
-}
-
-
-/* =====================================================
-   VOLTAR
-===================================================== */
-
-.back{
-    border:0;
-    background:none;
-    color:#fff;
-
-    font-size:15px;
-
-    margin-bottom:15px;
-}
-
-
-/* =====================================================
-   MENU INFERIOR
-===================================================== */
-
-.bottom{
+.bottom-nav{
     position:fixed;
-
+    z-index:200;
     bottom:0;
     left:50%;
-
     transform:translateX(-50%);
 
     width:100%;
-    max-width:650px;
-
-    height:70px;
+    max-width:700px;
+    height:72px;
 
     display:flex;
     justify-content:space-around;
     align-items:center;
 
-    background:rgba(12,12,12,.96);
-
-    backdrop-filter:blur(15px);
-
-    border-top:1px solid #292929;
-
-    z-index:200;
+    background:rgba(12,12,12,.97);
+    backdrop-filter:blur(18px);
+    border-top:1px solid #252525;
 }
 
-.bottom button{
-    min-width:52px;
-
-    border:0;
+.nav-btn{
     background:none;
-
+    border:0;
     color:#777;
-
-    font-size:9px;
+    font-size:10px;
+    min-width:60px;
 }
 
-.bottom button.active{
-    color:#fff;
+.nav-btn.active{
+    color:white;
 }
 
-.bottom span{
+.nav-icon{
     display:block;
-
-    font-size:20px;
-
+    font-size:21px;
     margin-bottom:3px;
 }
 
+/* =========================
+   REELS
+========================= */
 
-/* =====================================================
-   VAZIO
-===================================================== */
-
-.empty{
-    padding:50px 10px;
-
-    text-align:center;
-
-    color:#666;
-
-    grid-column:1/-1;
+.reels-container{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    background:#000;
+    display:none;
 }
 
+.reels-container.active{
+    display:block;
+}
 
-/* =====================================================
+.reels-feed{
+    height:100vh;
+    overflow-y:auto;
+    scroll-snap-type:y mandatory;
+}
+
+.reel{
+    height:100vh;
+    position:relative;
+    scroll-snap-align:start;
+    background:#050505;
+}
+
+.reel-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:.75;
+}
+
+.reel-overlay{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.9),
+            transparent 55%
+        );
+}
+
+.reel-info{
+    position:absolute;
+    bottom:80px;
+    left:18px;
+    right:75px;
+}
+
+.reel-info h2{
+    font-size:27px;
+    margin-bottom:8px;
+}
+
+.reel-info p{
+    color:#ddd;
+    line-height:1.45;
+    font-size:13px;
+}
+
+.reel-actions{
+    position:absolute;
+    right:15px;
+    bottom:100px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.reel-action{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:0;
+    background:rgba(30,30,30,.85);
+    color:white;
+    font-size:21px;
+}
+
+.close-reels{
+    position:fixed;
+    right:15px;
+    top:15px;
+    z-index:600;
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:50%;
+    background:rgba(0,0,0,.65);
+    color:white;
+    font-size:20px;
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+.admin-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.admin-title{
+    font-size:25px;
+}
+
+.admin-tabs{
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    margin-bottom:18px;
+}
+
+.admin-tab{
+    flex:none;
+    border:1px solid #292929;
+    background:#171717;
+    color:white;
+    padding:9px 13px;
+    border-radius:20px;
+}
+
+.admin-tab.active{
+    background:#e50914;
+    border-color:#e50914;
+}
+
+.admin-form{
+    background:#111;
+    border:1px solid #222;
+    border-radius:15px;
+    padding:15px;
+}
+
+.form-group{
+    margin-bottom:12px;
+}
+
+.form-group label{
+    display:block;
+    color:#aaa;
+    font-size:12px;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    padding:12px;
+    border-radius:9px;
+    border:1px solid #303030;
+    background:#191919;
+    color:white;
+    outline:none;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.admin-actions{
+    display:flex;
+    gap:8px;
+}
+
+.admin-actions button{
+    flex:1;
+}
+
+.admin-list{
+    margin-top:20px;
+}
+
+.admin-item{
+    background:#111;
+    border:1px solid #242424;
+    border-radius:12px;
+    padding:10px;
+    display:flex;
+    gap:10px;
+    margin-bottom:9px;
+}
+
+.admin-item img{
+    width:58px;
+    height:78px;
+    border-radius:7px;
+    object-fit:cover;
+}
+
+.admin-item-info{
+    flex:1;
+    min-width:0;
+}
+
+.admin-item-info h3{
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.admin-item-info p{
+    color:#777;
+    font-size:11px;
+}
+
+.admin-item-actions{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.small-btn{
+    border:0;
+    border-radius:7px;
+    padding:7px 9px;
+    color:white;
+    background:#242424;
+}
+
+.small-btn.red{
+    background:#b50912;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    background:rgba(0,0,0,.75);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:700px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#111;
+    border-radius:20px 20px 0 0;
+    padding:20px;
+}
+
+.modal-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.close-modal{
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    background:#242424;
+    color:white;
+    font-size:18px;
+}
+
+/* =========================
    TOAST
-===================================================== */
+========================= */
 
 .toast{
     position:fixed;
-
+    z-index:2000;
     left:50%;
-    bottom:85px;
-
-    transform:translateX(-50%);
-
-    background:#222;
-    color:#fff;
-
+    bottom:90px;
+    transform:translateX(-50%) translateY(20px);
+    background:#fff;
+    color:#000;
     padding:12px 17px;
-
-    border-radius:9px;
-
-    font-size:12px;
-
-    display:none;
-
-    z-index:500;
-
-    box-shadow:0 8px 30px rgba(0,0,0,.4);
+    border-radius:10px;
+    font-size:13px;
+    font-weight:bold;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
 }
 
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* =========================
+   RESPONSIVE
+========================= */
 
-@media(max-width:380px){
+@media(max-width:430px){
+
+    .hero{
+        height:360px;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
 
     .grid{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .grid .card img{
-        height:210px;
-    }
-
-    .reelInfo h1{
-        font-size:23px;
-    }
-
-}
-
-
-/* =====================================================
-   DESKTOP
-===================================================== */
-
-@media(min-width:700px){
-
-    body{
-        background:#000;
-    }
-
-    .app{
-        box-shadow:0 0 50px rgba(0,0,0,.7);
+    .grid .card-img{
+        height:230px;
     }
 
 }
@@ -986,885 +857,997 @@ video{
 </style>
 </head>
 
-
 <body>
 
 <div class="app">
 
+<!-- ================= HEADER ================= -->
 
-<!-- ==================================================
-     TOPO
-================================================== -->
+<header class="header">
 
-<header>
+    <div class="logo">
+        EMPIRE <span>FILMES</span>
+    </div>
 
-<div class="logo">
-EMPIRE <span>FILMES</span>
-</div>
+    <div class="header-actions">
 
-<button
-class="topButton"
-onclick="go('explorar')">
+        <button
+            class="icon-btn"
+            onclick="openReels()">
+            ▶
+        </button>
 
-🔎
+        <button
+            class="icon-btn"
+            onclick="go('explorar')">
+            🔍
+        </button>
 
-</button>
+    </div>
 
 </header>
 
 
-<!-- ==================================================
-     HOME / REELS
-================================================== -->
+<!-- ================= HOME ================= -->
 
 <section
-id="home"
-class="page active">
+    id="home"
+    class="page active">
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <span class="badge">
+                DESTAQUE
+            </span>
+
+            <h1>
+                Big Buck Bunny
+            </h1>
+
+            <p>
+                Assista agora aos conteúdos disponíveis
+                no Empire Filmes.
+            </p>
+
+            <button
+                class="btn btn-light watch-btn"
+                onclick="playMovie(0)">
+
+                ▶ Assistir agora
+
+            </button>
+
+        </div>
+
+    </div>
 
 
-<div
-id="reelsFeed"
-class="reels">
-</div>
+    <div class="section">
 
-<div class="reelsHint">
-↑ Deslize para assistir mais
-</div>
+        <div class="section-title">
 
+            <h2>
+                🔥 Lançamentos
+            </h2>
 
-<div class="section">
+            <small>
+                Ver tudo
+            </small>
 
-<div class="sectionTitle">
+        </div>
 
-<h2>🔥 Em destaque</h2>
+        <div
+            id="homeMovies"
+            class="cards">
+        </div>
 
-<span>Ver tudo</span>
-
-</div>
-
-<div
-id="homeMovies"
-class="horizontal">
-</div>
-
-</div>
+    </div>
 
 
-<div class="section">
+    <div class="section">
 
-<div class="sectionTitle">
+        <div class="section-title">
 
-<h2>📺 Séries</h2>
+            <h2>
+                🎬 Filmes
+            </h2>
 
-<span>Novidades</span>
+        </div>
 
-</div>
+        <div
+            id="homeFilms"
+            class="cards">
+        </div>
 
-<div
-id="homeSeries"
-class="horizontal">
-</div>
-
-</div>
+    </div>
 
 
-<div class="section">
+    <div class="section">
 
-<h2>🎭 Categorias</h2>
+        <div class="section-title">
 
-<br>
+            <h2>
+                📺 Séries
+            </h2>
 
-<div class="categories">
+        </div>
 
-<button
-class="category"
-onclick="filterCategory('Ação')">
-Ação
-</button>
+        <div
+            id="homeSeries"
+            class="cards">
+        </div>
 
-<button
-class="category"
-onclick="filterCategory('Terror')">
-Terror
-</button>
+    </div>
 
-<button
-class="category"
-onclick="filterCategory('Romance')">
-Romance
-</button>
 
-<button
-class="category"
-onclick="filterCategory('Comédia')">
-Comédia
-</button>
+    <div class="section">
 
-<button
-class="category"
-onclick="filterCategory('Nacional')">
-Nacional
-</button>
+        <div class="section-title">
 
-<button
-class="category"
-onclick="filterCategory('Animação')">
-Animação
-</button>
+            <h2>
+                📂 Categorias
+            </h2>
 
-</div>
+        </div>
 
-</div>
+        <div class="categories">
+
+            <button
+                class="category"
+                onclick="filterCategory('Ação')">
+                Ação
+            </button>
+
+            <button
+                class="category"
+                onclick="filterCategory('Terror')">
+                Terror
+            </button>
+
+            <button
+                class="category"
+                onclick="filterCategory('Romance')">
+                Romance
+            </button>
+
+            <button
+                class="category"
+                onclick="filterCategory('Comédia')">
+                Comédia
+            </button>
+
+            <button
+                class="category"
+                onclick="filterCategory('Animação')">
+                Animação
+            </button>
+
+            <button
+                class="category"
+                onclick="filterCategory('Nacional')">
+                Nacional
+            </button>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     EXPLORAR
-================================================== -->
+<!-- ================= EXPLORAR ================= -->
 
 <section
-id="explorar"
-class="page">
+    id="explorar"
+    class="page">
 
-<h2>🔎 Explorar</h2>
+    <h2>
+        🔎 Explorar
+    </h2>
 
-<div class="searchBox">
+    <div class="search">
 
-<input
-id="searchInput"
-placeholder="Buscar filmes ou séries..."
-oninput="searchAll()">
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Buscar filmes ou séries..."
+            oninput="searchContent()">
 
-<button onclick="searchAll()">
-🔎
-</button>
+        <button
+            onclick="searchContent()">
+            🔍
+        </button>
 
-</div>
+    </div>
 
-
-<h3>🎬 Filmes</h3>
-
-<br>
-
-<div
-id="exploreMovies"
-class="grid">
-</div>
-
-
-<h3 style="margin-top:25px">
-📺 Séries
-</h3>
-
-<br>
-
-<div
-id="exploreSeries"
-class="grid">
-</div>
+    <div
+        id="exploreCards"
+        class="grid">
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     SÉRIES
-================================================== -->
+<!-- ================= FAVORITOS ================= -->
 
 <section
-id="series"
-class="page">
+    id="favoritos"
+    class="page">
 
-<h2>📺 Séries</h2>
+    <h2>
+        ❤️ Favoritos
+    </h2>
 
-<br>
+    <br>
 
-<div
-id="seriesCards"
-class="grid">
-</div>
+    <div
+        id="favoriteCards"
+        class="grid">
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     FAVORITOS
-================================================== -->
+<!-- ================= PERFIL ================= -->
 
 <section
-id="favoritos"
-class="page">
+    id="perfil"
+    class="page">
 
-<h2>❤️ Favoritos</h2>
+    <div class="profile">
 
-<br>
+        <div class="avatar">
+            👤
+        </div>
 
-<div
-id="favoriteCards"
-class="grid">
-</div>
+        <h2>
+            Meu Perfil
+        </h2>
+
+        <p>
+            Empire Filmes
+        </p>
+
+        <div class="profile-menu">
+
+            <button
+                onclick="openAdmin()">
+                🛡️ Painel Administrativo
+            </button>
+
+            <button>
+                👤 Minha conta
+            </button>
+
+            <button>
+                ⚙️ Configurações
+            </button>
+
+            <button>
+                🔔 Notificações
+            </button>
+
+            <button>
+                ℹ️ Sobre o aplicativo
+            </button>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     DETALHES FILME
-================================================== -->
+<!-- ================= DETALHES ================= -->
 
 <section
-id="detalhes"
-class="page">
+    id="detalhes"
+    class="page">
 
-<button
-class="back"
-onclick="go('home')">
+    <button
+        class="back"
+        onclick="go('home')">
+        ← Voltar
+    </button>
 
-← Voltar
+    <img
+        id="detailImage"
+        class="detail-cover"
+        src=""
+        alt="">
 
-</button>
+    <div class="detail">
 
+        <h1 id="detailTitle">
+        </h1>
 
-<div class="detailCover">
+        <div
+            id="detailMeta"
+            class="meta">
+        </div>
 
-<img
-id="detailImage"
-alt="Capa do filme">
+        <p
+            id="detailDescription"
+            class="description">
+        </p>
 
-<div class="detailGradient"></div>
+        <div class="detail-actions">
 
-</div>
+            <button
+                class="btn btn-red"
+                onclick="playCurrent()">
 
+                ▶ Assistir
 
-<div class="detailContent">
+            </button>
 
-<h1 id="detailTitle">
-Filme
-</h1>
+            <button
+                class="btn btn-dark"
+                onclick="addFavorite()">
 
-<div
-id="detailMeta"
-class="meta">
-</div>
+                ❤️
 
-<p
-id="detailDescription"
-class="description">
-</p>
+            </button>
 
+        </div>
 
-<div class="detailButtons">
-
-<button
-class="watchButton"
-onclick="playCurrent()">
-
-▶ Assistir agora
-
-</button>
-
-<button
-class="favoriteButton"
-onclick="addFavorite()">
-
-❤️
-
-</button>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     DETALHES SÉRIE
-================================================== -->
+<!-- ================= PLAYER ================= -->
 
 <section
-id="serieDetalhes"
-class="page">
+    id="player"
+    class="page">
 
-<button
-class="back"
-onclick="go('series')">
+    <button
+        class="back"
+        onclick="backFromPlayer()">
 
-← Voltar
+        ← Voltar
 
-</button>
+    </button>
 
+    <div class="player-box">
 
-<div class="seriesHero">
+        <video
+            id="video"
+            controls
+            playsinline
+            preload="metadata">
+        </video>
 
-<img
-id="serieDetailImage"
-alt="Capa da série">
+    </div>
 
-</div>
+    <div class="player-title">
 
+        <h2
+            id="playerName">
+            Vídeo
+        </h2>
 
-<div class="seriesInfo">
+        <p>
+            Empire Filmes
+        </p>
 
-<h1
-id="serieDetailTitle">
-Série
-</h1>
-
-<div
-id="serieDetailMeta"
-class="meta">
-</div>
-
-<p
-id="serieDetailDescription"
-class="description">
-</p>
-
-</div>
-
-
-<div
-id="episodeList"
-class="episodeList">
-</div>
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     PLAYER
-================================================== -->
+<!-- ================= ADMIN ================= -->
 
 <section
-id="player"
-class="page playerPage">
+    id="admin"
+    class="page">
 
-<div class="playerBack">
+    <div class="admin-header">
 
-<button
-class="back"
-onclick="backPlayer()">
+        <div>
 
-← Voltar
+            <div class="admin-title">
+                🛡️ Administração
+            </div>
 
-</button>
+            <small style="color:#777">
+                Gerencie seu catálogo
+            </small>
 
-</div>
+        </div>
 
+        <button
+            class="btn btn-dark"
+            onclick="go('home')">
+            ✕
+        </button>
 
-<div class="playerBox">
-
-<video
-id="videoPlayer"
-controls
-playsinline
-preload="metadata">
-
-Seu navegador não suporta vídeo.
-
-</video>
-
-</div>
+    </div>
 
 
-<div class="playerInfo">
+    <div class="admin-tabs">
 
-<h2
-id="playerTitle">
-Vídeo
-</h2>
+        <button
+            id="tabMovie"
+            class="admin-tab active"
+            onclick="adminTab('filmes')">
+            🎬 Filmes
+        </button>
 
-<p>
-Empire Filmes
-</p>
+        <button
+            id="tabSeries"
+            class="admin-tab"
+            onclick="adminTab('series')">
+            📺 Séries
+        </button>
 
-</div>
+        <button
+            id="tabEpisode"
+            class="admin-tab"
+            onclick="adminTab('episodios')">
+            📑 Episódios
+        </button>
+
+    </div>
+
+
+    <!-- FORM FILME -->
+
+    <div
+        id="adminFilmes"
+        class="admin-form">
+
+        <h3 style="margin-bottom:15px">
+            🎬 Cadastrar filme
+        </h3>
+
+        <input
+            id="movieEditId"
+            type="hidden">
+
+        <div class="form-group">
+
+            <label>
+                Nome do filme
+            </label>
+
+            <input
+                id="movieTitle"
+                placeholder="Ex: Vingadores">
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Categoria
+            </label>
+
+            <select id="movieCategory">
+
+                <option>
+                    Ação
+                </option>
+
+                <option>
+                    Terror
+                </option>
+
+                <option>
+                    Romance
+                </option>
+
+                <option>
+                    Comédia
+                </option>
+
+                <option>
+                    Animação
+                </option>
+
+                <option>
+                    Nacional
+                </option>
+
+                <option>
+                    Documentário
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Ano
+            </label>
+
+            <input
+                id="movieYear"
+                type="number"
+                placeholder="2026">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Duração
+            </label>
+
+            <input
+                id="movieDuration"
+                placeholder="1h 45min">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                URL da capa
+            </label>
+
+            <input
+                id="movieImage"
+                placeholder="https://...">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                URL do vídeo
+            </label>
+
+            <input
+                id="movieVideo"
+                placeholder="https://...mp4">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Descrição
+            </label>
+
+            <textarea
+                id="movieDescription"
+                placeholder="Descrição do filme">
+            </textarea>
+
+        </div>
+
+
+        <div class="admin-actions">
+
+            <button
+                class="btn btn-red"
+                onclick="saveMovie()">
+
+                💾 Salvar filme
+
+            </button>
+
+            <button
+                class="btn btn-dark"
+                onclick="clearMovieForm()">
+
+                Limpar
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="movieAdminList"
+            class="admin-list">
+        </div>
+
+    </div>
+
+
+    <!-- FORM SÉRIE -->
+
+    <div
+        id="adminSeries"
+        class="admin-form"
+        style="display:none">
+
+        <h3 style="margin-bottom:15px">
+            📺 Cadastrar série
+        </h3>
+
+        <input
+            id="seriesEditId"
+            type="hidden">
+
+        <div class="form-group">
+
+            <label>
+                Nome da série
+            </label>
+
+            <input
+                id="seriesTitle"
+                placeholder="Ex: Minha Série">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Categoria
+            </label>
+
+            <select id="seriesCategory">
+
+                <option>
+                    Ação
+                </option>
+
+                <option>
+                    Terror
+                </option>
+
+                <option>
+                    Romance
+                </option>
+
+                <option>
+                    Comédia
+                </option>
+
+                <option>
+                    Nacional
+                </option>
+
+                <option>
+                    Documentário
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Ano
+            </label>
+
+            <input
+                id="seriesYear"
+                type="number"
+                placeholder="2026">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                URL da capa
+            </label>
+
+            <input
+                id="seriesImage"
+                placeholder="https://...">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Descrição
+            </label>
+
+            <textarea
+                id="seriesDescription"
+                placeholder="Descrição da série">
+            </textarea>
+
+        </div>
+
+
+        <div class="admin-actions">
+
+            <button
+                class="btn btn-red"
+                onclick="saveSeries()">
+
+                💾 Salvar série
+
+            </button>
+
+            <button
+                class="btn btn-dark"
+                onclick="clearSeriesForm()">
+
+                Limpar
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="seriesAdminList"
+            class="admin-list">
+        </div>
+
+    </div>
+
+
+    <!-- FORM EPISÓDIO -->
+
+    <div
+        id="adminEpisodes"
+        class="admin-form"
+        style="display:none">
+
+        <h3 style="margin-bottom:15px">
+            📑 Cadastrar episódio
+        </h3>
+
+        <input
+            id="episodeEditId"
+            type="hidden">
+
+        <div class="form-group">
+
+            <label>
+                Série
+            </label>
+
+            <select id="episodeSeries">
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Temporada
+            </label>
+
+            <input
+                id="episodeSeason"
+                type="number"
+                value="1"
+                min="1">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Número do episódio
+            </label>
+
+            <input
+                id="episodeNumber"
+                type="number"
+                value="1"
+                min="1">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Nome do episódio
+            </label>
+
+            <input
+                id="episodeTitle"
+                placeholder="Ex: O começo">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Duração
+            </label>
+
+            <input
+                id="episodeDuration"
+                placeholder="45 min">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                URL da capa do episódio
+            </label>
+
+            <input
+                id="episodeImage"
+                placeholder="https://...">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                URL do vídeo
+            </label>
+
+            <input
+                id="episodeVideo"
+                placeholder="https://...mp4">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Descrição
+            </label>
+
+            <textarea
+                id="episodeDescription"
+                placeholder="Descrição do episódio">
+            </textarea>
+
+        </div>
+
+
+        <div class="admin-actions">
+
+            <button
+                class="btn btn-red"
+                onclick="saveEpisode()">
+
+                💾 Salvar episódio
+
+            </button>
+
+            <button
+                class="btn btn-dark"
+                onclick="clearEpisodeForm()">
+
+                Limpar
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="episodeAdminList"
+            class="admin-list">
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     PERFIL
-================================================== -->
+<!-- ================= BOTTOM NAV ================= -->
 
-<section
-id="perfil"
-class="page">
+<nav class="bottom-nav">
 
-<div class="profile">
+    <button
+        id="navHome"
+        class="nav-btn active"
+        onclick="go('home')">
 
-<div class="avatar">
-🎬
-</div>
+        <span class="nav-icon">
+            🏠
+        </span>
 
-<h2>
-Empire Filmes
-</h2>
+        Início
 
-<p>
-Seu catálogo de entretenimento
-</p>
+    </button>
 
 
-<button
-class="profileButton"
-onclick="openAdmin()">
+    <button
+        id="navExplore"
+        class="nav-btn"
+        onclick="go('explorar')">
 
-🔐 Painel Administrador
+        <span class="nav-icon">
+            🔎
+        </span>
 
-</button>
+        Explorar
 
+    </button>
 
-<button
-class="profileButton"
-onclick="go('favoritos')">
 
-❤️ Meus favoritos
+    <button
+        class="nav-btn"
+        onclick="openReels()">
 
-</button>
+        <span class="nav-icon">
+            ▶️
+        </span>
 
+        Reels
 
-<button
-class="profileButton"
-onclick="showAbout()">
+    </button>
 
-ℹ️ Sobre o aplicativo
 
-</button>
+    <button
+        id="navFavorites"
+        class="nav-btn"
+        onclick="go('favoritos')">
 
-</div>
+        <span class="nav-icon">
+            ❤️
+        </span>
 
-</section>
+        Favoritos
 
+    </button>
 
-<!-- ==================================================
-     ADMIN
-================================================== -->
 
-<section
-id="admin"
-class="page">
+    <button
+        id="navProfile"
+        class="nav-btn"
+        onclick="go('perfil')">
 
-<button
-class="back"
-onclick="go('perfil')">
+        <span class="nav-icon">
+            👤
+        </span>
 
-← Voltar
+        Perfil
 
-</button>
-
-<h2>
-🔐 Painel Administrador
-</h2>
-
-<br>
-
-
-<button
-class="primary"
-onclick="openMovieForm()">
-
-🎬 Cadastrar Filme
-
-</button>
-
-<br><br>
-
-
-<button
-class="primary"
-onclick="openSeriesForm()">
-
-📺 Cadastrar Série
-
-</button>
-
-
-<div
-id="adminMovies"
-style="margin-top:25px">
-</div>
-
-
-<div
-id="adminSeries"
-style="margin-top:25px">
-</div>
-
-</section>
-
-
-<!-- ==================================================
-     FORM FILME
-================================================== -->
-
-<section
-id="cadastroFilme"
-class="page">
-
-<button
-class="back"
-onclick="go('admin')">
-
-← Voltar
-
-</button>
-
-<h2
-id="movieFormTitle">
-
-🎬 Cadastrar Filme
-
-</h2>
-
-<br>
-
-
-<div class="formBox">
-
-
-<label>
-Nome do filme
-</label>
-
-<input
-id="movieName"
-placeholder="Ex: Projeto Eclipse">
-
-
-<label>
-Categoria
-</label>
-
-<select
-id="movieCategory">
-
-<option>Ação</option>
-<option>Terror</option>
-<option>Romance</option>
-<option>Comédia</option>
-<option>Nacional</option>
-<option>Documentário</option>
-<option>Animação</option>
-
-</select>
-
-
-<label>
-Ano
-</label>
-
-<input
-id="movieYear"
-type="number"
-placeholder="2026">
-
-
-<label>
-Duração
-</label>
-
-<input
-id="movieDuration"
-placeholder="1h 40min">
-
-
-<label>
-URL da capa
-</label>
-
-<input
-id="movieImage"
-placeholder="https://...">
-
-
-<label>
-Descrição
-</label>
-
-<textarea
-id="movieDescription"
-placeholder="Descrição do filme">
-</textarea>
-
-
-<label>
-URL do vídeo
-</label>
-
-<input
-id="movieVideo"
-type="url"
-placeholder="https://.../video.mp4">
-
-
-<button
-class="primary"
-onclick="saveMovieForm()">
-
-💾 SALVAR FILME
-
-</button>
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
-     FORM SERIE
-================================================== -->
-
-<section
-id="cadastroSerie"
-class="page">
-
-<button
-class="back"
-onclick="go('admin')">
-
-← Voltar
-
-</button>
-
-<h2
-id="seriesFormTitle">
-
-📺 Cadastrar Série
-
-</h2>
-
-<br>
-
-
-<div class="formBox">
-
-
-<label>
-Nome da série
-</label>
-
-<input
-id="seriesName"
-placeholder="Ex: Minha Série">
-
-
-<label>
-Categoria
-</label>
-
-<select
-id="seriesCategory">
-
-<option>Ação</option>
-<option>Terror</option>
-<option>Romance</option>
-<option>Comédia</option>
-<option>Nacional</option>
-<option>Documentário</option>
-<option>Animação</option>
-
-</select>
-
-
-<label>
-Ano
-</label>
-
-<input
-id="seriesYear"
-type="number"
-placeholder="2026">
-
-
-<label>
-URL da capa
-</label>
-
-<input
-id="seriesImage"
-placeholder="https://...">
-
-
-<label>
-Descrição
-</label>
-
-<textarea
-id="seriesDescription"
-placeholder="Descrição da série">
-</textarea>
-
-
-<button
-class="primary"
-onclick="saveSeriesForm()">
-
-💾 SALVAR SÉRIE
-
-</button>
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
-     FORM EPISODIO
-================================================== -->
-
-<section
-id="cadastroEpisodio"
-class="page">
-
-<button
-class="back"
-onclick="go('admin')">
-
-← Voltar
-
-</button>
-
-<h2
-id="episodeFormTitle">
-
-🎞️ Adicionar Episódio
-
-</h2>
-
-<br>
-
-
-<div class="formBox">
-
-
-<label>
-Série
-</label>
-
-<select
-id="episodeSeries">
-</select>
-
-
-<label>
-Temporada
-</label>
-
-<input
-id="episodeSeason"
-type="number"
-min="1"
-value="1">
-
-
-<label>
-Número do episódio
-</label>
-
-<input
-id="episodeNumber"
-type="number"
-min="1"
-value="1">
-
-
-<label>
-Título
-</label>
-
-<input
-id="episodeTitle"
-placeholder="Ex: O começo">
-
-
-<label>
-URL do vídeo
-</label>
-
-<input
-id="episodeVideo"
-type="url"
-placeholder="https://.../episodio.mp4">
-
-
-<button
-class="primary"
-onclick="saveEpisodeForm()">
-
-💾 SALVAR EPISÓDIO
-
-</button>
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
-     MENU
-================================================== -->
-
-<nav class="bottom">
-
-<button
-id="navHome"
-onclick="go('home')">
-
-<span>⌂</span>
-Início
-
-</button>
-
-
-<button
-id="navExplore"
-onclick="go('explorar')">
-
-<span>⌕</span>
-Explorar
-
-</button>
-
-
-<button
-id="navSeries"
-onclick="go('series')">
-
-<span>▣</span>
-Séries
-
-</button>
-
-
-<button
-id="navFavorites"
-onclick="go('favoritos')">
-
-<span>♡</span>
-Favoritos
-
-</button>
-
-
-<button
-id="navProfile"
-onclick="go('perfil')">
-
-<span>●</span>
-Perfil
-
-</button>
+    </button>
 
 </nav>
 
+</div>
+
+
+<!-- ================= REELS ================= -->
+
+<div
+    id="reelsContainer"
+    class="reels-container">
+
+    <button
+        class="close-reels"
+        onclick="closeReels()">
+        ✕
+    </button>
+
+    <div
+        id="reelsFeed"
+        class="reels-feed">
+    </div>
 
 </div>
 
 
+<!-- ================= TOAST ================= -->
+
 <div
-id="toast"
-class="toast">
+    id="toast"
+    class="toast">
 </div>
 
 
@@ -1879,148 +1862,166 @@ const VIDEO_TESTE =
 
 
 /* =====================================================
-   FILMES INICIAIS
+   DADOS INICIAIS
 ===================================================== */
 
-let movies = [
+const defaultMovies = [
 
 {
-id:"movie_1",
+    id:"movie_1",
+    type:"movie",
+    title:"Big Buck Bunny",
+    category:"Animação",
+    year:"2008",
+    duration:"10 segundos",
+    description:"Vídeo de demonstração para testar o Empire Filmes.",
+    image:"https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png",
+    video:VIDEO_TESTE
+},
 
-title:"Big Buck Bunny",
+{
+    id:"movie_2",
+    type:"movie",
+    title:"Projeto Eclipse",
+    category:"Ação",
+    year:"2026",
+    duration:"1h 48min",
+    description:"Filme fictício de demonstração do Empire Filmes.",
+    image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
+    video:VIDEO_TESTE
+},
 
-category:"Animação",
+{
+    id:"movie_3",
+    type:"movie",
+    title:"Noite Sombria",
+    category:"Terror",
+    year:"2026",
+    duration:"1h 35min",
+    description:"Filme fictício de demonstração.",
+    image:"https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=700&q=80",
+    video:VIDEO_TESTE
+},
 
-year:"2008",
+{
+    id:"movie_4",
+    type:"movie",
+    title:"Último Verão",
+    category:"Romance",
+    year:"2026",
+    duration:"1h 38min",
+    description:"Filme fictício de demonstração.",
+    image:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80",
+    video:VIDEO_TESTE
+},
 
-duration:"10 segundos",
-
-description:
-"Vídeo público de demonstração para testar o player do Empire Filmes.",
-
-image:
-"https://upload.wikimedia.org/wikipedia/commons/7/70/Big.Buck.Bunny.-.Opening.png",
-
-video:VIDEO_TESTE
-
+{
+    id:"movie_5",
+    type:"movie",
+    title:"Riso Garantido",
+    category:"Comédia",
+    year:"2026",
+    duration:"1h 30min",
+    description:"Filme fictício de demonstração.",
+    image:"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80",
+    video:VIDEO_TESTE
 }
 
 ];
 
 
-/* =====================================================
-   VARIÁVEIS
-===================================================== */
-
-let currentMovie=null;
-
-let currentSeries=null;
-
-let previousPage="home";
-
-let editingMovie=null;
-
-let editingSeries=null;
-
-let editingEpisode=null;
-
-let editingEpisodeSeries=null;
-
-
-/* =====================================================
-   CARREGAR FILMES
-===================================================== */
-
-function loadMovies(){
-
-try{
-
-const data =
-localStorage.getItem("empire_movies");
-
-if(data){
-
-movies=JSON.parse(data);
-
-}
-
-}catch(error){
-
-console.log(error);
-
-}
-
-}
-
-
-function saveMovies(){
-
-localStorage.setItem(
-"empire_movies",
-JSON.stringify(movies)
+let movies = loadData(
+    "empireMovies",
+    defaultMovies
 );
 
-}
+
+let series = loadData(
+    "empireSeries",
+    []
+);
+
+
+let episodes = loadData(
+    "empireEpisodes",
+    []
+);
+
+
+let favorites = loadData(
+    "empireFavorites",
+    []
+);
+
+
+let currentContent = null;
+
+let currentType = null;
+
+let adminCurrentTab = "filmes";
 
 
 /* =====================================================
-   SÉRIES
+   STORAGE
 ===================================================== */
 
-function getSeries(){
+function loadData(key, fallback){
 
-try{
+    try{
 
-return JSON.parse(
-localStorage.getItem("empire_series") || "[]"
-);
+        const data =
+            localStorage.getItem(key);
 
-}catch(error){
+        if(!data){
 
-return [];
+            return JSON.parse(
+                JSON.stringify(fallback)
+            );
 
-}
+        }
 
-}
+        const parsed =
+            JSON.parse(data);
 
+        return Array.isArray(parsed)
+            ? parsed
+            : JSON.parse(
+                JSON.stringify(fallback)
+            );
 
-function saveSeriesData(series){
+    }catch(error){
 
-localStorage.setItem(
-"empire_series",
-JSON.stringify(series)
-);
+        console.warn(
+            "Erro ao carregar",
+            key,
+            error
+        );
 
-}
+        return JSON.parse(
+            JSON.stringify(fallback)
+        );
 
-
-/* =====================================================
-   FAVORITOS
-===================================================== */
-
-function getFavorites(){
-
-try{
-
-return JSON.parse(
-localStorage.getItem("empireFavorites") || "[]"
-);
-
-}catch(error){
-
-return [];
-
-}
+    }
 
 }
 
 
-function saveFavorites(list){
+function saveData(key,data){
 
-localStorage.setItem(
-"empireFavorites",
-JSON.stringify(list)
-);
+    try{
+
+        localStorage.setItem(
+            key,
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        showToast(
+            "Não foi possível salvar os dados."
+        );
+
+    }
 
 }
 
@@ -2031,301 +2032,131 @@ JSON.stringify(list)
 
 function go(page){
 
-document
-.querySelectorAll(".page")
-.forEach(function(item){
+    document
+        .querySelectorAll(".page")
+        .forEach(function(p){
 
-item.classList.remove("active");
+            p.classList.remove("active");
 
-});
-
-
-const target =
-document.getElementById(page);
-
-if(target){
-
-target.classList.add("active");
-
-}
+        });
 
 
-window.scrollTo(0,0);
+    const selected =
+        document.getElementById(page);
 
 
-updateNav(page);
+    if(selected){
 
-}
+        selected.classList.add("active");
 
-
-/* =====================================================
-   MENU ATIVO
-===================================================== */
-
-function updateNav(page){
-
-const ids=[
-"navHome",
-"navExplore",
-"navSeries",
-"navFavorites",
-"navProfile"
-];
-
-ids.forEach(function(id){
-
-const el =
-document.getElementById(id);
-
-if(el){
-
-el.classList.remove("active");
-
-}
-
-});
+    }
 
 
-const map={
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(function(btn){
 
-home:"navHome",
+            btn.classList.remove("active");
 
-explorar:"navExplore",
-
-series:"navSeries",
-
-favoritos:"navFavorites",
-
-perfil:"navProfile"
-
-};
+        });
 
 
-if(map[page]){
+    if(page==="home"){
+        document
+            .getElementById("navHome")
+            ?.classList.add("active");
+    }
 
-document
-.getElementById(map[page])
-.classList.add("active");
+    if(page==="explorar"){
+        document
+            .getElementById("navExplore")
+            ?.classList.add("active");
+    }
 
-}
+    if(page==="favoritos"){
+        document
+            .getElementById("navFavorites")
+            ?.classList.add("active");
+    }
+
+    if(page==="perfil"){
+        document
+            .getElementById("navProfile")
+            ?.classList.add("active");
+    }
+
+
+    window.scrollTo(
+        0,
+        0
+    );
 
 }
 
 
 /* =====================================================
-   TOAST
+   CARDS
 ===================================================== */
 
-function showToast(message){
+function createMovieCard(movie){
 
-const toast =
-document.getElementById("toast");
+    return `
 
-toast.textContent=message;
+        <div
+            class="card"
+            onclick="openMovieById('${movie.id}')">
 
-toast.style.display="block";
+            <img
+                class="card-img"
+                src="${escapeHtml(movie.image)}"
+                alt="${escapeHtml(movie.title)}"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/300x450/151515/ffffff?text=Empire+Filmes'">
 
-setTimeout(function(){
+            <h3>
+                ${escapeHtml(movie.title)}
+            </h3>
 
-toast.style.display="none";
+            <p>
+                ${escapeHtml(movie.category)}
+                •
+                ${escapeHtml(movie.year)}
+            </p>
 
-},2200);
+        </div>
+
+    `;
 
 }
 
 
-/* =====================================================
-   ESCAPE
-===================================================== */
+function createSeriesCard(item){
 
-function escapeHTML(text){
+    return `
 
-return String(text || "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+        <div
+            class="card"
+            onclick="openSeries('${item.id}')">
 
-}
+            <img
+                class="card-img"
+                src="${escapeHtml(item.image)}"
+                alt="${escapeHtml(item.title)}"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/300x450/151515/ffffff?text=Empire+Filmes'">
 
+            <h3>
+                ${escapeHtml(item.title)}
+            </h3>
 
-/* =====================================================
-   CARD FILME
-===================================================== */
+            <p>
+                Série •
+                ${escapeHtml(item.year)}
+            </p>
 
-function movieCard(movie,index){
+        </div>
 
-return `
-
-<div
-class="card"
-onclick="openMovie(${index})">
-
-<img
-src="${escapeHTML(movie.image)}"
-alt="${escapeHTML(movie.title)}"
-loading="lazy"
-onerror="this.style.opacity='.3'">
-
-<h3>
-${escapeHTML(movie.title)}
-</h3>
-
-<p>
-${escapeHTML(movie.category)}
-•
-${escapeHTML(movie.year)}
-</p>
-
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
-   CARD SERIE
-===================================================== */
-
-function seriesCard(serie,index){
-
-return `
-
-<div
-class="card"
-onclick="openSeries(${index})">
-
-<img
-src="${escapeHTML(serie.image)}"
-alt="${escapeHTML(serie.title)}"
-loading="lazy"
-onerror="this.style.opacity='.3'">
-
-<h3>
-${escapeHTML(serie.title)}
-</h3>
-
-<p>
-${escapeHTML(serie.category)}
-•
-${escapeHTML(serie.year)}
-</p>
-
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
-   REELS
-===================================================== */
-
-function renderReels(){
-
-const box =
-document.getElementById("reelsFeed");
-
-box.innerHTML="";
-
-
-if(movies.length===0){
-
-box.innerHTML=
-'<div class="empty">Nenhum filme cadastrado.</div>';
-
-return;
-
-}
-
-
-movies.forEach(function(movie,index){
-
-box.innerHTML += `
-
-<div class="reel">
-
-<img
-src="${escapeHTML(movie.image)}"
-loading="lazy"
-alt="${escapeHTML(movie.title)}"
-onerror="this.style.opacity='.3'">
-
-<div class="reelOverlay"></div>
-
-
-<div class="reelInfo">
-
-<span class="reelBadge">
-${escapeHTML(movie.category)}
-</span>
-
-<h1>
-${escapeHTML(movie.title)}
-</h1>
-
-<p>
-${escapeHTML(movie.description)}
-</p>
-
-<div class="reelMeta">
-${escapeHTML(movie.year)}
-•
-${escapeHTML(movie.duration)}
-</div>
-
-<button
-class="reelWatch"
-onclick="playMovie(${index})">
-
-▶ Assistir
-
-</button>
-
-</div>
-
-
-<div class="reelActions">
-
-<button
-class="actionButton"
-onclick="quickFavorite(${index})">
-
-♡
-<small>Salvar</small>
-
-</button>
-
-
-<button
-class="actionButton"
-onclick="openMovie(${index})">
-
-ℹ
-<small>Detalhes</small>
-
-</button>
-
-
-<button
-class="actionButton"
-onclick="playMovie(${index})">
-
-▶
-<small>Ver</small>
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
+    `;
 
 }
 
@@ -2336,37 +2167,73 @@ onclick="playMovie(${index})">
 
 function renderHome(){
 
-renderReels();
+    const homeMovies =
+        document.getElementById(
+            "homeMovies"
+        );
+
+    const homeFilms =
+        document.getElementById(
+            "homeFilms"
+        );
+
+    const homeSeries =
+        document.getElementById(
+            "homeSeries"
+        );
 
 
-const movieBox =
-document.getElementById("homeMovies");
+    if(homeMovies){
 
-movieBox.innerHTML="";
+        homeMovies.innerHTML =
+            movies
+                .slice()
+                .reverse()
+                .slice(0,10)
+                .map(createMovieCard)
+                .join("");
 
-movies.forEach(function(movie,index){
-
-movieBox.innerHTML +=
-movieCard(movie,index);
-
-});
+    }
 
 
-const series =
-getSeries();
+    if(homeFilms){
 
-const seriesBox =
-document.getElementById("homeSeries");
+        homeFilms.innerHTML =
+            movies
+                .slice(0,10)
+                .map(createMovieCard)
+                .join("");
 
-seriesBox.innerHTML="";
+    }
 
-series.slice(0,10)
-.forEach(function(serie,index){
 
-seriesBox.innerHTML +=
-seriesCard(serie,index);
+    if(homeSeries){
 
-});
+        if(series.length===0){
+
+            homeSeries.innerHTML = `
+                <div class="empty">
+                    <div class="empty-icon">
+                        📺
+                    </div>
+
+                    Nenhuma série cadastrada ainda.
+                </div>
+            `;
+
+        }else{
+
+            homeSeries.innerHTML =
+                series
+                    .slice()
+                    .reverse()
+                    .slice(0,10)
+                    .map(createSeriesCard)
+                    .join("");
+
+        }
+
+    }
 
 }
 
@@ -2375,207 +2242,277 @@ seriesCard(serie,index);
    EXPLORAR
 ===================================================== */
 
-function renderExplore(){
+function renderExplore(list){
 
-const movieBox =
-document.getElementById("exploreMovies");
-
-const seriesBox =
-document.getElementById("exploreSeries");
-
-movieBox.innerHTML="";
-
-seriesBox.innerHTML="";
+    const box =
+        document.getElementById(
+            "exploreCards"
+        );
 
 
-movies.forEach(function(movie,index){
-
-movieBox.innerHTML +=
-movieCard(movie,index);
-
-});
+    if(!box)return;
 
 
-const series =
-getSeries();
+    if(!list.length){
 
-series.forEach(function(serie,index){
+        box.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">
+                    🔎
+                </div>
 
-seriesBox.innerHTML +=
-seriesCard(serie,index);
+                Nenhum conteúdo encontrado.
+            </div>
+        `;
 
-});
+        return;
 
-
-if(movies.length===0){
-
-movieBox.innerHTML=
-'<div class="empty">Nenhum filme.</div>';
-
-}
-
-if(series.length===0){
-
-seriesBox.innerHTML=
-'<div class="empty">Nenhuma série.</div>';
-
-}
-
-}
+    }
 
 
-/* =====================================================
-   PESQUISA
-===================================================== */
-
-function searchAll(){
-
-const text =
-document
-.getElementById("searchInput")
-.value
-.toLowerCase()
-.trim();
+    let html = "";
 
 
-const movieBox =
-document.getElementById("exploreMovies");
+    list.forEach(function(item){
 
-const seriesBox =
-document.getElementById("exploreSeries");
+        if(item.type==="series"){
 
-movieBox.innerHTML="";
+            html +=
+                createSeriesCard(item);
 
-seriesBox.innerHTML="";
+        }else{
 
+            html +=
+                createMovieCard(item);
 
-const movieResults =
-movies.filter(function(movie){
+        }
 
-return movie.title
-.toLowerCase()
-.includes(text)
-
-||
-
-movie.category
-.toLowerCase()
-.includes(text);
-
-});
+    });
 
 
-const series =
-getSeries();
-
-const seriesResults =
-series.filter(function(serie){
-
-return serie.title
-.toLowerCase()
-.includes(text)
-
-||
-
-serie.category
-.toLowerCase()
-.includes(text);
-
-});
-
-
-movieResults.forEach(function(movie){
-
-const index =
-movies.indexOf(movie);
-
-movieBox.innerHTML +=
-movieCard(movie,index);
-
-});
-
-
-seriesResults.forEach(function(serie){
-
-const index =
-series.indexOf(serie);
-
-seriesBox.innerHTML +=
-seriesCard(serie,index);
-
-});
-
-
-if(movieResults.length===0){
-
-movieBox.innerHTML=
-'<div class="empty">Nenhum filme encontrado.</div>';
-
-}
-
-if(seriesResults.length===0){
-
-seriesBox.innerHTML=
-'<div class="empty">Nenhuma série encontrada.</div>';
-
-}
+    box.innerHTML = html;
 
 }
 
 
-/* =====================================================
-   FILTRO
-===================================================== */
+function searchContent(){
+
+    const input =
+        document.getElementById(
+            "searchInput"
+        );
+
+
+    const text =
+        (input?.value || "")
+        .toLowerCase()
+        .trim();
+
+
+    const all = [
+
+        ...movies,
+
+        ...series.map(function(s){
+
+            return {
+                ...s,
+                type:"series"
+            };
+
+        })
+
+    ];
+
+
+    const result =
+        all.filter(function(item){
+
+            return (
+
+                item.title
+                    .toLowerCase()
+                    .includes(text)
+
+                ||
+
+                (item.category || "")
+                    .toLowerCase()
+                    .includes(text)
+
+            );
+
+        });
+
+
+    renderExplore(result);
+
+}
+
 
 function filterCategory(category){
 
-go("explorar");
+    go("explorar");
 
-document
-.getElementById("searchInput")
-.value=category;
 
-searchAll();
+    const all = [
+
+        ...movies,
+
+        ...series.map(function(s){
+
+            return {
+                ...s,
+                type:"series"
+            };
+
+        })
+
+    ];
+
+
+    const result =
+        all.filter(function(item){
+
+            return item.category===category;
+
+        });
+
+
+    renderExplore(result);
 
 }
 
 
 /* =====================================================
-   DETALHE FILME
+   DETALHES FILME
 ===================================================== */
 
-function openMovie(index){
+function openMovieById(id){
 
-const movie =
-movies[index];
+    const index =
+        movies.findIndex(function(m){
 
-if(!movie)return;
+            return m.id===id;
 
-currentMovie=index;
+        });
 
-document
-.getElementById("detailImage")
-.src=movie.image;
 
-document
-.getElementById("detailTitle")
-.textContent=movie.title;
+    if(index<0)return;
 
-document
-.getElementById("detailMeta")
-.textContent=
-movie.category+
-" • "+
-movie.year+
-" • "+
-movie.duration;
 
-document
-.getElementById("detailDescription")
-.textContent=
-movie.description;
+    currentContent = index;
 
-go("detalhes");
+    currentType = "movie";
+
+
+    const movie =
+        movies[index];
+
+
+    document
+        .getElementById("detailImage")
+        .src = movie.image;
+
+
+    document
+        .getElementById("detailTitle")
+        .textContent =
+            movie.title;
+
+
+    document
+        .getElementById("detailMeta")
+        .textContent =
+            movie.category
+            +" • "+
+            movie.year
+            +" • "+
+            movie.duration;
+
+
+    document
+        .getElementById("detailDescription")
+        .textContent =
+            movie.description;
+
+
+    go("detalhes");
+
+}
+
+
+/* =====================================================
+   DETALHES SÉRIE
+===================================================== */
+
+function openSeries(id){
+
+    const serie =
+        series.find(function(s){
+
+            return s.id===id;
+
+        });
+
+
+    if(!serie)return;
+
+
+    currentContent = id;
+
+    currentType = "series";
+
+
+    document
+        .getElementById("detailImage")
+        .src = serie.image;
+
+
+    document
+        .getElementById("detailTitle")
+        .textContent =
+            serie.title;
+
+
+    document
+        .getElementById("detailMeta")
+        .textContent =
+            serie.category
+            +" • "+
+            serie.year
+            +" • Série";
+
+
+    const serieEpisodes =
+        episodes.filter(function(ep){
+
+            return ep.seriesId===serie.id;
+
+        });
+
+
+    let description =
+        serie.description || "";
+
+
+    if(serieEpisodes.length){
+
+        description +=
+            "\n\n📑 "+
+            serieEpisodes.length+
+            " episódio(s) disponível(is).";
+
+    }
+
+
+    document
+        .getElementById("detailDescription")
+        .textContent =
+            description;
+
+
+    go("detalhes");
 
 }
 
@@ -2584,420 +2521,415 @@ go("detalhes");
    PLAYER
 ===================================================== */
 
-function playMovie(index){
-
-const movie =
-movies[index];
-
-if(!movie)return;
-
-currentMovie=index;
-
-previousPage="detalhes";
-
-
-const video =
-document.getElementById("videoPlayer");
-
-video.pause();
-
-video.removeAttribute("src");
-
-video.load();
-
-video.src=movie.video;
-
-video.load();
-
-
-document
-.getElementById("playerTitle")
-.textContent=
-movie.title;
-
-go("player");
-
-}
-
-
 function playCurrent(){
 
-if(currentMovie!==null){
+    if(currentType==="movie"){
 
-playMovie(currentMovie);
+        const movie =
+            movies[currentContent];
+
+        if(movie){
+
+            playVideo(
+                movie.title,
+                movie.video
+            );
+
+        }
+
+    }
 
 }
+
+
+function playMovie(index){
+
+    if(!movies[index])return;
+
+
+    currentContent = index;
+
+    currentType = "movie";
+
+
+    playVideo(
+        movies[index].title,
+        movies[index].video
+    );
+
+}
+
+
+function playVideo(title,url){
+
+    if(!url){
+
+        showToast(
+            "Este conteúdo ainda não possui vídeo."
+        );
+
+        return;
+
+    }
+
+
+    const video =
+        document.getElementById(
+            "video"
+        );
+
+
+    const playerName =
+        document.getElementById(
+            "playerName"
+        );
+
+
+    video.pause();
+
+    video.removeAttribute(
+        "src"
+    );
+
+    video.load();
+
+
+    video.src = url;
+
+
+    playerName.textContent =
+        title;
+
+
+    go("player");
+
+
+    video.load();
+
+
+    setTimeout(function(){
+
+        const result =
+            video.play();
+
+
+        if(result &&
+           typeof result.catch==="function"){
+
+            result.catch(function(){
+
+                /* autoplay bloqueado:
+                   os controles continuam disponíveis */
+
+            });
+
+        }
+
+    },150);
+
+}
+
+
+function backFromPlayer(){
+
+    const video =
+        document.getElementById(
+            "video"
+        );
+
+
+    video.pause();
+
+
+    if(currentType==="movie" &&
+       currentContent!==null){
+
+        openMovieById(
+            movies[currentContent].id
+        );
+
+    }else{
+
+        go("home");
+
+    }
 
 }
 
 
 /* =====================================================
-   VOLTAR PLAYER
-===================================================== */
-
-function backPlayer(){
-
-const video =
-document.getElementById("videoPlayer");
-
-video.pause();
-
-video.removeAttribute("src");
-
-video.load();
-
-go(previousPage);
-
-}
-
-
-/* =====================================================
-   FAVORITO
+   FAVORITOS
 ===================================================== */
 
 function addFavorite(){
 
-if(currentMovie===null)return;
+    if(currentType!=="movie"){
 
-const movie =
-movies[currentMovie];
+        showToast(
+            "Abra um filme para adicionar aos favoritos."
+        );
 
-let favorites =
-getFavorites();
+        return;
 
-
-if(!favorites.includes(movie.id)){
-
-favorites.push(movie.id);
-
-saveFavorites(favorites);
-
-showToast("❤️ Salvo nos favoritos");
-
-}else{
-
-showToast("❤️ Já está nos favoritos");
-
-}
+    }
 
 
-renderFavorites();
+    const movie =
+        movies[currentContent];
 
-}
+
+    if(!movie)return;
 
 
-function quickFavorite(index){
+    if(
+        favorites.includes(movie.id)
+    ){
 
-currentMovie=index;
+        favorites =
+            favorites.filter(function(id){
 
-addFavorite();
+                return id!==movie.id;
+
+            });
+
+
+        showToast(
+            "Removido dos favoritos."
+        );
+
+    }else{
+
+        favorites.push(
+            movie.id
+        );
+
+
+        showToast(
+            "Adicionado aos favoritos ❤️"
+        );
+
+    }
+
+
+    saveData(
+        "empireFavorites",
+        favorites
+    );
+
+
+    renderFavorites();
 
 }
 
 
 function renderFavorites(){
 
-const box =
-document.getElementById("favoriteCards");
-
-const favorites =
-getFavorites();
-
-box.innerHTML="";
+    const box =
+        document.getElementById(
+            "favoriteCards"
+        );
 
 
-favorites.forEach(function(id){
-
-const index =
-movies.findIndex(function(movie){
-
-return movie.id===id;
-
-});
+    if(!box)return;
 
 
-if(index>=0){
+    const list =
+        favorites
+            .map(function(id){
 
-box.innerHTML +=
-movieCard(
-movies[index],
-index
-);
+                return movies.find(
+                    function(m){
 
-}
+                        return m.id===id;
 
-});
+                    }
+                );
 
-
-if(box.innerHTML===""){
-
-box.innerHTML=
-'<div class="empty">❤️<br><br>Nenhum favorito ainda.</div>';
-
-}
-
-}
+            })
+            .filter(Boolean);
 
 
-/* =====================================================
-   SERIES PAGE
-===================================================== */
+    if(!list.length){
 
-function renderSeriesPage(){
+        box.innerHTML = `
+            <div class="empty">
 
-const box =
-document.getElementById("seriesCards");
+                <div class="empty-icon">
+                    ❤️
+                </div>
 
-const series =
-getSeries();
+                Você ainda não possui favoritos.
 
-box.innerHTML="";
+            </div>
+        `;
 
+        return;
 
-if(series.length===0){
-
-box.innerHTML=
-'<div class="empty">📺<br><br>Nenhuma série cadastrada.</div>';
-
-return;
-
-}
+    }
 
 
-series.forEach(function(serie,index){
-
-box.innerHTML +=
-seriesCard(serie,index);
-
-});
+    box.innerHTML =
+        list
+            .map(createMovieCard)
+            .join("");
 
 }
 
 
 /* =====================================================
-   ABRIR SERIES
+   REELS
 ===================================================== */
 
-function openSeries(index){
+function openReels(){
 
-const series =
-getSeries();
-
-const serie =
-series[index];
-
-if(!serie)return;
-
-currentSeries=index;
-
-document
-.getElementById("serieDetailImage")
-.src=serie.image;
-
-document
-.getElementById("serieDetailTitle")
-.textContent=serie.title;
-
-document
-.getElementById("serieDetailMeta")
-.textContent=
-serie.category+
-" • "+
-serie.year;
-
-document
-.getElementById("serieDetailDescription")
-.textContent=
-serie.description;
+    const container =
+        document.getElementById(
+            "reelsContainer"
+        );
 
 
-renderEpisodes(serie);
-
-go("serieDetalhes");
-
-}
-
-
-/* =====================================================
-   EPISODIOS
-===================================================== */
-
-function renderEpisodes(serie){
-
-const box =
-document.getElementById("episodeList");
-
-box.innerHTML="";
+    const feed =
+        document.getElementById(
+            "reelsFeed"
+        );
 
 
-if(!serie.episodes ||
-serie.episodes.length===0){
-
-box.innerHTML=
-'<div class="empty">🎞️<br><br>Nenhum episódio cadastrado.</div>';
-
-return;
-
-}
+    const content =
+        movies.length
+        ? movies
+        : defaultMovies;
 
 
-const seasons={};
+    feed.innerHTML =
+        content
+            .map(function(movie){
+
+                return `
+
+                    <article class="reel">
+
+                        <img
+                            class="reel-bg"
+                            src="${escapeHtml(movie.image)}"
+                            loading="lazy">
+
+                        <div
+                            class="reel-overlay">
+                        </div>
+
+                        <div class="reel-info">
+
+                            <h2>
+                                ${escapeHtml(movie.title)}
+                            </h2>
+
+                            <p>
+                                ${escapeHtml(movie.description)}
+                            </p>
+
+                            <button
+                                class="btn btn-light"
+                                style="margin-top:12px"
+                                onclick="playMovieFromReel('${movie.id}')">
+
+                                ▶ Assistir
+
+                            </button>
+
+                        </div>
 
 
-serie.episodes.forEach(function(ep){
+                        <div class="reel-actions">
 
-if(!seasons[ep.season]){
+                            <button
+                                class="reel-action"
+                                onclick="favoriteFromReel('${movie.id}')">
 
-seasons[ep.season]=[];
+                                ❤️
 
-}
+                            </button>
 
-seasons[ep.season].push(ep);
+                            <button
+                                class="reel-action"
+                                onclick="openMovieFromReel('${movie.id}')">
 
-});
+                                ℹ️
 
+                            </button>
 
-Object.keys(seasons)
-.sort(function(a,b){
+                        </div>
 
-return Number(a)-Number(b);
+                    </article>
 
-})
-.forEach(function(season){
+                `;
 
-box.innerHTML +=
-`
-<h3 class="seasonTitle">
-Temporada ${season}
-</h3>
-`;
+            })
+            .join("");
 
 
-seasons[season]
-.sort(function(a,b){
-
-return Number(a.number)-Number(b.number);
-
-})
-.forEach(function(ep){
-
-const epIndex =
-serie.episodes.indexOf(ep);
-
-box.innerHTML += `
-
-<div class="episode">
-
-<div class="episodeNumber">
-${ep.number}
-</div>
-
-<div class="episodeInfo">
-
-<strong>
-${escapeHTML(ep.title)}
-</strong>
-
-<small>
-Episódio ${ep.number}
-</small>
-
-</div>
-
-<button
-class="episodePlay"
-onclick="playEpisode(${currentSeries},${epIndex})">
-
-▶
-
-</button>
-
-</div>
-
-`;
-
-});
-
-});
+    container.classList.add(
+        "active"
+    );
 
 }
 
 
-/* =====================================================
-   PLAYER EPISODIO
-===================================================== */
+function closeReels(){
 
-function playEpisode(seriesIndex,episodeIndex){
-
-const series =
-getSeries();
-
-const serie =
-series[seriesIndex];
-
-if(!serie ||
-!serie.episodes){
-
-return;
-
-}
-
-const episode =
-serie.episodes[episodeIndex];
-
-if(!episode)return;
-
-previousPage="serieDetalhes";
-
-
-const video =
-document.getElementById("videoPlayer");
-
-video.pause();
-
-video.removeAttribute("src");
-
-video.load();
-
-video.src=episode.video;
-
-video.load();
-
-
-document
-.getElementById("playerTitle")
-.textContent=
-"Episódio "+
-episode.number+
-" — "+
-episode.title;
-
-
-go("player");
+    document
+        .getElementById(
+            "reelsContainer"
+        )
+        .classList.remove(
+            "active"
+        );
 
 }
 
 
-/* =====================================================
-   ADMIN LOGIN
-===================================================== */
+function playMovieFromReel(id){
 
-function openAdmin(){
+    closeReels();
 
-const pin =
-prompt("Digite o PIN do administrador:");
+    openMovieById(id);
 
-if(pin!=="123456"){
+    setTimeout(function(){
 
-alert("PIN incorreto.");
+        playCurrent();
 
-return;
+    },100);
 
 }
 
-renderAdmin();
 
-go("admin");
+function openMovieFromReel(id){
+
+    closeReels();
+
+    openMovieById(id);
+
+}
+
+
+function favoriteFromReel(id){
+
+    const index =
+        movies.findIndex(function(m){
+
+            return m.id===id;
+
+        });
+
+
+    if(index<0)return;
+
+
+    currentContent = index;
+
+    currentType = "movie";
+
+
+    addFavorite();
 
 }
 
@@ -3006,1078 +2938,1646 @@ go("admin");
    ADMIN
 ===================================================== */
 
+function openAdmin(){
+
+    go("admin");
+
+    renderAdmin();
+
+}
+
+
+function adminTab(tab){
+
+    adminCurrentTab =
+        tab;
+
+
+    document
+        .getElementById(
+            "adminFilmes"
+        )
+        .style.display =
+            tab==="filmes"
+            ? "block"
+            : "none";
+
+
+    document
+        .getElementById(
+            "adminSeries"
+        )
+        .style.display =
+            tab==="series"
+            ? "block"
+            : "none";
+
+
+    document
+        .getElementById(
+            "adminEpisodes"
+        )
+        .style.display =
+            tab==="episodios"
+            ? "block"
+            : "none";
+
+
+    document
+        .querySelectorAll(
+            ".admin-tab"
+        )
+        .forEach(function(btn){
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if(tab==="filmes"){
+
+        document
+            .getElementById(
+                "tabMovie"
+            )
+            .classList.add(
+                "active"
+            );
+
+    }
+
+
+    if(tab==="series"){
+
+        document
+            .getElementById(
+                "tabSeries"
+            )
+            .classList.add(
+                "active"
+            );
+
+    }
+
+
+    if(tab==="episodios"){
+
+        document
+            .getElementById(
+                "tabEpisode"
+            )
+            .classList.add(
+                "active"
+            );
+
+    }
+
+
+    renderAdmin();
+
+}
+
+
 function renderAdmin(){
 
-renderAdminMovies();
+    renderMovieAdminList();
 
-renderAdminSeries();
+    renderSeriesAdminList();
 
-}
+    renderEpisodeAdminList();
 
-
-function renderAdminMovies(){
-
-const box =
-document.getElementById("adminMovies");
-
-let html=
-"<h3>🎬 Filmes</h3><br>";
-
-
-if(movies.length===0){
-
-html+=
-'<div class="empty">Nenhum filme.</div>';
-
-}else{
-
-movies.forEach(function(movie,index){
-
-html += `
-
-<div class="adminCard">
-
-<h3>
-🎬 ${escapeHTML(movie.title)}
-</h3>
-
-<p>
-${escapeHTML(movie.category)}
-•
-${escapeHTML(movie.year)}
-</p>
-
-<div class="adminButtons">
-
-<button
-class="adminButton"
-onclick="editMovie(${index})">
-
-✏️ Editar
-
-</button>
-
-<button
-class="adminButton red"
-onclick="deleteMovie(${index})">
-
-🗑️ Excluir
-
-</button>
-
-<button
-class="adminButton"
-onclick="playMovie(${index})">
-
-▶ Testar
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-}
-
-box.innerHTML=html;
-
-}
-
-
-function renderAdminSeries(){
-
-const box =
-document.getElementById("adminSeries");
-
-const series =
-getSeries();
-
-let html=
-"<h3>📺 Séries</h3><br>";
-
-
-if(series.length===0){
-
-html+=
-'<div class="empty">Nenhuma série.</div>';
-
-box.innerHTML=html;
-
-return;
-
-}
-
-
-series.forEach(function(serie,index){
-
-const episodes =
-serie.episodes || [];
-
-
-html+=`
-
-<div class="adminCard">
-
-<h3>
-📺 ${escapeHTML(serie.title)}
-</h3>
-
-<p>
-${escapeHTML(serie.category)}
-•
-${escapeHTML(serie.year)}
-•
-${episodes.length} episódio(s)
-</p>
-
-<div class="adminButtons">
-
-<button
-class="adminButton"
-onclick="editSeries(${index})">
-
-✏️ Editar
-
-</button>
-
-<button
-class="adminButton"
-onclick="prepareEpisode(${index})">
-
-➕ Episódio
-
-</button>
-
-<button
-class="adminButton"
-onclick="openSeries(${index})">
-
-👁 Ver
-
-</button>
-
-<button
-class="adminButton red"
-onclick="deleteSeries(${index})">
-
-🗑️ Excluir
-
-</button>
-
-</div>
-
-`;
-
-
-episodes.forEach(function(ep,epIndex){
-
-html+=`
-
-<div
-style="
-margin-top:9px;
-padding:10px;
-background:#202020;
-border-radius:8px;
-">
-
-<strong style="font-size:12px">
-
-T${ep.season}
-•
-EP${ep.number}
-—
-${escapeHTML(ep.title)}
-
-</strong>
-
-<br>
-
-<button
-class="adminButton"
-style="margin-top:7px"
-onclick="editEpisode(${index},${epIndex})">
-
-✏️
-
-</button>
-
-<button
-class="adminButton red"
-onclick="deleteEpisode(${index},${epIndex})">
-
-🗑️
-
-</button>
-
-</div>
-
-`;
-
-});
-
-
-html+="</div>";
-
-});
-
-
-box.innerHTML=html;
+    updateEpisodeSeriesSelect();
 
 }
 
 
 /* =====================================================
-   FORM FILME
+   CADASTRO FILME
 ===================================================== */
 
-function openMovieForm(){
+function saveMovie(){
 
-editingMovie=null;
+    const id =
+        document
+            .getElementById(
+                "movieEditId"
+            )
+            .value;
 
-document
-.getElementById("movieFormTitle")
-.textContent=
-"🎬 Cadastrar Filme";
 
-clearMovieForm();
+    const title =
+        document
+            .getElementById(
+                "movieTitle"
+            )
+            .value
+            .trim();
 
-go("cadastroFilme");
+
+    const category =
+        document
+            .getElementById(
+                "movieCategory"
+            )
+            .value;
+
+
+    const year =
+        document
+            .getElementById(
+                "movieYear"
+            )
+            .value
+            .trim();
+
+
+    const duration =
+        document
+            .getElementById(
+                "movieDuration"
+            )
+            .value
+            .trim();
+
+
+    const image =
+        document
+            .getElementById(
+                "movieImage"
+            )
+            .value
+            .trim();
+
+
+    const video =
+        document
+            .getElementById(
+                "movieVideo"
+            )
+            .value
+            .trim();
+
+
+    const description =
+        document
+            .getElementById(
+                "movieDescription"
+            )
+            .value
+            .trim();
+
+
+    if(!title){
+
+        showToast(
+            "Digite o nome do filme."
+        );
+
+        return;
+
+    }
+
+
+    if(!video){
+
+        showToast(
+            "Digite a URL do vídeo."
+        );
+
+        return;
+
+    }
+
+
+    const movie = {
+
+        id:
+            id ||
+            "movie_"+Date.now(),
+
+        type:"movie",
+
+        title,
+
+        category,
+
+        year,
+
+        duration,
+
+        image:
+            image ||
+            "https://via.placeholder.com/300x450/151515/ffffff?text=Empire+Filmes",
+
+        video,
+
+        description:
+            description ||
+            "Filme disponível no Empire Filmes."
+
+    };
+
+
+    if(id){
+
+        const index =
+            movies.findIndex(
+                function(m){
+
+                    return m.id===id;
+
+                }
+            );
+
+
+        if(index>=0){
+
+            movies[index] =
+                movie;
+
+        }
+
+    }else{
+
+        movies.push(
+            movie
+        );
+
+    }
+
+
+    saveData(
+        "empireMovies",
+        movies
+    );
+
+
+    clearMovieForm();
+
+    renderAdmin();
+
+    renderHome();
+
+    renderFavorites();
+
+
+    showToast(
+        id
+        ? "Filme atualizado!"
+        : "Filme cadastrado!"
+    );
 
 }
 
 
 function clearMovieForm(){
 
-document.getElementById("movieName").value="";
+    document
+        .getElementById(
+            "movieEditId"
+        )
+        .value = "";
 
-document.getElementById("movieCategory").value="Ação";
 
-document.getElementById("movieYear").value="";
+    document
+        .getElementById(
+            "movieTitle"
+        )
+        .value = "";
 
-document.getElementById("movieDuration").value="";
 
-document.getElementById("movieImage").value="";
+    document
+        .getElementById(
+            "movieYear"
+        )
+        .value = "";
 
-document.getElementById("movieDescription").value="";
 
-document.getElementById("movieVideo").value="";
+    document
+        .getElementById(
+            "movieDuration"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "movieImage"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "movieVideo"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "movieDescription"
+        )
+        .value = "";
+
+}
+
+
+function editMovie(id){
+
+    const movie =
+        movies.find(function(m){
+
+            return m.id===id;
+
+        });
+
+
+    if(!movie)return;
+
+
+    adminTab("filmes");
+
+
+    document
+        .getElementById(
+            "movieEditId"
+        )
+        .value =
+            movie.id;
+
+
+    document
+        .getElementById(
+            "movieTitle"
+        )
+        .value =
+            movie.title;
+
+
+    document
+        .getElementById(
+            "movieCategory"
+        )
+        .value =
+            movie.category;
+
+
+    document
+        .getElementById(
+            "movieYear"
+        )
+        .value =
+            movie.year;
+
+
+    document
+        .getElementById(
+            "movieDuration"
+        )
+        .value =
+            movie.duration;
+
+
+    document
+        .getElementById(
+            "movieImage"
+        )
+        .value =
+            movie.image;
+
+
+    document
+        .getElementById(
+            "movieVideo"
+        )
+        .value =
+            movie.video;
+
+
+    document
+        .getElementById(
+            "movieDescription"
+        )
+        .value =
+            movie.description;
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+function deleteMovie(id){
+
+    if(!confirm(
+        "Excluir este filme?"
+    ))return;
+
+
+    movies =
+        movies.filter(
+            function(m){
+
+                return m.id!==id;
+
+            }
+        );
+
+
+    favorites =
+        favorites.filter(
+            function(fid){
+
+                return fid!==id;
+
+            }
+        );
+
+
+    saveData(
+        "empireMovies",
+        movies
+    );
+
+
+    saveData(
+        "empireFavorites",
+        favorites
+    );
+
+
+    renderAdmin();
+
+    renderHome();
+
+    renderFavorites();
+
+
+    showToast(
+        "Filme excluído."
+    );
+
+}
+
+
+function renderMovieAdminList(){
+
+    const box =
+        document.getElementById(
+            "movieAdminList"
+        );
+
+
+    if(!box)return;
+
+
+    if(!movies.length){
+
+        box.innerHTML =
+            `<div class="empty">
+                Nenhum filme cadastrado.
+            </div>`;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        movies
+            .slice()
+            .reverse()
+            .map(function(movie){
+
+                return `
+
+                    <div class="admin-item">
+
+                        <img
+                            src="${escapeHtml(movie.image)}">
+
+                        <div class="admin-item-info">
+
+                            <h3>
+                                ${escapeHtml(movie.title)}
+                            </h3>
+
+                            <p>
+                                ${escapeHtml(movie.category)}
+                                •
+                                ${escapeHtml(movie.year)}
+                            </p>
+
+                        </div>
+
+                        <div class="admin-item-actions">
+
+                            <button
+                                class="small-btn"
+                                onclick="editMovie('${movie.id}')">
+
+                                ✏️
+
+                            </button>
+
+                            <button
+                                class="small-btn red"
+                                onclick="deleteMovie('${movie.id}')">
+
+                                🗑️
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            })
+            .join("");
 
 }
 
 
 /* =====================================================
-   SALVAR FILME
+   CADASTRO SÉRIE
 ===================================================== */
 
-function saveMovieForm(){
+function saveSeries(){
 
-const title =
-document.getElementById("movieName").value.trim();
+    const id =
+        document
+            .getElementById(
+                "seriesEditId"
+            )
+            .value;
 
-const category =
-document.getElementById("movieCategory").value;
 
-const year =
-document.getElementById("movieYear").value.trim();
+    const title =
+        document
+            .getElementById(
+                "seriesTitle"
+            )
+            .value
+            .trim();
 
-const duration =
-document.getElementById("movieDuration").value.trim();
 
-const image =
-document.getElementById("movieImage").value.trim();
+    const category =
+        document
+            .getElementById(
+                "seriesCategory"
+            )
+            .value;
 
-const description =
-document.getElementById("movieDescription").value.trim();
 
-const video =
-document.getElementById("movieVideo").value.trim();
+    const year =
+        document
+            .getElementById(
+                "seriesYear"
+            )
+            .value
+            .trim();
 
 
-if(!title){
+    const image =
+        document
+            .getElementById(
+                "seriesImage"
+            )
+            .value
+            .trim();
 
-alert("Digite o nome do filme.");
 
-return;
+    const description =
+        document
+            .getElementById(
+                "seriesDescription"
+            )
+            .value
+            .trim();
 
-}
 
-if(!image){
+    if(!title){
 
-alert("Digite a URL da capa.");
+        showToast(
+            "Digite o nome da série."
+        );
 
-return;
+        return;
 
-}
+    }
 
-if(!video){
 
-alert("Digite a URL do vídeo.");
+    const serie = {
 
-return;
+        id:
+            id ||
+            "series_"+Date.now(),
 
-}
+        type:"series",
 
+        title,
 
-if(editingMovie!==null){
+        category,
 
-movies[editingMovie].title=title;
+        year,
 
-movies[editingMovie].category=category;
+        image:
+            image ||
+            "https://via.placeholder.com/300x450/151515/ffffff?text=Empire+Filmes",
 
-movies[editingMovie].year=year || "2026";
+        description:
+            description ||
+            "Série disponível no Empire Filmes."
 
-movies[editingMovie].duration=duration;
+    };
 
-movies[editingMovie].image=image;
 
-movies[editingMovie].description=
-description || "Filme do Empire Filmes.";
+    if(id){
 
-movies[editingMovie].video=video;
+        const index =
+            series.findIndex(
+                function(s){
 
-showToast("✏️ Filme atualizado!");
+                    return s.id===id;
 
-editingMovie=null;
+                }
+            );
 
-}else{
 
-movies.push({
+        if(index>=0){
 
-id:"movie_"+Date.now(),
+            series[index] =
+                serie;
 
-title:title,
+        }
 
-category:category,
+    }else{
 
-year:year || "2026",
+        series.push(
+            serie
+        );
 
-duration:duration,
+    }
 
-image:image,
 
-description:
-description || "Filme do Empire Filmes.",
+    saveData(
+        "empireSeries",
+        series
+    );
 
-video:video
 
-});
+    clearSeriesForm();
 
-showToast("🎬 Filme cadastrado!");
+    renderAdmin();
 
-}
+    renderHome();
 
 
-saveMovies();
-
-renderAll();
-
-go("admin");
-
-}
-
-
-/* =====================================================
-   EDITAR FILME
-===================================================== */
-
-function editMovie(index){
-
-const movie =
-movies[index];
-
-if(!movie)return;
-
-editingMovie=index;
-
-document
-.getElementById("movieFormTitle")
-.textContent=
-"✏️ Editar Filme";
-
-
-document.getElementById("movieName").value=
-movie.title;
-
-document.getElementById("movieCategory").value=
-movie.category;
-
-document.getElementById("movieYear").value=
-movie.year;
-
-document.getElementById("movieDuration").value=
-movie.duration;
-
-document.getElementById("movieImage").value=
-movie.image;
-
-document.getElementById("movieDescription").value=
-movie.description;
-
-document.getElementById("movieVideo").value=
-movie.video;
-
-go("cadastroFilme");
-
-}
-
-
-/* =====================================================
-   EXCLUIR FILME
-===================================================== */
-
-function deleteMovie(index){
-
-if(!movies[index])return;
-
-if(!confirm(
-'Excluir "'+
-movies[index].title+
-'"?'
-))return;
-
-const id =
-movies[index].id;
-
-movies.splice(index,1);
-
-saveMovies();
-
-
-let favorites =
-getFavorites();
-
-favorites =
-favorites.filter(function(item){
-
-return item!==id;
-
-});
-
-saveFavorites(favorites);
-
-renderAll();
-
-showToast("🗑️ Filme excluído.");
-
-}
-
-
-/* =====================================================
-   FORM SERIE
-===================================================== */
-
-function openSeriesForm(){
-
-editingSeries=null;
-
-document
-.getElementById("seriesFormTitle")
-.textContent=
-"📺 Cadastrar Série";
-
-clearSeriesForm();
-
-go("cadastroSerie");
+    showToast(
+        id
+        ? "Série atualizada!"
+        : "Série cadastrada!"
+    );
 
 }
 
 
 function clearSeriesForm(){
 
-document.getElementById("seriesName").value="";
+    document
+        .getElementById(
+            "seriesEditId"
+        )
+        .value = "";
 
-document.getElementById("seriesCategory").value="Ação";
 
-document.getElementById("seriesYear").value="";
+    document
+        .getElementById(
+            "seriesTitle"
+        )
+        .value = "";
 
-document.getElementById("seriesImage").value="";
 
-document.getElementById("seriesDescription").value="";
+    document
+        .getElementById(
+            "seriesYear"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "seriesImage"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "seriesDescription"
+        )
+        .value = "";
+
+}
+
+
+function editSeries(id){
+
+    const serie =
+        series.find(function(s){
+
+            return s.id===id;
+
+        });
+
+
+    if(!serie)return;
+
+
+    adminTab("series");
+
+
+    document
+        .getElementById(
+            "seriesEditId"
+        )
+        .value =
+            serie.id;
+
+
+    document
+        .getElementById(
+            "seriesTitle"
+        )
+        .value =
+            serie.title;
+
+
+    document
+        .getElementById(
+            "seriesCategory"
+        )
+        .value =
+            serie.category;
+
+
+    document
+        .getElementById(
+            "seriesYear"
+        )
+        .value =
+            serie.year;
+
+
+    document
+        .getElementById(
+            "seriesImage"
+        )
+        .value =
+            serie.image;
+
+
+    document
+        .getElementById(
+            "seriesDescription"
+        )
+        .value =
+            serie.description;
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+function deleteSeries(id){
+
+    if(!confirm(
+        "Excluir esta série e todos os episódios dela?"
+    ))return;
+
+
+    series =
+        series.filter(
+            function(s){
+
+                return s.id!==id;
+
+            }
+        );
+
+
+    episodes =
+        episodes.filter(
+            function(ep){
+
+                return ep.seriesId!==id;
+
+            }
+        );
+
+
+    saveData(
+        "empireSeries",
+        series
+    );
+
+
+    saveData(
+        "empireEpisodes",
+        episodes
+    );
+
+
+    renderAdmin();
+
+    renderHome();
+
+
+    showToast(
+        "Série excluída."
+    );
+
+}
+
+
+function renderSeriesAdminList(){
+
+    const box =
+        document.getElementById(
+            "seriesAdminList"
+        );
+
+
+    if(!box)return;
+
+
+    if(!series.length){
+
+        box.innerHTML =
+            `<div class="empty">
+                Nenhuma série cadastrada.
+            </div>`;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        series
+            .slice()
+            .reverse()
+            .map(function(serie){
+
+                const total =
+                    episodes.filter(
+                        function(ep){
+
+                            return ep.seriesId===
+                                serie.id;
+
+                        }
+                    ).length;
+
+
+                return `
+
+                    <div class="admin-item">
+
+                        <img
+                            src="${escapeHtml(serie.image)}">
+
+                        <div class="admin-item-info">
+
+                            <h3>
+                                ${escapeHtml(serie.title)}
+                            </h3>
+
+                            <p>
+                                ${escapeHtml(serie.category)}
+                                •
+                                ${total}
+                                episódio(s)
+                            </p>
+
+                        </div>
+
+                        <div class="admin-item-actions">
+
+                            <button
+                                class="small-btn"
+                                onclick="editSeries('${serie.id}')">
+
+                                ✏️
+
+                            </button>
+
+                            <button
+                                class="small-btn red"
+                                onclick="deleteSeries('${serie.id}')">
+
+                                🗑️
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            })
+            .join("");
 
 }
 
 
 /* =====================================================
-   SALVAR SERIE
+   EPISÓDIOS
 ===================================================== */
 
-function saveSeriesForm(){
+function updateEpisodeSeriesSelect(){
 
-const title =
-document.getElementById("seriesName").value.trim();
-
-const category =
-document.getElementById("seriesCategory").value;
-
-const year =
-document.getElementById("seriesYear").value.trim();
-
-const image =
-document.getElementById("seriesImage").value.trim();
-
-const description =
-document.getElementById("seriesDescription").value.trim();
+    const select =
+        document.getElementById(
+            "episodeSeries"
+        );
 
 
-if(!title){
-
-alert("Digite o nome da série.");
-
-return;
-
-}
-
-if(!image){
-
-alert("Digite a URL da capa.");
-
-return;
-
-}
+    if(!select)return;
 
 
-const series =
-getSeries();
+    if(!series.length){
+
+        select.innerHTML =
+            `<option value="">
+                Cadastre uma série primeiro
+            </option>`;
+
+        return;
+
+    }
 
 
-if(editingSeries!==null){
+    const oldValue =
+        select.value;
 
-series[editingSeries].title=title;
 
-series[editingSeries].category=category;
+    select.innerHTML =
+        series
+            .map(function(serie){
 
-series[editingSeries].year=
-year || "2026";
+                return `
+                    <option value="${serie.id}">
+                        ${escapeHtml(serie.title)}
+                    </option>
+                `;
 
-series[editingSeries].image=image;
+            })
+            .join("");
 
-series[editingSeries].description=
-description || "Série do Empire Filmes.";
 
-showToast("✏️ Série atualizada!");
+    if(
+        series.some(function(s){
 
-editingSeries=null;
+            return s.id===oldValue;
 
-}else{
+        })
+    ){
 
-series.push({
+        select.value =
+            oldValue;
 
-id:"series_"+Date.now(),
-
-title:title,
-
-category:category,
-
-year:year || "2026",
-
-image:image,
-
-description:
-description || "Série do Empire Filmes.",
-
-episodes:[]
-
-});
-
-showToast("📺 Série cadastrada!");
+    }
 
 }
 
 
-saveSeriesData(series);
+function saveEpisode(){
 
-renderAll();
+    if(!series.length){
 
-go("admin");
+        showToast(
+            "Cadastre uma série primeiro."
+        );
+
+        return;
+
+    }
+
+
+    const id =
+        document
+            .getElementById(
+                "episodeEditId"
+            )
+            .value;
+
+
+    const seriesId =
+        document
+            .getElementById(
+                "episodeSeries"
+            )
+            .value;
+
+
+    const season =
+        document
+            .getElementById(
+                "episodeSeason"
+            )
+            .value;
+
+
+    const number =
+        document
+            .getElementById(
+                "episodeNumber"
+            )
+            .value;
+
+
+    const title =
+        document
+            .getElementById(
+                "episodeTitle"
+            )
+            .value
+            .trim();
+
+
+    const duration =
+        document
+            .getElementById(
+                "episodeDuration"
+            )
+            .value
+            .trim();
+
+
+    const image =
+        document
+            .getElementById(
+                "episodeImage"
+            )
+            .value
+            .trim();
+
+
+    const video =
+        document
+            .getElementById(
+                "episodeVideo"
+            )
+            .value
+            .trim();
+
+
+    const description =
+        document
+            .getElementById(
+                "episodeDescription"
+            )
+            .value
+            .trim();
+
+
+    if(!title){
+
+        showToast(
+            "Digite o nome do episódio."
+        );
+
+        return;
+
+    }
+
+
+    if(!video){
+
+        showToast(
+            "Digite a URL do vídeo."
+        );
+
+        return;
+
+    }
+
+
+    const episode = {
+
+        id:
+            id ||
+            "episode_"+Date.now(),
+
+        seriesId,
+
+        season:
+            Number(season) || 1,
+
+        number:
+            Number(number) || 1,
+
+        title,
+
+        duration,
+
+        image:
+            image ||
+            "https://via.placeholder.com/300x450/151515/ffffff?text=Episode",
+
+        video,
+
+        description:
+            description ||
+            "Episódio disponível no Empire Filmes."
+
+    };
+
+
+    if(id){
+
+        const index =
+            episodes.findIndex(
+                function(ep){
+
+                    return ep.id===id;
+
+                }
+            );
+
+
+        if(index>=0){
+
+            episodes[index] =
+                episode;
+
+        }
+
+    }else{
+
+        episodes.push(
+            episode
+        );
+
+    }
+
+
+    saveData(
+        "empireEpisodes",
+        episodes
+    );
+
+
+    clearEpisodeForm();
+
+    renderAdmin();
+
+
+    showToast(
+        id
+        ? "Episódio atualizado!"
+        : "Episódio cadastrado!"
+    );
+
+}
+
+
+function clearEpisodeForm(){
+
+    document
+        .getElementById(
+            "episodeEditId"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "episodeSeason"
+        )
+        .value = 1;
+
+
+    document
+        .getElementById(
+            "episodeNumber"
+        )
+        .value = 1;
+
+
+    document
+        .getElementById(
+            "episodeTitle"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "episodeDuration"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "episodeImage"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "episodeVideo"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "episodeDescription"
+        )
+        .value = "";
+
+}
+
+
+function editEpisode(id){
+
+    const episode =
+        episodes.find(function(ep){
+
+            return ep.id===id;
+
+        });
+
+
+    if(!episode)return;
+
+
+    adminTab(
+        "episodios"
+    );
+
+
+    document
+        .getElementById(
+            "episodeEditId"
+        )
+        .value =
+            episode.id;
+
+
+    document
+        .getElementById(
+            "episodeSeries"
+        )
+        .value =
+            episode.seriesId;
+
+
+    document
+        .getElementById(
+            "episodeSeason"
+        )
+        .value =
+            episode.season;
+
+
+    document
+        .getElementById(
+            "episodeNumber"
+        )
+        .value =
+            episode.number;
+
+
+    document
+        .getElementById(
+            "episodeTitle"
+        )
+        .value =
+            episode.title;
+
+
+    document
+        .getElementById(
+            "episodeDuration"
+        )
+        .value =
+            episode.duration;
+
+
+    document
+        .getElementById(
+            "episodeImage"
+        )
+        .value =
+            episode.image;
+
+
+    document
+        .getElementById(
+            "episodeVideo"
+        )
+        .value =
+            episode.video;
+
+
+    document
+        .getElementById(
+            "episodeDescription"
+        )
+        .value =
+            episode.description;
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+function deleteEpisode(id){
+
+    if(!confirm(
+        "Excluir este episódio?"
+    ))return;
+
+
+    episodes =
+        episodes.filter(
+            function(ep){
+
+                return ep.id!==id;
+
+            }
+        );
+
+
+    saveData(
+        "empireEpisodes",
+        episodes
+    );
+
+
+    renderAdmin();
+
+
+    showToast(
+        "Episódio excluído."
+    );
+
+}
+
+
+function renderEpisodeAdminList(){
+
+    const box =
+        document.getElementById(
+            "episodeAdminList"
+        );
+
+
+    if(!box)return;
+
+
+    if(!episodes.length){
+
+        box.innerHTML =
+            `<div class="empty">
+                Nenhum episódio cadastrado.
+            </div>`;
+
+        return;
+
+    }
+
+
+    const ordered =
+        episodes
+            .slice()
+            .sort(function(a,b){
+
+                if(a.seriesId!==b.seriesId){
+
+                    return a.seriesId
+                        .localeCompare(
+                            b.seriesId
+                        );
+
+                }
+
+                if(a.season!==b.season){
+
+                    return a.season-b.season;
+
+                }
+
+                return a.number-b.number;
+
+            });
+
+
+    box.innerHTML =
+        ordered
+            .map(function(ep){
+
+                const serie =
+                    series.find(
+                        function(s){
+
+                            return s.id===
+                                ep.seriesId;
+
+                        }
+                    );
+
+
+                return `
+
+                    <div class="admin-item">
+
+                        <img
+                            src="${escapeHtml(ep.image)}">
+
+                        <div class="admin-item-info">
+
+                            <h3>
+                                S${ep.season}
+                                E${ep.number}
+                                —
+                                ${escapeHtml(ep.title)}
+                            </h3>
+
+                            <p>
+                                ${escapeHtml(
+                                    serie
+                                    ? serie.title
+                                    : "Série removida"
+                                )}
+                            </p>
+
+                        </div>
+
+                        <div class="admin-item-actions">
+
+                            <button
+                                class="small-btn"
+                                onclick="editEpisode('${ep.id}')">
+
+                                ✏️
+
+                            </button>
+
+                            <button
+                                class="small-btn red"
+                                onclick="deleteEpisode('${ep.id}')">
+
+                                🗑️
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            })
+            .join("");
 
 }
 
 
 /* =====================================================
-   EDITAR SERIE
+   TOAST
 ===================================================== */
 
-function editSeries(index){
-
-const series =
-getSeries();
-
-const serie =
-series[index];
-
-if(!serie)return;
-
-editingSeries=index;
-
-document
-.getElementById("seriesFormTitle")
-.textContent=
-"✏️ Editar Série";
+let toastTimer;
 
 
-document.getElementById("seriesName").value=
-serie.title;
+function showToast(message){
 
-document.getElementById("seriesCategory").value=
-serie.category;
+    const toast =
+        document.getElementById(
+            "toast"
+        );
 
-document.getElementById("seriesYear").value=
-serie.year;
 
-document.getElementById("seriesImage").value=
-serie.image;
+    if(!toast)return;
 
-document.getElementById("seriesDescription").value=
-serie.description;
 
-go("cadastroSerie");
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(function(){
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },2500);
 
 }
 
 
 /* =====================================================
-   EXCLUIR SERIE
+   SEGURANÇA BÁSICA PARA TEXTO
 ===================================================== */
 
-function deleteSeries(index){
+function escapeHtml(value){
 
-const series =
-getSeries();
-
-if(!series[index])return;
-
-if(!confirm(
-'Excluir a série "'+
-series[index].title+
-'" e seus episódios?'
-))return;
-
-series.splice(index,1);
-
-saveSeriesData(series);
-
-renderAll();
-
-showToast("🗑️ Série excluída.");
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
 
 
 /* =====================================================
-   PREPARAR EPISODIO
+   INICIALIZAÇÃO
 ===================================================== */
 
-function prepareEpisode(seriesIndex){
+function init(){
 
-editingEpisode=null;
+    renderHome();
 
-editingEpisodeSeries=null;
+    renderExplore([
+        ...movies,
 
-const series =
-getSeries();
+        ...series.map(function(s){
 
-fillEpisodeSelect(series);
+            return {
+                ...s,
+                type:"series"
+            };
 
-document
-.getElementById("episodeSeries")
-.value=seriesIndex;
+        })
 
-document
-.getElementById("episodeSeason")
-.value="1";
+    ]);
 
-document
-.getElementById("episodeNumber")
-.value="1";
+    renderFavorites();
 
-document
-.getElementById("episodeTitle")
-.value="";
-
-document
-.getElementById("episodeVideo")
-.value="";
-
-document
-.getElementById("episodeFormTitle")
-.textContent=
-"🎞️ Adicionar Episódio";
-
-go("cadastroEpisodio");
+    renderAdmin();
 
 }
 
 
-/* =====================================================
-   SELECT EPISODIO
-===================================================== */
-
-function fillEpisodeSelect(series){
-
-const select =
-document.getElementById("episodeSeries");
-
-select.innerHTML="";
-
-
-series.forEach(function(serie,index){
-
-const option =
-document.createElement("option");
-
-option.value=index;
-
-option.textContent=
-serie.title;
-
-select.appendChild(option);
-
-});
-
-}
-
-
-/* =====================================================
-   SALVAR EPISODIO
-===================================================== */
-
-function saveEpisodeForm(){
-
-const seriesIndex =
-Number(
-document.getElementById("episodeSeries").value
+document.addEventListener(
+    "DOMContentLoaded",
+    init
 );
-
-const season =
-Number(
-document.getElementById("episodeSeason").value
-);
-
-const number =
-Number(
-document.getElementById("episodeNumber").value
-);
-
-const title =
-document.getElementById("episodeTitle").value.trim();
-
-const video =
-document.getElementById("episodeVideo").value.trim();
-
-
-if(!title){
-
-alert("Digite o título do episódio.");
-
-return;
-
-}
-
-if(!video){
-
-alert("Digite a URL do vídeo.");
-
-return;
-
-}
-
-if(!season || season<1){
-
-alert("Temporada inválida.");
-
-return;
-
-}
-
-if(!number || number<1){
-
-alert("Número de episódio inválido.");
-
-return;
-
-}
-
-
-const series =
-getSeries();
-
-const serie =
-series[seriesIndex];
-
-if(!serie){
-
-alert("Série não encontrada.");
-
-return;
-
-}
-
-if(!serie.episodes){
-
-serie.episodes=[];
-
-}
-
-
-/* EDITAR */
-
-if(editingEpisode!==null){
-
-const oldSeriesIndex =
-editingEpisodeSeries;
-
-if(oldSeriesIndex!==seriesIndex){
-
-const oldSeries =
-series[oldSeriesIndex];
-
-if(oldSeries &&
-oldSeries.episodes){
-
-oldSeries.episodes.splice(
-editingEpisode,
-1
-);
-
-}
-
-serie.episodes.push({
-
-season:season,
-
-number:number,
-
-title:title,
-
-video:video
-
-});
-
-}else{
-
-const ep =
-serie.episodes[editingEpisode];
-
-ep.season=season;
-
-ep.number=number;
-
-ep.title=title;
-
-ep.video=video;
-
-}
-
-showToast("✏️ Episódio atualizado!");
-
-}
-
-
-/* NOVO */
-
-else{
-
-const exists =
-serie.episodes.some(function(ep){
-
-return Number(ep.season)===season
-&&
-Number(ep.number)===number;
-
-});
-
-
-if(exists){
-
-alert(
-"Esse episódio já existe nessa temporada."
-);
-
-return;
-
-}
-
-
-serie.episodes.push({
-
-season:season,
-
-number:number,
-
-title:title,
-
-video:video
-
-});
-
-showToast("🎞️ Episódio cadastrado!");
-
-}
-
-
-saveSeriesData(series);
-
-editingEpisode=null;
-
-editingEpisodeSeries=null;
-
-renderAll();
-
-go("admin");
-
-}
-
-
-/* =====================================================
-   EDITAR EPISODIO
-===================================================== */
-
-function editEpisode(seriesIndex,episodeIndex){
-
-const series =
-getSeries();
-
-const serie =
-series[seriesIndex];
-
-if(!serie ||
-!serie.episodes ||
-!serie.episodes[episodeIndex]){
-
-return;
-
-}
-
-const ep =
-serie.episodes[episodeIndex];
-
-editingEpisode=episodeIndex;
-
-editingEpisodeSeries=seriesIndex;
-
-fillEpisodeSelect(series);
-
-document
-.getElementById("episodeSeries")
-.value=seriesIndex;
-
-document
-.getElementById("episodeSeason")
-.value=ep.season;
-
-document
-.getElementById("episodeNumber")
-.value=ep.number;
-
-document
-.getElementById("episodeTitle")
-.value=ep.title;
-
-document
-.getElementById("episodeVideo")
-.value=ep.video;
-
-document
-.getElementById("episodeFormTitle")
-.textContent=
-"✏️ Editar Episódio";
-
-go("cadastroEpisodio");
-
-}
-
-
-/* =====================================================
-   EXCLUIR EPISODIO
-===================================================== */
-
-function deleteEpisode(seriesIndex,episodeIndex){
-
-const series =
-getSeries();
-
-const serie =
-series[seriesIndex];
-
-if(!serie ||
-!serie.episodes ||
-!serie.episodes[episodeIndex]){
-
-return;
-
-}
-
-if(!confirm(
-'Excluir o episódio "'+
-serie.episodes[episodeIndex].title+
-'"?'
-))return;
-
-serie.episodes.splice(
-episodeIndex,
-1
-);
-
-saveSeriesData(series);
-
-renderAll();
-
-showToast("🗑️ Episódio excluído.");
-
-}
-
-
-/* =====================================================
-   SOBRE
-===================================================== */
-
-function showAbout(){
-
-alert(
-"EMPIRE FILMES\n\n"+
-"Catálogo de filmes e séries.\n\n"+
-"Versão V4"
-);
-
-}
-
-
-/* =====================================================
-   RENDER GERAL
-===================================================== */
-
-function renderAll(){
-
-renderHome();
-
-renderExplore();
-
-renderSeriesPage();
-
-renderFavorites();
-
-renderAdmin();
-
-}
-
-
-/* =====================================================
-   INICIAR
-===================================================== */
-
-loadMovies();
-
-renderAll();
-
-updateNav("home");
 
 </script>
 
 </body>
 </html>
-```
