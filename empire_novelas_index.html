@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="Empire Novelas — mini novelas em episódios verticais.">
+<title>Empire Novelas</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;min-height:100%;background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif}
+body{overflow-x:hidden}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+img{display:block;max-width:100%}
+.hidden{display:none!important}
+.app{width:100%;max-width:700px;min-height:100vh;margin:auto;padding-bottom:82px}
+.header{height:64px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(5,5,5,.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06)}
+.logo{font-size:21px;font-weight:900;letter-spacing:-.8px}.logo span{color:#e50914}
+.header-actions{display:flex;gap:8px}.icon-btn{width:40px;height:40px;border:0;border-radius:50%;background:#171717;color:#fff;font-size:18px}
+.page{display:none;padding:15px;animation:pageIn .22s ease}.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.hero{height:405px;position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(to top,#050505 2%,rgba(0,0,0,.45) 52%,rgba(0,0,0,.05)),url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85") center/cover}
+.hero-content{position:absolute;left:20px;right:20px;bottom:21px}.badge{display:inline-block;padding:6px 10px;border-radius:20px;background:#e50914;font-size:10px;font-weight:900;letter-spacing:.7px}
+.hero h1{margin:9px 0 6px;font-size:31px}.hero p{max-width:440px;color:#ddd;font-size:13px;line-height:1.5}
+.btn{border:0;border-radius:11px;padding:12px 17px;color:#fff;font-weight:800}.btn:active{transform:scale(.97)}.btn-red{background:#e50914}.btn-dark{background:#222}.btn-light{background:#fff;color:#000}.btn-full{width:100%}.watch-btn{margin-top:15px}
+.section{margin-top:27px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.section-title h2{font-size:19px}.section-title small{color:#777}
+.cards{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:5px}.cards::-webkit-scrollbar{display:none}
+.card{position:relative;min-width:140px;width:140px;cursor:pointer}.card-img{width:140px;height:198px;object-fit:cover;border-radius:13px;background:#171717}.card h3{margin-top:7px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card p{margin-top:4px;color:#777;font-size:11px}
+.card-badge{position:absolute;left:7px;top:7px;padding:5px 7px;border-radius:7px;background:#e50914;font-size:9px;font-weight:900}
+.progress{width:100%;height:3px;margin-top:7px;overflow:hidden;border-radius:10px;background:#292929}.progress-bar{height:100%;background:#e50914}
+.categories{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}.categories::-webkit-scrollbar{display:none}.category{flex:none;padding:9px 14px;border:1px solid #292929;border-radius:25px;background:#171717;color:#fff}.category.active{background:#e50914;border-color:#e50914}
+.search{display:flex;gap:8px;margin:15px 0}.search input{flex:1;min-width:0;padding:13px 14px;border:1px solid #303030;border-radius:11px;outline:0;background:#171717;color:#fff}.search button{width:48px;border:0;border-radius:11px;background:#e50914;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grid .card{width:100%;min-width:0}.grid .card-img{width:100%;height:210px}
+.back{margin-bottom:15px;border:0;background:none;color:#fff;font-size:15px}.detail-cover{width:100%;height:340px;object-fit:cover;border-radius:19px}.detail h1{margin-top:16px;font-size:28px}.meta{margin:8px 0 13px;color:#888;font-size:13px}.description{color:#ddd;font-size:14px;line-height:1.6}
+.detail-actions{display:flex;gap:8px;margin-top:17px}.detail-actions button{flex:1}
+.episodes{margin-top:26px}.episode{display:flex;align-items:center;gap:11px;padding:10px;margin-bottom:9px;border:1px solid #242424;border-radius:12px;background:#111}.episode-thumb{width:100px;height:64px;object-fit:cover;border-radius:8px}.episode-info{flex:1;min-width:0}.episode-info h3{font-size:13px;line-height:1.35}.episode-info p{margin-top:5px;color:#777;font-size:11px}.episode-play{width:39px;height:39px;flex:none;border:0;border-radius:50%;background:#e50914;color:#fff}
+.player-box{overflow:hidden;border-radius:15px;background:#000}.player-box video{width:100%;display:block;max-height:78vh;background:#000}.player-title{margin-top:16px}.player-title h2{font-size:21px}.player-title p{margin-top:5px;color:#777}
+.empty{grid-column:1/-1;padding:60px 15px;text-align:center;color:#777}.empty-icon{margin-bottom:12px;font-size:45px}
+.profile{padding:25px 0;text-align:center}.avatar{width:90px;height:90px;margin:auto;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(135deg,#e50914,#641018);font-size:38px}.profile h2{margin-top:13px}.profile p{margin-top:5px;color:#777}.profile-menu{margin-top:25px}.profile-menu button{width:100%;padding:15px;margin-top:9px;border:1px solid #252525;border-radius:11px;background:#171717;color:#fff;text-align:left}
+.bottom-nav{position:fixed;z-index:200;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:700px;height:72px;display:flex;justify-content:space-around;align-items:center;background:rgba(12,12,12,.97);backdrop-filter:blur(18px);border-top:1px solid #252525}.nav-btn{min-width:60px;border:0;background:none;color:#777;font-size:10px}.nav-btn.active{color:#fff}.nav-icon{display:block;margin-bottom:3px;font-size:21px}
+.reels-container{position:fixed;inset:0;z-index:500;display:none;background:#000}.reels-container.active{display:block}.reels-feed{width:100%;height:100vh;overflow-y:auto;scroll-snap-type:y mandatory}.reel{position:relative;width:100%;height:100vh;overflow:hidden;scroll-snap-align:start;background:#000}.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}.reel-overlay{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.96),rgba(0,0,0,.05) 62%)}.reel-info{position:absolute;left:18px;right:80px;bottom:86px}.reel-episode{margin-bottom:6px;color:#bbb;font-size:11px;font-weight:700}.reel-info h2{margin-bottom:7px;font-size:27px}.reel-info p{color:#ddd;font-size:13px;line-height:1.45}.reel-actions{position:absolute;right:14px;bottom:105px;display:flex;flex-direction:column;gap:14px}.reel-action{width:48px;height:48px;border:0;border-radius:50%;background:rgba(30,30,30,.84);color:#fff;font-size:21px}.reel-action.liked{background:#e50914}.close-reels{position:fixed;z-index:600;top:15px;right:15px;width:42px;height:42px;border:0;border-radius:50%;background:rgba(0,0,0,.7);color:#fff;font-size:20px}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.admin-title{font-size:25px;font-weight:900}.admin-tabs{display:flex;gap:7px;overflow-x:auto;margin-bottom:18px}.admin-tab{flex:none;padding:9px 13px;border:1px solid #292929;border-radius:20px;background:#171717;color:#fff}.admin-tab.active{background:#e50914;border-color:#e50914}.admin-form{padding:15px;border:1px solid #222;border-radius:15px;background:#111}.form-group{margin-bottom:12px}.form-group label{display:block;margin-bottom:6px;color:#aaa;font-size:12px}.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px;border:1px solid #303030;border-radius:9px;outline:0;background:#191919;color:#fff}.form-group textarea{min-height:90px;resize:vertical}.check-row{display:flex;gap:9px;align-items:center;margin:10px 0 15px;color:#bbb;font-size:13px}.admin-list{margin-top:20px}.admin-item{display:flex;gap:10px;padding:10px;margin-bottom:9px;border:1px solid #242424;border-radius:12px;background:#111}.admin-item img{width:58px;height:78px;object-fit:cover;border-radius:7px}.admin-item-info{flex:1;min-width:0}.admin-item-info h3{margin-bottom:5px;font-size:14px}.admin-item-info p{color:#777;font-size:11px}.admin-item-actions{display:flex;flex-direction:column;gap:5px}.small-btn{padding:7px 9px;border:0;border-radius:7px;background:#242424;color:#fff}.small-btn.red{background:#b50912}
+.toast{position:fixed;z-index:2000;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);padding:12px 17px;border-radius:10px;background:#fff;color:#000;font-size:13px;font-weight:800;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;z-index:1500;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.75)}.modal.active{display:flex}.modal-box{width:100%;max-width:700px;max-height:85vh;overflow:auto;padding:20px;border-radius:20px 20px 0 0;background:#111}.modal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.close-modal{width:38px;height:38px;border:0;border-radius:50%;background:#242424;color:#fff}
+.comment{padding:12px 0;border-bottom:1px solid #242424}.comment strong{font-size:13px}.comment p{margin-top:5px;color:#bbb;font-size:13px;line-height:1.4}
+@media(max-width:430px){.hero{height:360px}.hero h1{font-size:27px}.grid{grid-template-columns:repeat(2,1fr)}.grid .card-img{height:235px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="header">
+<div class="logo">EMPIRE <span>NOVELAS</span></div>
+<div class="header-actions">
+<button class="icon-btn" aria-label="Abrir Reels" onclick="openReels()">▶</button>
+<button class="icon-btn" aria-label="Pesquisar" onclick="go('explorar')">🔍</button>
+</div>
+</header>
+
+<section id="home" class="page active">
+<div class="hero">
+<div class="hero-content">
+<span class="badge">NOVELA EM DESTAQUE</span>
+<h1 id="heroTitle">A Herdeira</h1>
+<p id="heroDescription">Ela perdeu tudo. Agora voltou para descobrir quem destruiu sua família.</p>
+<button class="btn btn-light watch-btn" onclick="openHero()">▶ Assistir agora</button>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title"><h2>🔥 Em alta</h2><small>Empire</small></div>
+<div id="trendingNovels" class="cards"></div>
+</div>
+
+<div id="continueSection" class="section hidden">
+<div class="section-title"><h2>▶ Continuar assistindo</h2></div>
+<div id="continueCards" class="cards"></div>
+</div>
+
+<div class="section">
+<div class="section-title"><h2>🎬 Novelas</h2></div>
+<div id="novelCards" class="cards"></div>
+</div>
+
+<div class="section">
+<div class="section-title"><h2>📂 Categorias</h2></div>
+<div class="categories">
+<button class="category active" onclick="filterCategory('Todos',this)">Todos</button>
+<button class="category" onclick="filterCategory('Romance',this)">❤️ Romance</button>
+<button class="category" onclick="filterCategory('Vingança',this)">🔥 Vingança</button>
+<button class="category" onclick="filterCategory('Máfia',this)">🖤 Máfia</button>
+<button class="category" onclick="filterCategory('Bilionário',this)">💰 Bilionário</button>
+<button class="category" onclick="filterCategory('Fantasia',this)">✨ Fantasia</button>
+</div>
+</div>
+</section>
+
+<section id="explorar" class="page">
+<h2>🔎 Explorar</h2>
+<div class="search">
+<input id="searchInput" type="search" autocomplete="off" placeholder="Buscar novelas..." oninput="searchNovels()">
+<button onclick="searchNovels()" aria-label="Pesquisar">🔍</button>
+</div>
+<div id="exploreCards" class="grid"></div>
+</section>
+
+<section id="favoritos" class="page">
+<h2>❤️ Minha lista</h2><br>
+<div id="favoriteCards" class="grid"></div>
+</section>
+
+<section id="perfil" class="page">
+<div class="profile">
+<div class="avatar">👤</div>
+<h2 id="profileName">Visitante</h2>
+<p>Seu perfil Empire Novelas</p>
+<div class="profile-menu">
+<button onclick="changeProfileName()">👤 Alterar nome</button>
+<button onclick="openAdmin()">🛡️ Painel Administrativo</button>
+<button onclick="showToast('🪙 Sistema de moedas preparado para integração')">🪙 Minhas moedas</button>
+<button onclick="showToast('👑 Área VIP preparada para integração')">👑 Empire VIP</button>
+<button onclick="resetDemo()">♻️ Restaurar catálogo de demonstração</button>
+</div>
+</div>
+</section>
+
+<section id="detalhes" class="page">
+<button class="back" onclick="go('home')">← Voltar</button>
+<img id="detailImage" class="detail-cover" src="" alt="">
+<div class="detail">
+<h1 id="detailTitle"></h1>
+<div id="detailMeta" class="meta"></div>
+<p id="detailDescription" class="description"></p>
+<div class="detail-actions">
+<button class="btn btn-red" onclick="startNovel()">▶ Assistir</button>
+<button id="favoriteBtn" class="btn btn-dark" onclick="toggleFavorite()">♡</button>
+</div>
+<div class="episodes">
+<h2>📑 Episódios</h2><br>
+<div id="episodeList"></div>
+</div>
+</div>
+</section>
+
+<section id="player" class="page">
+<button class="back" onclick="backFromPlayer()">← Voltar</button>
+<div class="player-box"><video id="video" controls playsinline preload="metadata"></video></div>
+<div class="player-title"><h2 id="playerName">Episódio</h2><p id="playerDescription">Empire Novelas</p></div>
+<div style="display:flex;gap:8px;margin-top:15px">
+<button class="btn btn-dark" style="flex:1" onclick="previousEpisode()">◀ Anterior</button>
+<button class="btn btn-red" style="flex:1" onclick="nextEpisode()">Próximo ▶</button>
+</div>
+</section>
+
+<section id="admin" class="page">
+<div class="admin-header">
+<div><div class="admin-title">🛡️ Administração</div><small style="color:#777">Catálogo local deste navegador</small></div>
+<button class="btn btn-dark" onclick="go('home')">✕</button>
+</div>
+<div class="admin-tabs">
+<button id="tabNovel" class="admin-tab active" onclick="adminTab('novelas')">🎬 Novelas</button>
+<button id="tabEpisode" class="admin-tab" onclick="adminTab('episodios')">📑 Episódios</button>
+</div>
+
+<div id="adminNovelas" class="admin-form">
+<h3 style="margin-bottom:15px">🎬 Cadastrar novela</h3>
+<input id="novelEditId" type="hidden">
+<div class="form-group"><label>Nome da novela</label><input id="novelTitle" placeholder="Ex: A Herdeira"></div>
+<div class="form-group"><label>Categoria</label><select id="novelCategory"><option>Romance</option><option>Vingança</option><option>Máfia</option><option>Bilionário</option><option>Fantasia</option></select></div>
+<div class="form-group"><label>URL da capa</label><input id="novelImage" placeholder="https://..."></div>
+<div class="form-group"><label>Sinopse</label><textarea id="novelDescription" placeholder="Digite a sinopse..."></textarea></div>
+<div style="display:flex;gap:8px"><button class="btn btn-red" style="flex:1" onclick="saveNovel()">💾 Salvar</button><button class="btn btn-dark" style="flex:1" onclick="clearNovelForm()">Limpar</button></div>
+</div>
+
+<div id="adminEpisodios" class="admin-form" style="display:none">
+<h3 style="margin-bottom:15px">📑 Cadastrar episódio</h3>
+<input id="episodeEditId" type="hidden">
+<div class="form-group"><label>Novela</label><select id="episodeNovel"></select></div>
+<div class="form-group"><label>Número do episódio</label><input id="episodeNumber" type="number" min="1" placeholder="1"></div>
+<div class="form-group"><label>Título</label><input id="episodeTitle" placeholder="O retorno"></div>
+<div class="form-group"><label>URL do vídeo</label><input id="episodeVideo" placeholder="https://servidor/video.mp4"></div>
+<div style="display:flex;gap:8px"><button class="btn btn-red" style="flex:1" onclick="saveEpisode()">💾 Salvar</button><button class="btn btn-dark" style="flex:1" onclick="clearEpisodeForm()">Limpar</button></div>
+</div>
+<div id="adminList" class="admin-list"></div>
+</section>
+</div>
+
+<nav class="bottom-nav">
+<button class="nav-btn active" onclick="go('home')"><span class="nav-icon">🏠</span>Início</button>
+<button class="nav-btn" onclick="openReels()"><span class="nav-icon">▶️</span>Reels</button>
+<button class="nav-btn" onclick="go('explorar')"><span class="nav-icon">🔎</span>Explorar</button>
+<button class="nav-btn" onclick="go('favoritos')"><span class="nav-icon">❤️</span>Minha lista</button>
+<button class="nav-btn" onclick="go('perfil')"><span class="nav-icon">👤</span>Perfil</button>
+</nav>
+
+<div id="reelsContainer" class="reels-container">
+<button class="close-reels" onclick="closeReels()" aria-label="Fechar Reels">✕</button>
+<div id="reelsFeed" class="reels-feed"></div>
+</div>
+
+<div id="commentsModal" class="modal">
+<div class="modal-box">
+<div class="modal-top"><h3>💬 Comentários</h3><button class="close-modal" onclick="closeComments()">✕</button></div>
+<div id="commentsList"></div>
+<div style="display:flex;gap:8px;margin-top:15px">
+<input id="commentInput" style="flex:1;padding:12px;border-radius:9px;border:1px solid #303030;background:#191919;color:white" placeholder="Escreva um comentário...">
+<button class="btn btn-red" onclick="addComment()">Enviar</button>
+</div>
+</div>
+</div>
+
+<div id="authModal" class="modal">
+<div class="modal-box">
+<div class="modal-top"><h3>🔐 Administração</h3><button class="close-modal" onclick="closeAuth()">✕</button></div>
+<p style="color:#aaa;font-size:13px;line-height:1.5;margin-bottom:14px">Painel local de demonstração. Senha padrão: <b>1234</b>.</p>
+<input id="adminPin" type="password" inputmode="numeric" autocomplete="off" placeholder="Digite a senha" style="width:100%;padding:13px;border:1px solid #303030;border-radius:9px;background:#191919;color:#fff">
+<button class="btn btn-red btn-full" style="margin-top:12px" onclick="checkAdmin()">Entrar</button>
+</div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+"use strict";
+
+const STORAGE={
+novels:"empire_novelas_v3",
+favorites:"empire_favorites_v3",
+progress:"empire_progress_v3",
+comments:"empire_comments_v3",
+profile:"empire_profile_v3",
+adminPin:"empire_admin_pin_v3"
+};
+
+const FALLBACK_IMAGE="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=85";
+
+const defaultNovels=[
+{id:1,title:"A Herdeira",category:"Vingança",image:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=85",description:"Ela perdeu tudo. Agora voltou para descobrir quem destruiu sua família.",episodes:[
+{id:101,number:1,title:"O retorno",video:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"},
+{id:102,number:2,title:"A descoberta",video:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"},
+{id:103,number:3,title:"O segredo",video:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"},
+{id:104,number:4,title:"A vingança começa",video:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"}]},
+{id:2,title:"Contrato de Amor",category:"Romance",image:"https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?auto=format&fit=crop&w=700&q=85",description:"Um contrato falso. Um casamento de mentira. E um amor que ninguém esperava.",episodes:[
+{id:201,number:1,title:"O contrato",video:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"},
+{id:202,number:2,title:"O primeiro beijo",video:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"},
+{id:203,number:3,title:"A mentira",video:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"}]},
+{id:3,title:"O Bilionário Secreto",category:"Bilionário",image:"https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=700&q=85",description:"Ela pensa que ele é apenas um homem comum. Até descobrir quem ele realmente é.",episodes:[
+{id:301,number:1,title:"O desconhecido",video:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"},
+{id:302,number:2,title:"O segredo",video:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"}]},
+{id:4,title:"A Última Promessa",category:"Fantasia",image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=85",description:"Uma promessa feita há séculos volta para mudar o destino de duas pessoas.",episodes:[
+{id:401,number:1,title:"A promessa",video:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"}]}
+];
+
+function clone(value){return JSON.parse(JSON.stringify(value))}
+function loadJSON(key,fallback){
+try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback}catch(e){return fallback}
+}
+let novels=loadJSON(STORAGE.novels,null);
+if(!Array.isArray(novels)||!novels.length){novels=clone(defaultNovels);localStorage.setItem(STORAGE.novels,JSON.stringify(novels))}
+let favorites=loadJSON(STORAGE.favorites,[]);
+let progress=loadJSON(STORAGE.progress,{});
+let comments=loadJSON(STORAGE.comments,{});
+let profile=loadJSON(STORAGE.profile,{name:"Visitante"});
+let currentNovel=null,currentEpisode=null,previousPage="home",currentCommentKey=null,reelObserver=null,reelOpen=false,toastTimer=null;
+
+function saveAll(){
+localStorage.setItem(STORAGE.novels,JSON.stringify(novels));
+localStorage.setItem(STORAGE.favorites,JSON.stringify(favorites));
+localStorage.setItem(STORAGE.progress,JSON.stringify(progress));
+localStorage.setItem(STORAGE.comments,JSON.stringify(comments));
+localStorage.setItem(STORAGE.profile,JSON.stringify(profile));
+}
+
+function escapeHtml(value){
+return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+}
+function safeUrl(value,fallback=FALLBACK_IMAGE){
+try{
+const url=new URL(String(value||""),location.href);
+if(url.protocol==="http:"||url.protocol==="https:"||url.protocol==="blob:"||url.protocol==="data:")return url.href;
+}catch(e){}
+return fallback;
+}
+function safeVideoUrl(value){
+try{
+const url=new URL(String(value||""),location.href);
+if(url.protocol==="http:"||url.protocol==="https:"||url.protocol==="blob:")return url.href;
+}catch(e){}
+return "";
+}
+function showToast(message){
+const toast=document.getElementById("toast");
+toast.textContent=message;
+toast.classList.add("show");
+clearTimeout(toastTimer);
+toastTimer=setTimeout(()=>toast.classList.remove("show"),2200);
+}
+
+function go(page){
+if(page!=="player"){
+const v=document.getElementById("video");
+if(v&&!v.paused){v.pause()}
+}
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+const target=document.getElementById(page);
+if(!target)return;
+target.classList.add("active");
+document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
+const map={home:0,explorar:2,favoritos:3,perfil:4};
+if(map[page]!==undefined)document.querySelectorAll(".nav-btn")[map[page]].classList.add("active");
+window.scrollTo(0,0);
+if(page==="home")renderHome();
+if(page==="explorar")renderExplore();
+if(page==="favoritos")renderFavorites();
+if(page==="perfil")renderProfile();
+if(page==="admin")renderAdmin();
+}
+
+function createCard(novel){
+const last=getLastProgress(novel.id);
+const percent=last?Math.max(0,Math.min(100,Number(last.percent)||0)):0;
+return `<div class="card" role="button" tabindex="0" onclick="openNovel(${Number(novel.id)})" onkeydown="if(event.key==='Enter')openNovel(${Number(novel.id)})">
+<div style="position:relative"><img class="card-img" loading="lazy" src="${escapeHtml(safeUrl(novel.image))}" alt="${escapeHtml(novel.title)}" onerror="this.src='${FALLBACK_IMAGE}'"><span class="card-badge">${escapeHtml(novel.category)}</span></div>
+<h3>${escapeHtml(novel.title)}</h3><p>${novel.episodes.length} episódio${novel.episodes.length===1?"":"s"}</p>
+${last?`<div class="progress"><div class="progress-bar" style="width:${percent}%"></div></div>`:""}
+</div>`;
+}
+
+function renderHome(){
+const trending=document.getElementById("trendingNovels"),box=document.getElementById("novelCards");
+trending.innerHTML=novels.slice(0,5).map(createCard).join("");
+box.innerHTML=novels.map(createCard).join("");
+renderContinue();updateHero();
+}
+function updateHero(){
+if(!novels.length)return;
+const hero=novels[0];
+document.getElementById("heroTitle").textContent=hero.title;
+document.getElementById("heroDescription").textContent=hero.description;
+const el=document.querySelector(".hero");
+el.style.backgroundImage=`linear-gradient(to top,#050505 2%,rgba(0,0,0,.45) 52%,rgba(0,0,0,.05)),url("${safeUrl(hero.image)}")`;
+}
+function openHero(){if(novels.length)openNovel(novels[0].id)}
+function getLastProgress(novelId){
+const items=Object.values(progress).filter(p=>Number(p.novelId)===Number(novelId));
+if(!items.length)return null;
+return items.sort((a,b)=>(Number(b.updated)||0)-(Number(a.updated)||0))[0];
+}
+function renderContinue(){
+const section=document.getElementById("continueSection"),box=document.getElementById("continueCards");
+const list=novels.filter(n=>getLastProgress(n.id));
+section.classList.toggle("hidden",!list.length);
+if(list.length)box.innerHTML=list.map(createCard).join("");
+}
+
+function renderExplore(){
+const box=document.getElementById("exploreCards");
+box.innerHTML=novels.length?novels.map(createCard).join():`<div class="empty"><div class="empty-icon">🎬</div>Nenhuma novela cadastrada.</div>`;
+}
+function searchNovels(){
+const value=document.getElementById("searchInput").value.toLowerCase().trim();
+const results=novels.filter(n=>(n.title+" "+n.category+" "+n.description).toLowerCase().includes(value));
+document.getElementById("exploreCards").innerHTML=results.length?results.map(createCard).join():`<div class="empty"><div class="empty-icon">🔎</div>Nenhuma novela encontrada.</div>`;
+}
+function filterCategory(category,button){
+document.querySelectorAll(".category").forEach(b=>b.classList.remove("active"));
+if(button)button.classList.add("active");
+const result=category==="Todos"?novels:novels.filter(n=>n.category===category);
+document.getElementById("novelCards").innerHTML=result.length?result.map(createCard).join():`<div class="empty"><div class="empty-icon">📂</div>Nenhuma novela nesta categoria.</div>`;
+}
+
+function openNovel(id){
+const novel=novels.find(n=>Number(n.id)===Number(id));
+if(!novel)return;
+currentNovel=novel;
+document.getElementById("detailImage").src=safeUrl(novel.image);
+document.getElementById("detailImage").onerror=()=>{document.getElementById("detailImage").src=FALLBACK_IMAGE};
+document.getElementById("detailImage").alt=novel.title;
+document.getElementById("detailTitle").textContent=novel.title;
+document.getElementById("detailMeta").textContent=`${novel.category} • ${novel.episodes.length} episódio${novel.episodes.length===1?"":"s"}`;
+document.getElementById("detailDescription").textContent=novel.description;
+updateFavoriteButton();renderEpisodes();go("detalhes");
+}
+function renderEpisodes(){
+const box=document.getElementById("episodeList");
+if(!currentNovel){box.innerHTML="";return}
+const list=[...currentNovel.episodes].sort((a,b)=>(Number(a.number)||0)-(Number(b.number)||0));
+box.innerHTML=list.length?list.map(ep=>{
+const p=progress[ep.id];
+const pct=p?Math.round(Math.max(0,Math.min(100,Number(p.percent)||0))):0;
+return `<div class="episode">
+<img class="episode-thumb" loading="lazy" src="${escapeHtml(safeUrl(currentNovel.image))}" alt="" onerror="this.src='${FALLBACK_IMAGE}'">
+<div class="episode-info"><h3>Episódio ${Number(ep.number)||0} — ${escapeHtml(ep.title||"Sem título")}</h3><p>${p?`Assistido ${pct}%`:"Ainda não assistido"}</p></div>
+<button class="episode-play" onclick="playEpisode(${Number(currentNovel.id)},${Number(ep.id)})" aria-label="Assistir episódio ${Number(ep.number)||0}">▶</button>
+</div>`;
+}).join(""):`<div class="empty"><div class="empty-icon">📑</div>Esta novela ainda não possui episódios.</div>`;
+}
+function toggleFavorite(){
+if(!currentNovel)return;
+const id=Number(currentNovel.id),index=favorites.indexOf(id);
+if(index===-1){favorites.push(id);showToast("❤️ Adicionado à sua lista")}else{favorites.splice(index,1);showToast("Removido da sua lista")}
+saveAll();updateFavoriteButton();renderFavorites();
+}
+function updateFavoriteButton(){
+const btn=document.getElementById("favoriteBtn");
+if(btn&&currentNovel){btn.textContent=favorites.includes(Number(currentNovel.id))?"❤️":"♡"}
+}
+function renderFavorites(){
+const box=document.getElementById("favoriteCards"),list=novels.filter(n=>favorites.includes(Number(n.id)));
+box.innerHTML=list.length?list.map(createCard).join():`<div class="empty"><div class="empty-icon">❤️</div>Sua lista está vazia.<br><br>Toque no coração de uma novela para adicioná-la.</div>`;
+}
+
+function playEpisode(novelId,episodeId){
+const novel=novels.find(n=>Number(n.id)===Number(novelId));if(!novel)return;
+const episode=novel.episodes.find(e=>Number(e.id)===Number(episodeId));if(!episode)return;
+const videoUrl=safeVideoUrl(episode.video);
+if(!videoUrl){showToast("❌ URL de vídeo inválida");return}
+currentNovel=novel;currentEpisode=episode;previousPage="detalhes";
+const video=document.getElementById("video");
+video.pause();video.src=videoUrl;video.load();
+document.getElementById("playerName").textContent=`${novel.title} — Episódio ${episode.number}`;
+document.getElementById("playerDescription").textContent=episode.title||"Empire Novelas";
+go("player");
+setTimeout(()=>{
+const saved=progress[episode.id];
+if(saved&&Number.isFinite(Number(saved.currentTime))){try{video.currentTime=Math.max(0,Number(saved.currentTime))}catch(e){}}
+video.play().catch(()=>showToast("Toque no vídeo para iniciar"));
+},180);
+}
+function startNovel(){
+if(!currentNovel)return;
+const last=getLastProgress(currentNovel.id);
+if(last){playEpisode(currentNovel.id,last.episodeId);return}
+const first=[...currentNovel.episodes].sort((a,b)=>a.number-b.number)[0];
+if(first)playEpisode(currentNovel.id,first.id);else showToast("Esta novela ainda não possui episódios");
+}
+function nextEpisode(){
+if(!currentNovel||!currentEpisode)return;
+const list=[...currentNovel.episodes].sort((a,b)=>a.number-b.number),index=list.findIndex(e=>Number(e.id)===Number(currentEpisode.id));
+if(index>=0&&index<list.length-1)playEpisode(currentNovel.id,list[index+1].id);else showToast("🎬 Você chegou ao último episódio");
+}
+function previousEpisode(){
+if(!currentNovel||!currentEpisode)return;
+const list=[...currentNovel.episodes].sort((a,b)=>a.number-b.number),index=list.findIndex(e=>Number(e.id)===Number(currentEpisode.id));
+if(index>0)playEpisode(currentNovel.id,list[index-1].id);else showToast("Este é o primeiro episódio");
+}
+function backFromPlayer(){
+const video=document.getElementById("video");video.pause();video.removeAttribute("src");video.load();go(previousPage);
+}
+document.getElementById("video").addEventListener("timeupdate",function(){
+if(!currentNovel||!currentEpisode||!Number.isFinite(this.duration)||this.duration<=0)return;
+const percent=(this.currentTime/this.duration)*100;
+progress[currentEpisode.id]={novelId:Number(currentNovel.id),episodeId:Number(currentEpisode.id),percent,currentTime:this.currentTime,duration:this.duration,updated:Date.now()};
+localStorage.setItem(STORAGE.progress,JSON.stringify(progress));
+});
+document.getElementById("video").addEventListener("ended",()=>{progress[currentEpisode.id]&& (progress[currentEpisode.id].percent=100);localStorage.setItem(STORAGE.progress,JSON.stringify(progress));setTimeout(nextEpisode,900)});
+
+function getAllEpisodes(){
+const list=[];novels.forEach(n=>n.episodes.forEach(e=>list.push({novel:n,episode:e})));return list;
+}
+function openReels(){
+const episodes=getAllEpisodes();if(!episodes.length){showToast("Nenhum episódio disponível");return}
+const container=document.getElementById("reelsContainer"),feed=document.getElementById("reelsFeed");
+feed.innerHTML=episodes.map((item,index)=>`
+<article class="reel" data-index="${index}">
+<video class="reel-video" src="${escapeHtml(safeVideoUrl(item.episode.video))}" muted loop playsinline preload="metadata"></video>
+<div class="reel-overlay"></div>
+<div class="reel-info"><div class="reel-episode">EPISÓDIO ${Number(item.episode.number)||0}</div><h2>${escapeHtml(item.novel.title)}</h2><p>${escapeHtml(item.episode.title||"")}</p></div>
+<div class="reel-actions">
+<button class="reel-action" onclick="likeReel(this)" aria-label="Curtir">♡</button>
+<button class="reel-action" onclick="openReelComments(${Number(item.novel.id)},${Number(item.episode.id)})" aria-label="Comentários">💬</button>
+<button class="reel-action" onclick="saveReel(${Number(item.novel.id)})" aria-label="Salvar">🔖</button>
+<button class="reel-action" onclick="openReelNovel(${Number(item.novel.id)})" aria-label="Abrir novela">📖</button>
+</div></article>`).join("");
+container.classList.add("active");reelOpen=true;document.body.style.overflow="hidden";setupReelObserver();
+}
+function closeReels(){
+document.querySelectorAll(".reel-video").forEach(v=>v.pause());
+if(reelObserver)reelObserver.disconnect();
+document.getElementById("reelsContainer").classList.remove("active");reelOpen=false;document.body.style.overflow="";
+}
+function setupReelObserver(){
+const feed=document.getElementById("reelsFeed"),videos=document.querySelectorAll(".reel-video");
+if(reelObserver)reelObserver.disconnect();
+reelObserver=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting&&entry.intersectionRatio>=.7){
+videos.forEach(v=>{if(v!==entry.target)v.pause()});
+entry.target.play().catch(()=>{});
+}
+});
+},{root:feed,threshold:[.7]});
+videos.forEach(v=>reelObserver.observe(v));
+if(videos[0])videos[0].play().catch(()=>{});
+}
+function likeReel(button){button.classList.toggle("liked");button.textContent=button.classList.contains("liked")?"❤️":"♡"}
+function saveReel(id){
+const index=favorites.indexOf(Number(id));
+if(index===-1){favorites.push(Number(id));showToast("🔖 Salvo na sua lista")}else{favorites.splice(index,1);showToast("Removido da sua lista")}
+saveAll();
+}
+function openReelNovel(id){closeReels();openNovel(id)}
+
+function openReelComments(novelId,episodeId){currentCommentKey=`${novelId}_${episodeId}`;renderComments();document.getElementById("commentsModal").classList.add("active")}
+function closeComments(){document.getElementById("commentsModal").classList.remove("active")}
+function renderComments(){
+const box=document.getElementById("commentsList"),list=comments[currentCommentKey]||[];
+box.innerHTML=list.length?list.map(c=>`<div class="comment"><strong>👤 ${escapeHtml(c.name)}</strong><p>${escapeHtml(c.text)}</p></div>`).join(""):`<div class="empty" style="padding:30px 5px">Ainda não há comentários.</div>`;
+}
+function addComment(){
+const input=document.getElementById("commentInput"),text=input.value.trim();if(!text)return;
+if(!comments[currentCommentKey])comments[currentCommentKey]=[];
+comments[currentCommentKey].push({name:profile.name||"Visitante",text,date:Date.now()});
+input.value="";saveAll();renderComments();showToast("💬 Comentário publicado");
+}
+document.getElementById("commentInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addComment()}});
+
+function openAdmin(){document.getElementById("adminPin").value="";document.getElementById("authModal").classList.add("active");setTimeout(()=>document.getElementById("adminPin").focus(),80)}
+function closeAuth(){document.getElementById("authModal").classList.remove("active")}
+function checkAdmin(){
+const saved=localStorage.getItem(STORAGE.adminPin)||"1234";
+if(document.getElementById("adminPin").value===saved){closeAuth();go("admin");showToast("🛡️ Painel aberto")}else showToast("❌ Senha incorreta");
+}
+document.getElementById("adminPin").addEventListener("keydown",e=>{if(e.key==="Enter")checkAdmin()});
+
+function adminTab(tab){
+document.getElementById("adminNovelas").style.display=tab==="novelas"?"block":"none";
+document.getElementById("adminEpisodios").style.display=tab==="episodios"?"block":"none";
+document.getElementById("tabNovel").classList.toggle("active",tab==="novelas");
+document.getElementById("tabEpisode").classList.toggle("active",tab==="episodios");
+renderAdmin();
+}
+function clearNovelForm(){
+["novelEditId","novelTitle","novelImage","novelDescription"].forEach(id=>document.getElementById(id).value="");
+}
+function saveNovel(){
+const editId=Number(document.getElementById("novelEditId").value||0);
+const title=document.getElementById("novelTitle").value.trim(),category=document.getElementById("novelCategory").value,image=document.getElementById("novelImage").value.trim(),description=document.getElementById("novelDescription").value.trim();
+if(!title){showToast("Digite o nome da novela");return}
+if(editId){
+const n=novels.find(x=>Number(x.id)===editId);if(n){n.title=title;n.category=category;n.image=image||FALLBACK_IMAGE;n.description=description||"Nova mini novela Empire.";showToast("✅ Novela atualizada")}
+}else{
+novels.push({id:Date.now(),title,category,image:image||FALLBACK_IMAGE,description:description||"Nova mini novela Empire.",episodes:[]});showToast("🎬 Novela cadastrada!")
+}
+saveAll();clearNovelForm();renderAdmin();renderHome();
+}
+function editNovel(id){
+const n=novels.find(x=>Number(x.id)===Number(id));if(!n)return;
+adminTab("novelas");document.getElementById("novelEditId").value=n.id;document.getElementById("novelTitle").value=n.title;document.getElementById("novelCategory").value=n.category;document.getElementById("novelImage").value=n.image;document.getElementById("novelDescription").value=n.description;window.scrollTo(0,0);
+}
+function clearEpisodeForm(){
+["episodeEditId","episodeNumber","episodeTitle","episodeVideo"].forEach(id=>document.getElementById(id).value="");
+}
+function saveEpisode(){
+const editId=Number(document.getElementById("episodeEditId").value||0),novelId=Number(document.getElementById("episodeNovel").value),number=Number(document.getElementById("episodeNumber").value),title=document.getElementById("episodeTitle").value.trim(),video=safeVideoUrl(document.getElementById("episodeVideo").value.trim()),novel=novels.find(n=>Number(n.id)===novelId);
+if(!novel){showToast("Selecione uma novela");return}
+if(!Number.isInteger(number)||number<1){showToast("Número de episódio inválido");return}
+if(!video){showToast("URL de vídeo inválida");return}
+if(editId){
+let oldNovel=novels.find(n=>n.episodes.some(e=>Number(e.id)===editId));
+if(oldNovel&&oldNovel!==novel){oldNovel.episodes=oldNovel.episodes.filter(e=>Number(e.id)!==editId);novel.episodes.push({id:editId,number,title:title||`Episódio ${number}`,video})}
+else{const ep=novel.episodes.find(e=>Number(e.id)===editId);if(ep){ep.number=number;ep.title=title||`Episódio ${number}`;ep.video=video}}
+showToast("✅ Episódio atualizado");
+}else{novel.episodes.push({id:Date.now(),number,title:title||`Episódio ${number}`,video});showToast("📺 Episódio cadastrado!")}
+novel.episodes.sort((a,b)=>a.number-b.number);saveAll();clearEpisodeForm();renderAdmin();renderHome();
+}
+function editEpisode(id){
+for(const n of novels){const ep=n.episodes.find(e=>Number(e.id)===Number(id));if(ep){
+adminTab("episodios");document.getElementById("episodeEditId").value=ep.id;document.getElementById("episodeNovel").value=n.id;document.getElementById("episodeNumber").value=ep.number;document.getElementById("episodeTitle").value=ep.title;document.getElementById("episodeVideo").value=ep.video;window.scrollTo(0,0);return;
+}}
+}
+function deleteNovel(id){
+if(!confirm("Excluir esta novela e todos os seus episódios?"))return;
+novels=novels.filter(n=>Number(n.id)!==Number(id));favorites=favorites.filter(f=>Number(f)!==Number(id));
+Object.keys(progress).forEach(k=>{if(Number(progress[k].novelId)===Number(id))delete progress[k]});
+saveAll();renderAdmin();renderHome();showToast("Novela excluída");
+}
+function deleteEpisode(novelId,episodeId){
+if(!confirm("Excluir este episódio?"))return;
+const n=novels.find(x=>Number(x.id)===Number(novelId));if(!n)return;
+n.episodes=n.episodes.filter(e=>Number(e.id)!==Number(episodeId));delete progress[episodeId];saveAll();renderAdmin();renderHome();showToast("Episódio excluído");
+}
+function renderAdmin(){
+const select=document.getElementById("episodeNovel"),list=document.getElementById("adminList");
+select.innerHTML=novels.map(n=>`<option value="${Number(n.id)}">${escapeHtml(n.title)}</option>`).join("");
+const activeEpisodeTab=document.getElementById("adminEpisodios").style.display!=="none";
+if(activeEpisodeTab){
+const items=[];novels.forEach(n=>n.episodes.forEach(e=>items.push({n,e})));
+list.innerHTML=items.length?items.sort((a,b)=>a.n.title.localeCompare(b.n.title)||a.e.number-b.e.number).map(({n,e})=>`<div class="admin-item"><img src="${escapeHtml(safeUrl(n.image))}" alt=""><div class="admin-item-info"><h3>${escapeHtml(n.title)} — EP ${Number(e.number)||0}</h3><p>${escapeHtml(e.title||"Sem título")}</p></div><div class="admin-item-actions"><button class="small-btn" onclick="editEpisode(${Number(e.id)})">Editar</button><button class="small-btn red" onclick="deleteEpisode(${Number(n.id)},${Number(e.id)})">Excluir</button></div></div>`).join(""):`<div class="empty"><div class="empty-icon">📑</div>Nenhum episódio cadastrado.</div>`;
+}else{
+list.innerHTML=novels.length?novels.map(n=>`<div class="admin-item"><img src="${escapeHtml(safeUrl(n.image))}" alt=""><div class="admin-item-info"><h3>${escapeHtml(n.title)}</h3><p>${escapeHtml(n.category)} • ${n.episodes.length} episódio${n.episodes.length===1?"":"s"}</p></div><div class="admin-item-actions"><button class="small-btn" onclick="editNovel(${Number(n.id)})">Editar</button><button class="small-btn red" onclick="deleteNovel(${Number(n.id)})">Excluir</button></div></div>`).join(""):`<div class="empty"><div class="empty-icon">🎬</div>Nenhuma novela cadastrada.</div>`;
+}
+}
+function renderProfile(){document.getElementById("profileName").textContent=profile.name||"Visitante"}
+function changeProfileName(){
+const name=prompt("Como quer aparecer nos comentários?",profile.name||"Visitante");
+if(name===null)return;const clean=name.trim().slice(0,30);if(!clean)return;
+profile.name=clean;saveAll();renderProfile();showToast("👤 Nome atualizado");
+}
+function resetDemo(){
+if(!confirm("Isso apagará seu catálogo local e voltará para os dados de demonstração. Continuar?"))return;
+novels=clone(defaultNovels);favorites=[];progress={};comments={};saveAll();renderHome();renderExplore();renderFavorites();renderAdmin();showToast("♻️ Catálogo restaurado");
+}
+
+document.addEventListener("keydown",e=>{
+if(e.key==="Escape"){
+document.getElementById("commentsModal").classList.remove("active");
+document.getElementById("authModal").classList.remove("active");
+if(reelOpen)closeReels();
+}
+});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)document.querySelectorAll(".reel-video").forEach(v=>v.pause())});
+
+renderProfile();renderHome();renderExplore();renderFavorites();renderAdmin();
+</script>
+</body>
+</html>
